@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="398 88 758 860" width="758" height="860" role="img" aria-label="SyHire mark">
+  <defs>
+    <linearGradient id="syGrad" x1="430" y1="250" x2="1120" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#071A3D"></stop>
+      <stop offset="0.4" stop-color="#0E3178"></stop>
+      <stop offset="0.75" stop-color="#2468E5"></stop>
+      <stop offset="1" stop-color="#3D8BFF"></stop>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#syGrad)" stroke-width="80" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 922,199 C 850,148 706,148 622,254 C 578,314 596,396 714,452 C 830,502 952,560 938,660 C 924,728 660,745 480,700"></path>
+    <path d="M 910,462 C 918,605 950,700 1008,706 C 1062,710 1074,590 1086,468"></path>
+    <path d="M 1086,468 C 1074,665 1025,795 892,878"></path>
+  </g>
+  <g fill="url(#syGrad)">
+    <circle cx="922" cy="199" r="58"></circle>
+    <circle cx="478" cy="700" r="58"></circle>
+    <circle cx="892" cy="878" r="58"></circle>
+  </g>
+</svg>

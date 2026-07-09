@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block deploy/config and source artifacts from indexing
+Disallow: /design_handoff_syhire_v1/
+Disallow: /screenshots/
+Disallow: /uploads/
+
+Sitemap: https://syhire.app/sitemap.xml

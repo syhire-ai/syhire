@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="description" content="SyHire is an AI Career Operating System that continuously discovers, verifies, and matches job opportunities to your skills, preferences, and goals.">
+<meta name="author" content="SyHire">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#071A3D">
+<meta name="color-scheme" content="light">
+<link rel="canonical" href="https://syhire.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SyHire">
+<meta property="og:title" content="SyHire — Your AI Career Operating System">
+<meta property="og:description" content="AI-matched job discovery that works quietly in the background to surface verified opportunities aligned with your career goals.">
+<meta property="og:url" content="https://syhire.app/">
+<meta property="og:image" content="https://syhire.app/assets/syhire-logo-premium.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SyHire — Your AI Career Operating System">
+<meta name="twitter:description" content="AI-matched job discovery that surfaces verified opportunities aligned with your career goals.">
+<meta name="twitter:image" content="https://syhire.app/assets/syhire-logo-premium.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: 'Geist', system-ui, sans-serif; -webkit-font-smoothing: antialiased; color: #0f172a; background: #f4f6fa; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #d5dbe6; border-radius: 8px; border: 3px solid #f4f6fa; }
+  input, button, select, textarea { font-family: inherit; }
+  input:focus, select:focus, textarea:focus { outline: none; }
+  @keyframes syfade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes syspin { to { transform: rotate(360deg); } }
+  @keyframes sypulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,.45); } 70% { box-shadow: 0 0 0 10px rgba(34,197,94,0); } 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); } }
+  @keyframes syshimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+  @keyframes syfade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes sytoast { from { opacity: 0; transform: translateX(24px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes syflow { 0% { left: -30%; } 100% { left: 130%; } }
+  @keyframes syradar { to { transform: rotate(360deg); } }
+  @keyframes syappear { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes sybreathe { from { opacity: .7; } to { opacity: 1; } }
+  @keyframes sytrace { to { stroke-dashoffset: -760; } }
+  @keyframes synode { 0%, 100% { opacity: .12; } 50% { opacity: .7; } }
+  @keyframes syfloat { from { transform: translateY(0); } to { transform: translateY(-16px); } }
+  @keyframes syorbit { to { transform: rotate(360deg); } }
+  @keyframes syhover { from { transform: translateY(0); } to { transform: translateY(-8px); } }
+  @keyframes sytwinkle { 0%, 100% { opacity: .25; } 50% { opacity: .9; } }
+  @keyframes sydrift { from { transform: translateY(0); } to { transform: translateY(-12px); } }
+  @keyframes syhoverlite { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+  @keyframes syflow { 0%, 100% { opacity: .2; stroke-width: 2.5px; } 50% { opacity: .35; stroke-width: 2.8px; } }
+  @keyframes sydrift { 0% { opacity: 1; transform: translate(0, 0); } 100% { opacity: 0; transform: translate(180px, -280px); } }
+  @keyframes syBreathe { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
+  @keyframes syGlowPulse { 0%, 100% { opacity: .35; stroke-width: 3.2px; } 50% { opacity: .6; stroke-width: 3.5px; } }
+  @keyframes syDriftPath { 0% { opacity: 1; transform: translate(0, 0); } 100% { opacity: 0; transform: translate(220px, -320px); } }
+</style>
+</helmet>
+
+<template id="__bundler_thumbnail" data-bg-color="#0c1f4a">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0c1f4a"></rect>
+    <g fill="none" stroke="#4d8dff" stroke-width="16"><circle cx="600" cy="350" r="150"></circle><circle cx="600" cy="350" r="68"></circle></g>
+    <circle cx="600" cy="350" r="16" fill="#4d8dff"></circle>
+    <line x1="600" y1="350" x2="742" y2="250" stroke="#4d8dff" stroke-width="16" stroke-linecap="round"></line>
+    <text x="600" y="600" font-family="sans-serif" font-size="84" font-weight="700" fill="#ffffff" text-anchor="middle">SyHire</text>
+  </svg>
+</template>
+
+<div style="height: 100vh; width: 100%; overflow: hidden; background: #f4f6fa;">
+
+  <!-- ============ AUTH ============ -->
+  <sc-if value="{{ showAuth }}" hint-placeholder-val="{{ true }}">
+  <div style="display: flex; height: 100vh; width: 100%; overflow-y: auto;">
+    <!-- brand panel -->
+    
+
+    <!-- form panel -->
+    <div style="{{ authPanelStyle }}">
+      <div ref="{{ heroFxRef }}" style="position: absolute; inset: 0; overflow: hidden; pointer-events: none;">
+        <div style="position: absolute; left: -8%; top: 10%; width: 520px; height: 520px; border-radius: 50%; opacity: .07; filter: blur(300px); background-color: #0A173D"></div>
+        <div style="position: absolute; left: 5%; top: 52%; width: 560px; height: 560px; border-radius: 50%; opacity: .06; filter: blur(300px); background-color: #0A173D"></div>
+        <div style="position: absolute; right: -6%; top: -8%; width: 520px; height: 520px; border-radius: 50%; opacity: .06; filter: blur(340px); background-color: #0A173D"></div>
+        <div style="position: absolute; left: -10%; bottom: -12%; width: 560px; height: 560px; border-radius: 50%; opacity: .05; filter: blur(360px); background-color: #0A173D"></div>
+        <div style="position: absolute; inset: 0; transform: translate3d(calc(var(--syx, 0) * 6px), calc(var(--syy, 0) * 6px), 0); transition: transform .18s ease-out;">
+          <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 62% 48% at 80% 12%, rgba(61,139,255,.30), transparent 65%), radial-gradient(ellipse 55% 45% at 8% 92%, rgba(29,78,216,.38), transparent 62%), radial-gradient(ellipse 45% 40% at 50% 55%, rgba(96,165,250,.10), transparent 70%); animation: sybreathe 14s ease-in-out infinite alternate;"></div>
+          <div style="position: absolute; width: 560px; height: 560px; left: -150px; top: 30%; background: radial-gradient(circle, rgba(61,139,255,.16), transparent 65%); filter: blur(8px);"></div>
+          <div style="position: absolute; width: 480px; height: 380px; right: -80px; top: -90px; background: radial-gradient(ellipse, rgba(96,165,250,.13), transparent 65%); filter: blur(10px);"></div>
+          <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 145% 135% at 42% 40%, transparent 38%, rgba(0,1,6,.88) 100%);"></div>
+      <!-- ambient lights (subtle) -->
+      <div style="position: absolute; width: 500px; height: 500px; top: 12%; left: 28%; background: radial-gradient(circle, rgba(61,139,255,.06), transparent 60%); filter: blur(520px); pointer-events: none;"></div>
+      <div style="position: absolute; width: 600px; height: 600px; top: 48%; right: 10%; background: radial-gradient(circle, rgba(80,130,250,.04), transparent 65%); filter: blur(640px); pointer-events: none;"></div>
+          <div style="position: absolute; right: 0; top: 8%; height: 84%; width: 1px; background: linear-gradient(180deg, transparent, rgba(143,192,255,.22) 50%, transparent);"></div>
+          
+        </div>
+
+        
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; position: relative;">
+        <div style="width: 40px; height: 40px; border-radius: 11px; background: #fff; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.35); box-shadow: 0 6px 18px -8px rgba(4,12,32,.5);">
+          <img src="assets/syhire-mark-premium.png" alt="SyHire" style="width: 27px; height: 27px; object-fit: contain;">
+        </div>
+        <span style="font-size: 21px; font-weight: 700; letter-spacing: -.02em;">SyHire</span>
+      </div>
+      <div style="position: relative; max-width: 620px;">
+        <h1 style="font-size: clamp(32px, 3.6vh + 16px, 50px); line-height: 1.05; font-weight: 700; letter-spacing: -.03em; margin: 0 0 18px;">Your AI Career Operating System</h1>
+        <p style="font-size: 16px; line-height: 1.6; color: rgba(255,255,255,.72); margin: 0; max-width: 560px;">Discover jobs, organize applications, optimize resumes, and land interviews—all in one intelligent workspace built to move your career forward.</p>
+        <!-- product preview: hero focal point -->
+        <div style="margin-top: clamp(22px, 4vh, 38px); max-width: 560px; animation: syhoverlite 12s ease-in-out infinite alternate;">
+        <div style="position: relative; overflow: hidden; border-radius: 18px; padding: 20px; background: linear-gradient(180deg, #162B5F 0%, #12234A 45%, #0D1C3E 100%); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 30px 80px rgba(0,0,0,.45), 0 12px 30px rgba(0,0,0,.22); transition: all .3s ease">
+          <div style="position: absolute; left: 14px; right: 14px; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); pointer-events: none;"></div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+            <div style="display: flex; align-items: center; gap: 9px;">
+              <div style="width: 26px; height: 26px; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center;"><img src="assets/syhire-mark-premium.png" alt="" style="width: 17px; height: 17px; object-fit: contain;"></div>
+              <span style="font-size: 13px; font-weight: 600; color: #fff;">Your Dashboard</span>
+            </div>
+            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; color: #bfe0c8; background: rgba(34,197,94,.16); border: 1px solid rgba(34,197,94,.28); padding: 3px 9px; border-radius: 999px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #7fd6a3; animation: sypulse 2.6s infinite;"></span>AI Collector · Active</span>
+          </div>
+          <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+            <div style="flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 13px 14px;">
+              <div style="font-size: 11.5px; color: rgba(255,255,255,.6); margin-bottom: 8px;">AI Match Score</div>
+              <div style="display: flex; align-items: baseline; gap: 6px;"><span style="font-size: 22px; font-weight: 700; color: #fff;">{{ heroMatchNum }}</span><span style="font-size: 11px; color: #7fd6a3;">Excellent</span></div>
+              <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.14); margin-top: 9px; overflow: hidden;"><div style="{{ heroMatchBarStyle }}"></div></div>
+            </div>
+            <div style="flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 13px 14px;">
+              <div style="font-size: 11.5px; color: rgba(255,255,255,.6); margin-bottom: 8px;">Resume Score</div>
+              <div style="display: flex; align-items: baseline; gap: 6px;"><span style="font-size: 22px; font-weight: 700; color: #fff;">{{ heroResumeNum }}</span><span style="font-size: 11px; color: #8fc0ff;">Strong</span></div>
+              <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.14); margin-top: 9px; overflow: hidden;"><div style="{{ heroResumeBarStyle }}"></div></div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <div style="flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 12px 14px;">
+              <div style="font-size: 22px; font-weight: 700; color: #fff;">{{ heroAppsNum }}</div>
+              <div style="font-size: 11.5px; color: rgba(255,255,255,.6); margin-top: 2px;">Active Applications</div>
+            </div>
+            <div style="flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 12px 14px;">
+              <div style="font-size: 22px; font-weight: 700; color: #fff;">{{ heroInterviewsNum }}</div>
+              <div style="font-size: 11.5px; color: rgba(255,255,255,.6); margin-top: 2px;">Upcoming Interviews</div>
+            </div>
+          </div>
+          <div style="font-size: 11.5px; color: rgba(255,255,255,.6); margin-bottom: 9px;">Job Recommendations</div>
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 11px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 9px 12px; animation: syfade .6s ease .2s both;">
+              <div style="width: 30px; height: 30px; border-radius: 8px; background: rgba(99,91,255,.9); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff;">S</div>
+              <div style="flex: 1; min-width: 0;"><div style="font-size: 12.5px; font-weight: 600; color: #fff;">Senior Frontend Engineer</div><div style="font-size: 11px; color: rgba(255,255,255,.55);">Stripe · Remote</div></div>
+              <span style="font-size: 11px; font-weight: 600; color: #7fd6a3;">96%</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 11px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 9px 12px; animation: syfade .6s ease .35s both;">
+              <div style="width: 30px; height: 30px; border-radius: 8px; background: rgba(15,23,42,.55); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff;">L</div>
+              <div style="flex: 1; min-width: 0;"><div style="font-size: 12.5px; font-weight: 600; color: #fff;">Product Designer</div><div style="font-size: 11px; color: rgba(255,255,255,.55);">Linear · Hybrid</div></div>
+              <span style="font-size: 11px; font-weight: 600; color: #8fc0ff;">{{ heroSkillsMiniNum }}</span>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div style="display: flex; gap: 12px; margin-top: clamp(20px, 4vh, 40px);">
+          <div style="flex: 1; padding: 14px 15px; border-radius: 14px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 16px 36px -22px rgba(3,9,24,.85); transition: transform .2s ease, background .2s, border-color .2s; animation: syfade .6s ease 0s both;" style-hover="transform: translateY(-3px); background: rgba(255,255,255,.11); border-color: rgba(143,192,255,.35);">
+            <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #7fd6a3; animation: sypulse 2.6s infinite;"></span><span style="font-size: 24px; font-weight: 700; letter-spacing: -.02em;">{{ statLiveNum }}</span></div>
+            <div style="font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.62); margin-top: 4px;">Live Opportunities</div>
+          </div>
+          <div style="flex: 1; padding: 14px 15px; border-radius: 14px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 16px 36px -22px rgba(3,9,24,.85); transition: transform .2s ease, background .2s, border-color .2s; animation: syfade .6s ease .1s both;" style-hover="transform: translateY(-3px); background: rgba(255,255,255,.11); border-color: rgba(143,192,255,.35);">
+            <div style="font-size: 24px; font-weight: 700; letter-spacing: -.02em;">{{ statCompaniesNum }}</div>
+            <div style="font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.62); margin-top: 4px;">Hiring Companies</div>
+          </div>
+          <div style="flex: 1; padding: 14px 15px; border-radius: 14px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 16px 36px -22px rgba(3,9,24,.85); transition: transform .2s ease, background .2s, border-color .2s; animation: syfade .6s ease .2s both;" style-hover="transform: translateY(-3px); background: rgba(255,255,255,.11); border-color: rgba(143,192,255,.35);">
+            <div style="font-size: 24px; font-weight: 700; letter-spacing: -.02em;">{{ statAccuracyNum }}</div>
+            <div style="font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.62); margin-top: 4px;">AI Match Accuracy</div>
+          </div>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <div style="font-size: 12.5px; color: rgba(255,255,255,.5);">© 2026 SyHire. All rights reserved.</div>
+        <div style="font-size: 12.5px; font-weight: 500; color: rgba(255,255,255,.72); margin-top: 4px;">Making Hiring Easy. Empowering Every Opportunity.</div>
+      </div>
+    <div style="position: absolute; inset: 0; transform: translate3d(calc(var(--syx, 0) * 10px), calc(var(--syy, 0) * 10px), 0); transition: transform .18s ease-out; animation: syappear 1.6s ease .3s both; left: 4300px; top: 3px">
+          
+          <!-- minimal ambient particles -->
+          <!-- glowing AI particle field (3 depth layers) -->
+          <sc-for list="{{ particles }}" as="p" hint-placeholder-count="0"><div style="{{ p.style }}"></div></sc-for>
+          <!-- Ambient AI particle field (neural connections, clipped inside Hero) -->
+          
+        </div></div><div style="flex: 1 1 54%; display: flex; align-items: center; justify-content: center; padding: clamp(22px, 4vh, 40px) 40px; background: radial-gradient(ellipse 90% 70% at 50% 0%, #f7f9fd, #eef2f8); position: relative; overflow: hidden;">
+      <div style="width: 100%; max-width: 428px; background: #fff; border: 1px solid #e9edf4; border-radius: 24px; box-shadow: 0 30px 64px -32px rgba(15,23,42,.22), 0 8px 24px -18px rgba(15,23,42,.12); padding: clamp(26px, 3.6vh, 40px); animation: syfade .25s ease; position: relative; z-index: 1;">
+        <sc-if value="{{ authViewMain }}" hint-placeholder-val="{{ true }}">
+        <div style="display: inline-flex; padding: 4px; background: #f1f4f9; border-radius: 11px; margin-bottom: 28px;">
+          <button onClick="{{ setLogin }}" style="{{ tabLoginStyle }}">Sign in</button>
+          <button onClick="{{ setSignup }}" style="{{ tabSignupStyle }}">Create account</button>
+        </div>
+        <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">{{ authTitle }}</h2>
+        <p style="font-size: 14.5px; color: #64748b; margin: 0 0 26px;">{{ authSubtitle }}</p>
+
+        <sc-if value="{{ isSignup }}" hint-placeholder-val="{{ false }}">
+          <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Full name</label>
+          <input value="{{ fullName }}" onChange="{{ setFullName }}" placeholder="Alex Morgan" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid #e2e8f0; border-radius: 11px; font-size: 14.5px; margin-bottom: 16px; background: #fbfcfe; transition: border-color .15s, box-shadow .15s, background .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15); background: #fff;">
+          <sc-if value="{{ hasErrName }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin: -10px 0 14px;">{{ errName }}</div></sc-if>
+        </sc-if>
+
+        <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Email address</label>
+        <div style="position: relative; margin-bottom: 16px;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.7" style="position: absolute; left: 15px; top: 24px; transform: translateY(-50%); pointer-events: none;"><rect x="2.5" y="5" width="19" height="14" rx="2.5"></rect><path d="M3 7l9 6 9-6"></path></svg>
+          <input value="{{ email }}" onChange="{{ setEmail }}" type="email" autoComplete="email" aria-label="Email address" placeholder="you@company.com" style="width: 100%; height: 48px; padding: 0 14px 0 44px; border: 1px solid #e2e8f0; border-radius: 16px; font-size: 14.5px; background: #fbfcfe; transition: border-color .18s, box-shadow .18s, background .18s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 4px rgba(61,139,255,.16); background: #fff;" style-hover="border-color: #cdd8ea;">
+        </div>
+        <sc-if value="{{ hasErrEmail }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin: -8px 0 14px;">{{ errEmail }}</div></sc-if>
+
+        <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Password</label>
+        <div style="position: relative;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.7" style="position: absolute; left: 15px; top: 24px; transform: translateY(-50%); pointer-events: none;"><rect x="4" y="10.5" width="16" height="10" rx="2.5"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>
+          <input value="{{ password }}" onChange="{{ setPassword }}" onKeyUp="{{ onPwKey }}" onKeyDown="{{ onPwKey }}" type="{{ pwType }}" autoComplete="current-password" aria-label="Password" placeholder="••••••••" style="width: 100%; height: 48px; padding: 0 46px 0 44px; border: 1px solid #e2e8f0; border-radius: 16px; font-size: 14.5px; background: #fbfcfe; transition: border-color .18s, box-shadow .18s, background .18s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 4px rgba(61,139,255,.16); background: #fff;" style-hover="border-color: #cdd8ea;">
+          <button onClick="{{ togglePw }}" type="button" aria-label="{{ pwToggleLabel }}" style="position: absolute; right: 6px; top: 24px; transform: translateY(-50%); width: 34px; height: 34px; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #94a3b8; border-radius: 8px; transition: color .15s, background .15s;" style-hover="color: #475569; background: #f1f4f9;">
+            <sc-if value="{{ hidePw }}" hint-placeholder-val="{{ true }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></sc-if>
+            <sc-if value="{{ showPw }}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"></path><path d="M10.6 5.2A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.1 4M6.2 6.2A17 17 0 0 0 2 12s3.5 7 10 7a9.6 9.6 0 0 0 4.2-1"></path></svg></sc-if>
+          </button>
+        </div>
+        <sc-if value="{{ capsOn }}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #ea9a0b; margin-top: 8px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 8h-5v6H9v-6H4l8-8z"></path></svg>Caps Lock is on</div></sc-if>
+        <sc-if value="{{ hasErrPw }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin-top: 8px;">{{ errPw }}</div></sc-if>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; margin: 16px 0 20px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #475569; cursor: pointer; user-select: none;">
+            <input type="checkbox" checked="{{ remember }}" onChange="{{ toggleRemember }}" style="width: 16px; height: 16px; accent-color: #1e3a8a; cursor: pointer;"> Remember me
+          </label>
+          <a onClick="{{ goForgot }}" style="font-size: 13px; color: #2563eb; font-weight: 500; cursor: pointer;">Forgot password?</a>
+        </div>
+
+        <button onClick="{{ login }}" style="width: 100%; height: 48px; border: none; border-radius: 16px; background: linear-gradient(180deg, #2f66e0, #1e3a8a); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 24px -8px rgba(30,58,138,.55), 0 2px 6px -2px rgba(30,58,138,.4); transition: filter .18s, transform .12s, box-shadow .25s;" style-hover="filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 16px 32px -10px rgba(37,99,235,.6), 0 0 0 3px rgba(61,139,255,.14);" style-active="transform: translateY(0) scale(.985);">
+          <sc-if value="{{ authLoading }}" hint-placeholder-val="{{ false }}"><span style="width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; display: inline-block; animation: syspin .7s linear infinite;"></span></sc-if>
+          <span>{{ authBtnLabel }}</span>
+        </button>
+
+        <div style="display: flex; align-items: center; gap: 12px; margin: 22px 0; color: #94a3b8; font-size: 12.5px;">
+          <div style="flex: 1; height: 1px; background: #e8ecf2;"></div> or <div style="flex: 1; height: 1px; background: #e8ecf2;"></div>
+        </div>
+        <button onClick="{{ googleLogin }}" style="width: 100%; height: 48px; border: 1px solid #e2e8f0; border-radius: 16px; background: #fff; color: #1e293b; font-size: 14.5px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: border-color .18s, background .18s, box-shadow .18s;" style-hover="border-color: #c7d4ea; background: #fbfcfe; box-shadow: 0 4px 14px -8px rgba(15,23,42,.2);">
+          <svg width="17" height="17" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.9a5 5 0 0 1-2.2 3.3v2.7h3.6c2.1-1.9 3.2-4.8 3.2-7.8z"></path><path fill="#34A853" d="M12 23c2.9 0 5.4-1 7.2-2.6l-3.6-2.7c-1 .7-2.3 1.1-3.6 1.1-2.8 0-5.1-1.9-6-4.4H2.3v2.8A11 11 0 0 0 12 23z"></path><path fill="#FBBC05" d="M6 14.4a6.6 6.6 0 0 1 0-4.2V7.4H2.3a11 11 0 0 0 0 9.8L6 14.4z"></path><path fill="#EA4335" d="M12 5.6c1.6 0 3 .5 4.1 1.6l3.1-3.1A11 11 0 0 0 2.3 7.4L6 10.2c.9-2.6 3.2-4.6 6-4.6z"></path></svg>
+          Continue with Google
+        </button>
+        <div style="margin-top: 22px; padding-top: 20px; border-top: 1px solid #eef1f6;">
+          <div style="display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #94a3b8; margin-bottom: 12px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3.4v5.1c0 4.7-3.2 8.4-7.5 10.5-4.3-2.1-7.5-5.8-7.5-10.5V5.9L12 2.5z"></path></svg>Enterprise Security</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 9px 14px;">
+            <div style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #475569;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>256-bit Encryption</div>
+            <div style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #475569;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>GDPR Ready</div>
+            <div style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #475569;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Secure Authentication</div>
+            <div style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #475569;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Privacy First</div>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- forgot password -->
+        <sc-if value="{{ authViewForgot }}" hint-placeholder-val="{{ false }}">
+        <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">Reset your password</h2>
+        <p style="font-size: 14.5px; color: #64748b; margin: 0 0 26px; line-height: 1.55;">Enter the email linked to your account and we'll send you a secure reset link.</p>
+        <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Email address</label>
+        <input value="{{ email }}" onChange="{{ setEmail }}" placeholder="you@company.com" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid #e2e8f0; border-radius: 11px; font-size: 14.5px; margin-bottom: 16px; background: #fbfcfe; transition: border-color .15s, box-shadow .15s, background .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15); background: #fff;">
+        <sc-if value="{{ hasErrEmail }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin: -10px 0 14px;">{{ errEmail }}</div></sc-if>
+        <button onClick="{{ sendReset }}" style="width: 100%; height: 47px; border: none; border-radius: 11px; background: linear-gradient(180deg, #2456d6, #1e3a8a); color: #fff; font-size: 14.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 20px -8px rgba(30,58,138,.6); transition: filter .15s, transform .12s;" style-hover="filter: brightness(1.1);" style-active="transform: scale(.98);">
+          <sc-if value="{{ authLoading }}" hint-placeholder-val="{{ false }}"><span style="width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; display: inline-block; animation: syspin .7s linear infinite;"></span></sc-if>
+          <span>{{ forgotBtnLabel }}</span>
+        </button>
+        <a onClick="{{ backToLogin }}" style="display: block; text-align: center; font-size: 13px; color: #2563eb; font-weight: 500; cursor: pointer; margin-top: 22px;">← Back to sign in</a>
+        </sc-if>
+
+        <!-- reset link sent -->
+        <sc-if value="{{ authViewForgotSent }}" hint-placeholder-val="{{ false }}">
+        <div style="width: 52px; height: 52px; border-radius: 15px; background: #ecfdf3; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"></rect><path d="M3 7l9 6 9-6"></path></svg>
+        </div>
+        <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">Check your inbox</h2>
+        <p style="font-size: 14.5px; color: #64748b; margin: 0 0 26px; line-height: 1.55;">We sent a password reset link to <strong style="color: #0f172a;">{{ email }}</strong>. The link expires in 60 minutes.</p>
+        <button onClick="{{ openResetDemo }}" style="width: 100%; height: 47px; border: none; border-radius: 11px; background: linear-gradient(180deg, #2456d6, #1e3a8a); color: #fff; font-size: 14.5px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 20px -8px rgba(30,58,138,.6); transition: filter .15s, transform .12s;" style-hover="filter: brightness(1.1);" style-active="transform: scale(.98);">Open reset link (demo)</button>
+        <div style="display: flex; justify-content: center; gap: 18px; margin-top: 22px;">
+          <a onClick="{{ sendReset }}" style="font-size: 13px; color: #2563eb; font-weight: 500; cursor: pointer;">Resend email</a>
+          <a onClick="{{ backToLogin }}" style="font-size: 13px; color: #64748b; font-weight: 500; cursor: pointer;">Back to sign in</a>
+        </div>
+        </sc-if>
+
+        <!-- reset password -->
+        <sc-if value="{{ authViewReset }}" hint-placeholder-val="{{ false }}">
+        <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">Create a new password</h2>
+        <p style="font-size: 14.5px; color: #64748b; margin: 0 0 26px;">Must be at least 8 characters.</p>
+        <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">New password</label>
+        <input value="{{ resetPw }}" onChange="{{ setResetPw }}" type="password" placeholder="••••••••" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid #e2e8f0; border-radius: 11px; font-size: 14.5px; margin-bottom: 16px; background: #fbfcfe; transition: border-color .15s, box-shadow .15s, background .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15); background: #fff;">
+        <sc-if value="{{ hasErrResetPw }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin: -10px 0 14px;">{{ errResetPw }}</div></sc-if>
+        <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Confirm password</label>
+        <input value="{{ confirmPw }}" onChange="{{ setConfirmPw }}" type="password" placeholder="••••••••" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid #e2e8f0; border-radius: 11px; font-size: 14.5px; margin-bottom: 22px; background: #fbfcfe; transition: border-color .15s, box-shadow .15s, background .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15); background: #fff;">
+        <sc-if value="{{ hasErrConfirm }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin: -16px 0 16px;">{{ errConfirm }}</div></sc-if>
+        <button onClick="{{ doReset }}" style="width: 100%; height: 47px; border: none; border-radius: 11px; background: linear-gradient(180deg, #2456d6, #1e3a8a); color: #fff; font-size: 14.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 20px -8px rgba(30,58,138,.6); transition: filter .15s, transform .12s;" style-hover="filter: brightness(1.1);" style-active="transform: scale(.98);">
+          <sc-if value="{{ authLoading }}" hint-placeholder-val="{{ false }}"><span style="width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; display: inline-block; animation: syspin .7s linear infinite;"></span></sc-if>
+          <span>{{ resetBtnLabel }}</span>
+        </button>
+        <a onClick="{{ backToLogin }}" style="display: block; text-align: center; font-size: 13px; color: #2563eb; font-weight: 500; cursor: pointer; margin-top: 22px;">← Back to sign in</a>
+        </sc-if>
+
+        <!-- verify email -->
+        <sc-if value="{{ authViewVerify }}" hint-placeholder-val="{{ false }}">
+        <div style="width: 52px; height: 52px; border-radius: 15px; background: #eef2ff; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3.4v5.1c0 4.7-3.2 8.4-7.5 10.5-4.3-2.1-7.5-5.8-7.5-10.5V5.9L12 2.5z"></path><path d="M8.8 12l2.3 2.3 4.1-4.6"></path></svg>
+        </div>
+        <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">Verify your email</h2>
+        <p style="font-size: 14.5px; color: #64748b; margin: 0 0 26px; line-height: 1.55;">We sent a verification link to <strong style="color: #0f172a;">{{ email }}</strong>. Click it to activate your account.</p>
+        <button onClick="{{ verifiedContinue }}" style="width: 100%; height: 47px; border: none; border-radius: 11px; background: linear-gradient(180deg, #2456d6, #1e3a8a); color: #fff; font-size: 14.5px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 20px -8px rgba(30,58,138,.6); transition: filter .15s, transform .12s;" style-hover="filter: brightness(1.1);" style-active="transform: scale(.98);">I've verified — continue</button>
+        <div style="display: flex; justify-content: center; gap: 18px; margin-top: 22px;">
+          <a onClick="{{ resendVerify }}" style="{{ resendStyle }}">{{ resendLabel }}</a>
+          <a onClick="{{ backToLogin }}" style="font-size: 13px; color: #64748b; font-weight: 500; cursor: pointer;">Use a different email</a>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ============ APP ============ -->
+  <sc-if value="{{ isAuthed }}" hint-placeholder-val="{{ false }}">
+  <div style="display: flex; height: 100vh; width: 100%;">
+
+    <!-- SIDEBAR -->
+    <sc-if value="{{ navOpen }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeNav }}" style="position: fixed; inset: 0; background: rgba(7,26,61,.5); backdrop-filter: blur(2px); z-index: 90; animation: syfade .2s ease;"></div></sc-if>
+    <aside style="{{ sidebarStyle }}">
+      <div style="display: flex; align-items: center; gap: 11px; padding: 4px 8px 16px;">
+        <div style="width: 36px; height: 36px; border-radius: 10px; background: #fff; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px -6px rgba(61,139,255,.45);">
+          <img src="assets/syhire-mark-premium.png" alt="SyHire" style="width: 24px; height: 24px; object-fit: contain;">
+        </div>
+        <span style="font-size: 18px; font-weight: 700; letter-spacing: -.02em; color: #fff;">SyHire</span>
+      </div>
+
+      <div style="font-size: 10.5px; font-weight: 600; letter-spacing: .1em; color: rgba(255,255,255,.4); padding: 4px 10px 8px;">PHASE 1</div>
+      <button onClick="{{ goDashboard }}" style="{{ navDashStyle }}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>
+        <span>Dashboard</span>
+      </button>
+      <button onClick="{{ goJobs }}" style="{{ navJobsStyle }}">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        <span>Job Posts</span>
+        <span style="margin-left: auto; font-size: 11px; font-weight: 600; background: #eef2ff; color: #2563eb; padding: 1px 7px; border-radius: 999px;">{{ jobCount }}</span>
+      </button>
+
+      <div style="font-size: 10.5px; font-weight: 600; letter-spacing: .1em; color: rgba(255,255,255,.4); padding: 18px 10px 8px;">PHASE 2</div>
+      <div onClick="{{ comingSoon }}" style="display:flex; align-items:center; gap:11px; padding:9px 11px; border-radius:10px; color:rgba(255,255,255,.4); font-size:14px; font-weight:500; cursor:not-allowed;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
+        <span style="flex:1;">Resume Builder</span><span style="font-size:10px; font-weight:600; background:rgba(255,255,255,.08); color:rgba(255,255,255,.5); padding:2px 7px; border-radius:999px;">Soon</span>
+      </div>
+      <div onClick="{{ comingSoon }}" style="display:flex; align-items:center; gap:11px; padding:9px 11px; border-radius:10px; color:rgba(255,255,255,.4); font-size:14px; font-weight:500; cursor:not-allowed;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 4H4v16h16v-7"></path><path d="m18.5 2.5 3 3L12 15l-4 1 1-4z"></path></svg>
+        <span style="flex:1;">Cover Letters</span><span style="font-size:10px; font-weight:600; background:rgba(255,255,255,.08); color:rgba(255,255,255,.5); padding:2px 7px; border-radius:999px;">Soon</span>
+      </div>
+      <div onClick="{{ comingSoon }}" style="display:flex; align-items:center; gap:11px; padding:9px 11px; border-radius:10px; color:rgba(255,255,255,.4); font-size:14px; font-weight:500; cursor:not-allowed;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path></svg>
+        <span style="flex:1;">Notification Center</span><span style="font-size:10px; font-weight:600; background:rgba(255,255,255,.08); color:rgba(255,255,255,.5); padding:2px 7px; border-radius:999px;">Soon</span>
+      </div>
+
+      <div style="font-size: 10.5px; font-weight: 600; letter-spacing: .1em; color: rgba(255,255,255,.4); padding: 18px 10px 8px;">PHASE 3</div>
+      <div onClick="{{ comingSoon }}" style="display:flex; align-items:center; gap:11px; padding:9px 11px; border-radius:10px; color:rgba(255,255,255,.4); font-size:14px; font-weight:500; cursor:not-allowed;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"></path><circle cx="12" cy="12" r="4"></circle></svg>
+        <span style="flex:1;">AI Automation</span><span style="font-size:10px; font-weight:600; background:rgba(255,255,255,.08); color:rgba(255,255,255,.5); padding:2px 7px; border-radius:999px;">Soon</span>
+      </div>
+      <div onClick="{{ comingSoon }}" style="display:flex; align-items:center; gap:11px; padding:9px 11px; border-radius:10px; color:rgba(255,255,255,.4); font-size:14px; font-weight:500; cursor:not-allowed;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m12 2 3 6 6 .8-4.5 4.2 1.2 6L12 16.8 6.3 19l1.2-6L3 8.8 9 8z"></path></svg>
+        <span style="flex:1;">Early Access</span><span style="font-size:10px; font-weight:600; background:rgba(255,255,255,.08); color:rgba(255,255,255,.5); padding:2px 7px; border-radius:999px;">Soon</span>
+      </div>
+
+      <div style="margin-top: auto; padding-top: 16px;">
+        <div style="background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 15px; margin-bottom: 12px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+            <span style="font-size:13px; font-weight:700; color:#fff;">AI Collector</span>
+            <span style="display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-weight:600; color:{{ collectorFg }};"><span style="width:6px; height:6px; border-radius:50%; background:{{ statusDot }}; animation:{{ statusAnim }};"></span>{{ statusText }}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:7px;"><span style="color:rgba(255,255,255,.5);">Last scan</span><span style="color:rgba(255,255,255,.85); font-weight:500;">{{ lastScan }}</span></div>
+          <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:13px;"><span style="color:rgba(255,255,255,.5);">Next scan</span><span style="color:rgba(255,255,255,.85); font-weight:500; font-family:'Geist Mono',monospace;">{{ nextScan }}</span></div>
+          <button onClick="{{ scanNow }}" style="width:100%; height:37px; border:1px solid rgba(255,255,255,.16); border-radius:10px; background:rgba(255,255,255,.06); color:#fff; font-size:12.5px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:7px;" style-hover="background:rgba(255,255,255,.12);"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" style="animation:{{ scanIconAnim }}; transform-origin:12px 12px;"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.4 2.6L21 8"></path><path d="M21 3v5h-5"></path></svg>{{ scanBtnLabel }}</button>
+        </div>
+        <button onClick="{{ goSettings }}" style="{{ navSettingsStyle }}">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>Settings</span>
+        </button>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 12px 8px 2px;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #2563eb, #4d8dff); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">AM</div>
+          <div style="line-height: 1.2; overflow: hidden;"><div style="font-size: 13px; font-weight: 600; color: #fff;">Alex Morgan</div><div style="font-size: 11.5px; color: rgba(255,255,255,.5); white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{{ email }}</div></div>
+          <svg onClick="{{ logout }}" style="margin-left: auto; cursor: pointer; color: rgba(255,255,255,.5);" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg>
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main style="flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #f4f6fa;">
+      <!-- TOP BAR -->
+      <header style="height: 66px; flex-shrink: 0; background: rgba(255,255,255,.82); backdrop-filter: blur(8px); border-bottom: 1px solid #eaedf3; display: flex; align-items: center; padding: 0 {{ topbarPad }}; gap: 14px;">
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ toggleNav }}" style="width: 40px; height: 40px; border-radius: 11px; border: 1px solid #e6eaf1; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #334155; flex-shrink: 0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 6h16M4 12h16M4 18h16"></path></svg></button>
+        </sc-if>
+        <div style="min-width: 0;">
+          <h1 style="font-size: 18px; font-weight: 700; letter-spacing: -.02em; margin: 0; color: #0f172a;">{{ pageTitle }}</h1>
+          <div style="font-size: 12.5px; color: #94a3b8; margin-top: 1px;">{{ pageSubtitle }}</div>
+        </div>
+        <div style="flex: 1;"></div>
+        <div style="position: relative; width: 300px; max-width: 34vw;">
+          <svg style="position: absolute; left: 13px; top: 50%; transform: translateY(-50%); color: #94a3b8;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+          <input value="{{ search }}" onChange="{{ setSearch }}" placeholder="Search jobs, companies, skills…" style="width: 100%; height: 40px; padding: 0 14px 0 38px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 13.5px; background: #f7f9fc; transition: border-color .15s, box-shadow .15s, background .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15); background: #fff;">
+        </div>
+      </header>
+
+      <div style="flex: 1; overflow-y: auto; padding: {{ mainPad }};">
+
+        <!-- ======= DASHBOARD ======= -->
+        <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+        <div style="max-width: 1080px; margin: 0 auto; animation: syfade .35s ease;">
+          <!-- collector hero -->
+          <div style="position: relative; overflow: hidden; border-radius: 18px; background: linear-gradient(135deg, #0f2557 0%, #1e3a8a 60%, #1d4ed8 130%); color: #fff; padding: 26px 28px; margin-bottom: 22px; box-shadow: 0 18px 40px -22px rgba(30,58,138,.7);">
+            <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 50% 110% at 86% 8%, rgba(61,139,255,.20), transparent 65%), radial-gradient(ellipse 42% 90% at 58% 110%, rgba(29,78,216,.16), transparent 62%);"></div>
+            <div style="position: absolute; inset: 0; animation: syappear 1.6s ease .4s both;">
+              <div style="position: absolute; left: 64%; top: 40%; width: 2px; height: 2px; border-radius: 50%; background: rgba(255,255,255,.3); animation: syfloat 9s ease-in-out infinite alternate;"></div>
+              <div style="position: absolute; left: 76%; top: 30%; width: 2.5px; height: 2.5px; border-radius: 50%; background: rgba(143,192,255,.45); animation: syfloat 8s ease-in-out 1.4s infinite alternate;"></div>
+              <div style="position: absolute; left: 88%; top: 20%; width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.4); animation: syfloat 10s ease-in-out 2.4s infinite alternate;"></div>
+            </div>
+            <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 46% 130% at 24% 50%, rgba(255,255,255,.05), transparent 70%), radial-gradient(ellipse 120% 100% at 50% 135%, rgba(4,12,28,.35), transparent 55%); pointer-events: none;"></div>
+
+            <div style="position: relative; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
+              <div style="display: flex; gap: 18px; align-items: center;">
+                <div style="width: 58px; height: 58px; border-radius: 15px; background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center;">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4.2"></circle><path d="M12 12 L20.5 5.5" style="transform-origin: 12px 12px; animation: syradar 3s linear infinite;"></path></svg>
+                </div>
+                <div>
+                  <div style="display: inline-flex; align-items: center; gap: 8px; padding: 4px 11px; border-radius: 999px; background: {{ statusChipBg }}; font-size: 12.5px; font-weight: 600; margin-bottom: 8px;">
+                    <span style="width: 8px; height: 8px; border-radius: 50%; background: {{ statusDot }}; animation: {{ statusAnim }};"></span> AI Collector · {{ statusText }}
+                  </div>
+                  <div style="font-size: 22px; font-weight: 700; letter-spacing: -.02em;">Good {{ daypart }}, Alex</div>
+                  <div style="font-size: 14px; color: rgba(255,255,255,.72); margin-top: 2px;">{{ scanLine }}</div>
+                </div>
+              </div>
+              <button onClick="{{ scanNow }}" style="height: 42px; padding: 0 18px; border-radius: 11px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.14); color: #fff; font-size: 13.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 9px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" style="animation: {{ scanIconAnim }}; transform-origin: 12px 12px;"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.4 2.6L21 8"></path><path d="M21 3v5h-5"></path></svg>
+                {{ scanBtnLabel }}
+              </button>
+            </div>
+            <div style="position: relative; display: flex; gap: 34px; margin-top: 24px; flex-wrap: wrap;">
+              <div><div style="font-size: 11.5px; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .05em;">Last scan</div><div style="font-size: 18px; font-weight: 600; margin-top: 3px;">{{ lastScan }}</div></div>
+              <div style="width: 1px; background: rgba(255,255,255,.14);"></div>
+              <div><div style="font-size: 11.5px; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .05em;">Next scan</div><div style="font-size: 18px; font-weight: 600; margin-top: 3px; font-family: 'Geist Mono', monospace;">{{ nextScan }}</div></div>
+              <div style="width: 1px; background: rgba(255,255,255,.14);"></div>
+              <div><div style="font-size: 11.5px; color: rgba(255,255,255,.6); text-transform: uppercase; letter-spacing: .05em;">Collected today</div><div style="font-size: 18px; font-weight: 600; margin-top: 3px;">{{ jobsToday }} jobs</div></div>
+            </div>
+          </div>
+
+          <!-- stat cards -->
+          <div style="display: grid; grid-template-columns: {{ statCols }}; gap: 16px; margin-bottom: 20px;">
+            <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 15px; padding: 18px; transition: box-shadow .18s, border-color .18s;" style-hover="box-shadow: 0 12px 30px -20px rgba(15,23,42,.25); border-color: #dfe6f0;">
+              <div style="display: flex; align-items: center; justify-content: space-between;"><span style="font-size: 13px; color: #64748b;">New jobs today</span><div style="width: 30px; height: 30px; border-radius: 9px; background: #eef2ff; color: #2563eb; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg></div></div>
+              <div style="font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-top: 8px;">{{ jobsToday }}</div>
+              <div style="font-size: 12px; color: #22a35a; font-weight: 500; margin-top: 2px;">↑ 18% vs yesterday</div>
+            </div>
+            <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 15px; padding: 18px; transition: box-shadow .18s, border-color .18s;" style-hover="box-shadow: 0 12px 30px -20px rgba(15,23,42,.25); border-color: #dfe6f0;">
+              <div style="display: flex; align-items: center; justify-content: space-between;"><span style="font-size: 13px; color: #64748b;">Saved jobs</span><div style="width: 30px; height: 30px; border-radius: 9px; background: #fff7ed; color: #ea9a0b; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></div></div>
+              <div style="font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-top: 8px;">{{ savedCount }}</div>
+              <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">ready to apply</div>
+            </div>
+            <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 15px; padding: 18px; transition: box-shadow .18s, border-color .18s;" style-hover="box-shadow: 0 12px 30px -20px rgba(15,23,42,.25); border-color: #dfe6f0;">
+              <div style="display: flex; align-items: center; justify-content: space-between;"><span style="font-size: 13px; color: #64748b;">AI matches</span><div style="width: 30px; height: 30px; border-radius: 9px; background: #ecfdf3; color: #16a34a; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4.2"></circle></svg></div></div>
+              <div style="font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin-top: 8px;">{{ matchesCount }}</div>
+              <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">matched to your preferences</div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: {{ dashCols }}; gap: 16px; margin-bottom: 16px;">
+            <!-- recommended jobs -->
+            <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 16px; padding: 20px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <h3 style="font-size: 15px; font-weight: 700; margin: 0; letter-spacing: -.01em; display:flex; align-items:center; gap:8px;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4.2"></circle></svg>Recommended for you</h3>
+                <a onClick="{{ goJobs }}" style="font-size: 13px; color: #2563eb; font-weight: 500; cursor: pointer;">View all →</a>
+              </div>
+              <p style="font-size: 12.5px; color: #94a3b8; margin: 0 0 8px;">Your best matches, ranked by SyHire AI</p>
+              <sc-for list="{{ recommendedJobs }}" as="job" hint-placeholder-count="4">
+                <div onClick="{{ job.open }}" style="display: flex; align-items: center; gap: 13px; padding: 11px; border-radius: 12px; cursor: pointer; transition: background .15s;" style-hover="background: #f6f8fc;">
+                  <div style="width: 40px; height: 40px; border-radius: 10px; background: {{ job.logoBg }}; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex-shrink: 0;">{{ job.initial }}</div>
+                  <div style="min-width: 0; flex: 1;">
+                    <div style="font-size: 14px; font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ job.title }}</div>
+                    <div style="font-size: 12.5px; color: #94a3b8;">{{ job.company }} · {{ job.location }}</div>
+                  </div>
+                  <span style="display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:700; color:{{ job.matchFg }}; background:{{ job.matchBg }}; padding:4px 8px; border-radius:999px; flex-shrink:0;">{{ job.match }}%</span>
+                  <div style="text-align: right; flex-shrink: 0; width: 76px;">
+                    <div style="font-size: 13px; font-weight: 600; color: #16a34a;">{{ job.salaryText }}</div>
+                    <div style="font-size: 11.5px; color: #94a3b8;">{{ job.posted }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <!-- recent activity -->
+            <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 16px; padding: 20px;">
+              <h3 style="font-size: 15px; font-weight: 700; margin: 0 0 4px; letter-spacing: -.01em;">Recent activity</h3>
+              <p style="font-size: 12.5px; color: #94a3b8; margin: 0 0 12px;">The latest from your collector</p>
+              <sc-for list="{{ activity }}" as="a" hint-placeholder-count="5">
+                <div style="display: flex; gap: 11px; padding: 8px 0; align-items: flex-start;">
+                  <span style="width: 8px; height: 8px; border-radius: 50%; background: {{ a.color }}; margin-top: 6px; flex-shrink: 0;"></span>
+                  <div style="flex: 1;"><div style="font-size: 13px; color: #334155; line-height: 1.4;">{{ a.text }}</div><div style="font-size: 11.5px; color: #94a3b8; margin-top: 1px;">{{ a.time }}</div></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: {{ dashCols }}; gap: 16px;">
+            <!-- your preferences -->
+            <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 16px; padding: 20px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                <h3 style="font-size: 15px; font-weight: 700; margin: 0; letter-spacing: -.01em;">Your preferences</h3>
+                <a onClick="{{ goSettings }}" style="font-size: 13px; color: #2563eb; font-weight: 500; cursor: pointer;">Edit →</a>
+              </div>
+              <p style="font-size: 12.5px; color: #94a3b8; margin: 0 0 12px;">Why you're seeing these roles</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <sc-for list="{{ prefChips }}" as="c" hint-placeholder-count="4">
+                  <span style="font-size: 13px; font-weight: 500; color: {{ c.fg }}; background: {{ c.bg }}; padding: 6px 12px; border-radius: 8px;">{{ c.label }}</span>
+                </sc-for>
+              </div>
+            </div>
+            <!-- quick actions -->
+            <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 16px; padding: 20px;">
+              <h3 style="font-size: 15px; font-weight: 700; margin: 0 0 12px; letter-spacing: -.01em;">Quick actions</h3>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <button onClick="{{ scanNow }}" style="display:flex; flex-direction:column; gap:7px; align-items:flex-start; padding:13px; border:1px solid #eef1f6; border-radius:12px; background:#fbfcfe; cursor:pointer;" style-hover="border-color:#d4dcec; background:#f6f8fc;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.4 2.6L21 8"></path><path d="M21 3v5h-5"></path></svg><span style="font-size:13px; font-weight:600; color:#1e293b;">Scan now</span></button>
+                <button onClick="{{ goJobs }}" style="display:flex; flex-direction:column; gap:7px; align-items:flex-start; padding:13px; border:1px solid #eef1f6; border-radius:12px; background:#fbfcfe; cursor:pointer;" style-hover="border-color:#d4dcec; background:#f6f8fc;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg><span style="font-size:13px; font-weight:600; color:#1e293b;">Browse jobs</span></button>
+                <button onClick="{{ goSaved }}" style="display:flex; flex-direction:column; gap:7px; align-items:flex-start; padding:13px; border:1px solid #eef1f6; border-radius:12px; background:#fbfcfe; cursor:pointer;" style-hover="border-color:#d4dcec; background:#f6f8fc;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg><span style="font-size:13px; font-weight:600; color:#1e293b;">Saved jobs</span></button>
+                <button onClick="{{ goSettings }}" style="display:flex; flex-direction:column; gap:7px; align-items:flex-start; padding:13px; border:1px solid #eef1f6; border-radius:12px; background:#fbfcfe; cursor:pointer;" style-hover="border-color:#d4dcec; background:#f6f8fc;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.8"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg><span style="font-size:13px; font-weight:600; color:#1e293b;">Settings</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </sc-if>
+
+        <!-- ======= JOB POSTS ======= -->
+        <sc-if value="{{ isJobs }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width: 1180px; margin: 0 auto; display:flex; gap:24px; align-items:flex-start; animation: syfade .35s ease;">
+
+          <!-- CENTER: search + filters + jobs -->
+          <div style="flex:1; min-width:0;">
+          <!-- centered search hero -->
+          <div style="text-align: center; padding: 6px 0 2px;">
+            <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.03em; margin: 0 0 5px;">Find your next role</h2>
+            <p style="font-size: 14px; color: #94a3b8; margin: 0 0 18px;">Search everything the collector scans — refreshed continuously by your AI.</p>
+            <div style="position: relative; max-width: 640px; margin: 0 auto;">
+              <svg style="position:absolute; left:20px; top:50%; transform:translateY(-50%); color:#94a3b8;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+              <input value="{{ search }}" onChange="{{ setJobSearch }}" placeholder="Search jobs, companies, skills, or keywords…" style="width:100%; height:56px; padding:0 48px 0 52px; border:1px solid #e2e8f0; border-radius:16px; font-size:16px; background:#fff; box-shadow:0 10px 30px -16px rgba(15,23,42,.28); transition:border-color .15s, box-shadow .15s;" style-focus="border-color:#3D8BFF; box-shadow:0 0 0 4px rgba(61,139,255,.14), 0 10px 30px -16px rgba(15,23,42,.28);">
+              <sc-if value="{{ hasSearch }}" hint-placeholder-val="{{ false }}">
+                <span onClick="{{ clearSearch }}" style="position:absolute; right:16px; top:50%; transform:translateY(-50%); cursor:pointer; color:#94a3b8; width:26px; height:26px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:18px;" style-hover="background:#f1f4f9;">×</span>
+              </sc-if>
+            </div>
+            <div style="display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; margin-top:15px;">
+              <span style="font-size:12px; color:#94a3b8; font-weight:500;">Trending</span>
+              <sc-for list="{{ trendingChips }}" as="c" hint-placeholder-count="6"><button onClick="{{ c.go }}" style="font-size:12.5px; font-weight:500; color:#334155; background:#fff; border:1px solid #e6eaf1; padding:6px 13px; border-radius:999px; cursor:pointer; transition:border-color .15s, color .15s, background .15s;" style-hover="border-color:#3D8BFF; color:#1e3a8a; background:#f5f8ff;">{{ c.label }}</button></sc-for>
+            </div>
+          </div>
+
+          <!-- filter toolbar -->
+          <div style="display: flex; gap: 10px; align-items: center; justify-content: center; margin: 10px 0 22px; flex-wrap: wrap;">
+            <select value="{{ filterCategory }}" onChange="{{ setCategory }}" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15);" style-hover="border-color: #c7d4ea;" style="transition: border-color .15s, box-shadow .15s; height: 40px; padding: 0 32px 0 13px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 13px; background: #fff; color: #334155; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 fill=%22none%22 stroke=%22%2364748b%22 stroke-width=%222%22&gt;&lt;path d=%22m3 5 4 4 4-4%22/&gt;&lt;/svg&gt;'); background-repeat: no-repeat; background-position: right 11px center;">
+              <sc-for list="{{ categories }}" as="c" hint-placeholder-count="10"><option value="{{ c.value }}">{{ c.optionLabel }}</option></sc-for>
+            </select>
+            <select value="{{ filterLocation }}" onChange="{{ setLocation }}" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15);" style-hover="border-color: #c7d4ea;" style="transition: border-color .15s, box-shadow .15s; height: 40px; padding: 0 32px 0 13px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 13px; background: #fff; color: #334155; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 fill=%22none%22 stroke=%22%2364748b%22 stroke-width=%222%22&gt;&lt;path d=%22m3 5 4 4 4-4%22/&gt;&lt;/svg&gt;'); background-repeat: no-repeat; background-position: right 11px center;">
+              <option value="all">All locations</option>
+              <option value="Remote">Remote</option>
+              <option value="San Francisco">San Francisco</option>
+              <option value="New York">New York</option>
+              <option value="Austin">Austin</option>
+              <option value="London">London</option>
+            </select>
+            <div style="position: relative;">
+              <button onClick="{{ toggleSalary }}" style="{{ salaryBtnStyle }}" style-hover="border-color: #c7d4ea;">{{ salaryLabel }}<svg width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.6;"><path d="m3 5 4 4 4-4"></path></svg></button>
+              <sc-if value="{{ salaryOpen }}" hint-placeholder-val="{{ false }}">
+              <div>
+                <div onClick="{{ closeSalary }}" style="position:fixed; inset:0; z-index:20;"></div>
+                <div style="position:absolute; top:46px; left:0; z-index:30; width:262px; background:#fff; border:1px solid #e6eaf1; border-radius:14px; box-shadow:0 18px 44px -18px rgba(15,23,42,.35); padding:16px;">
+                  <div style="font-size:13px; font-weight:700; margin-bottom:14px;">Salary range</div>
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:#64748b; margin-bottom:6px;"><span>Minimum</span><span style="font-weight:600; color:#1e3a8a; font-family:'Geist Mono',monospace;">{{ minSalaryText }}</span></div>
+                  <input type="range" min="0" max="300" step="10" value="{{ minSalary }}" onChange="{{ setSalary }}" style="width:100%; accent-color:#1e3a8a; cursor:pointer; margin-bottom:14px;">
+                  <div style="display:flex; justify-content:space-between; font-size:12px; color:#64748b; margin-bottom:6px;"><span>Maximum</span><span style="font-weight:600; color:#1e3a8a; font-family:'Geist Mono',monospace;">{{ maxSalaryText }}</span></div>
+                  <input type="range" min="0" max="300" step="10" value="{{ maxSalary }}" onChange="{{ setMaxSalary }}" style="width:100%; accent-color:#1e3a8a; cursor:pointer; margin-bottom:14px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;"><span style="font-size:12.5px; color:#64748b;">Currency</span><select value="{{ currency }}" onChange="{{ setCurrency }}" style="font-size:12.5px; font-weight:600; color:#334155; background:#f4f6fa; padding:5px 10px; border-radius:8px; border:none; cursor:pointer;"><option value="USD">USD ($)</option><option value="EUR">EUR (€)</option><option value="GBP">GBP (£)</option></select></div>
+                  <div style="display:flex; gap:8px;"><button onClick="{{ resetSalary }}" style="flex:1; height:38px; border:1px solid #e6eaf1; border-radius:10px; background:#fff; color:#64748b; font-size:13px; font-weight:600; cursor:pointer; transition:border-color .15s, background .15s;" style-hover="border-color:#c7d4ea; background:#fbfcfe;">Reset</button><button onClick="{{ applySalary }}" style="flex:1; height:38px; border:none; border-radius:10px; background:#1e3a8a; color:#fff; font-size:13px; font-weight:600; cursor:pointer; transition:filter .15s, transform .12s;" style-hover="filter:brightness(1.15);" style-active="transform:scale(.97);">Apply</button></div>
+                </div>
+              </div>
+              </sc-if>
+            </div>
+            <select value="{{ sort }}" onChange="{{ setSort }}" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15);" style-hover="border-color: #c7d4ea;" style="transition: border-color .15s, box-shadow .15s; height: 40px; padding: 0 32px 0 13px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 13px; background: #fff; color: #334155; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 fill=%22none%22 stroke=%22%2364748b%22 stroke-width=%222%22&gt;&lt;path d=%22m3 5 4 4 4-4%22/&gt;&lt;/svg&gt;'); background-repeat: no-repeat; background-position: right 11px center;">
+              <option value="recent">Most recent</option>
+              <option value="salary">Highest salary</option>
+              <option value="relevance">Best AI match</option>
+            </select>
+            <sc-if value="{{ anyFilter }}" hint-placeholder-val="{{ false }}">
+              <button onClick="{{ clearFilters }}" style="height: 40px; padding: 0 14px; border: 1px solid #e6eaf1; border-radius: 11px; background: #fff; color: #64748b; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"></path></svg>Clear</button>
+            </sc-if>
+            <button onClick="{{ toggleSavedView }}" style="{{ savedToggleStyle }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="{{ savedToggleFill }}" stroke="currentColor" stroke-width="1.8"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>Saved</button>
+          </div>
+
+          <div style="font-size: 13px; color: #64748b; margin-bottom: 14px;">{{ resultLine }}</div>
+
+          <!-- loading skeletons -->
+          <sc-if value="{{ loadingJobs }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:16px; color:#2563eb; font-size:13.5px; font-weight:600;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" style="animation: syspin .9s linear infinite; transform-origin:12px 12px;"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.4 2.6L21 8"></path><path d="M21 3v5h-5"></path></svg>
+            {{ loadMsg }}
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr; gap: 14px;">
+            <sc-for list="{{ skeletons }}" as="s" hint-placeholder-count="6">
+              <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 15px; padding: 18px; transition: box-shadow .18s, border-color .18s;" style-hover="box-shadow: 0 12px 30px -20px rgba(15,23,42,.25); border-color: #dfe6f0;">
+                <div style="display: flex; gap: 13px;"><div style="width: 46px; height: 46px; border-radius: 11px; background: linear-gradient(90deg,#eef1f6 25%,#f6f8fb 37%,#eef1f6 63%); background-size: 800px 100%; animation: syshimmer 1.4s infinite;"></div><div style="flex: 1;"><div style="height: 15px; width: 70%; border-radius: 6px; background: linear-gradient(90deg,#eef1f6 25%,#f6f8fb 37%,#eef1f6 63%); background-size: 800px 100%; animation: syshimmer 1.4s infinite; margin-bottom: 8px;"></div><div style="height: 12px; width: 45%; border-radius: 6px; background: linear-gradient(90deg,#eef1f6 25%,#f6f8fb 37%,#eef1f6 63%); background-size: 800px 100%; animation: syshimmer 1.4s infinite;"></div></div></div>
+                <div style="height: 12px; width: 100%; border-radius: 6px; background: linear-gradient(90deg,#eef1f6 25%,#f6f8fb 37%,#eef1f6 63%); background-size: 800px 100%; animation: syshimmer 1.4s infinite; margin-top: 16px;"></div>
+                <div style="height: 12px; width: 60%; border-radius: 6px; background: linear-gradient(90deg,#eef1f6 25%,#f6f8fb 37%,#eef1f6 63%); background-size: 800px 100%; animation: syshimmer 1.4s infinite; margin-top: 10px;"></div>
+              </div>
+            </sc-for>
+          </div>
+          </sc-if>
+
+          <!-- empty state -->
+          <sc-if value="{{ showEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="background: #fff; border: 1px dashed #d8dfea; border-radius: 16px; padding: 60px 20px; text-align: center;">
+            <div style="width: 62px; height: 62px; border-radius: 16px; background: #f1f4f9; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.6"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            </div>
+            <h3 style="font-size: 17px; font-weight: 700; margin: 0 0 6px;">No jobs match these filters</h3>
+            <p style="font-size: 14px; color: #94a3b8; margin: 0 0 20px;">Try widening your salary range or clearing a filter — the collector adds new roles every few minutes.</p>
+            <button onClick="{{ clearFilters }}" style="height: 42px; padding: 0 20px; border: none; border-radius: 11px; background: #1e3a8a; color: #fff; font-size: 13.5px; font-weight: 600; cursor: pointer;">Clear all filters</button>
+          </div>
+          </sc-if>
+
+          <!-- job grid -->
+          <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ true }}">
+          <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
+            <sc-for list="{{ visibleJobs }}" as="job" hint-placeholder-count="6">
+              <div onClick="{{ job.open }}" style="background:#fff; border:1px solid #eef1f6; border-radius:18px; padding:22px 24px; cursor:pointer; transition:box-shadow .18s, transform .18s, border-color .18s;" style-hover="box-shadow:0 18px 44px -24px rgba(15,23,42,.28); border-color:#dbe3f0; transform:translateY(-2px);">
+                <div style="display:flex; align-items:flex-start; gap:15px;">
+                  <div style="width:50px; height:50px; border-radius:13px; background:{{ job.logoBg }}; color:#fff; display:flex; align-items:center; justify-content:center; font-size:19px; font-weight:700; flex-shrink:0;">{{ job.initial }}</div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="display:flex; align-items:flex-start; gap:12px;">
+                      <div style="flex:1; min-width:0;">
+                        <div style="font-size:16.5px; font-weight:700; color:#0f172a; letter-spacing:-.015em;">{{ job.title }}</div>
+                        <div style="font-size:13.5px; color:#64748b; margin-top:1px;">{{ job.company }}</div>
+                      </div>
+                      <span title="AI match score" style="display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:600; color:#16a34a; background:#ecfdf3; padding:5px 11px; border-radius:999px; flex-shrink:0;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3.5"></circle></svg>{{ job.match }}% Match</span>
+                      <button onClick="{{ job.toggleSave }}" style="width:36px; height:36px; border-radius:10px; border:1px solid #eef1f6; background:{{ job.saveBg }}; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; transition:background .18s, border-color .18s, transform .12s;" style-hover="border-color:#c7d4ea;" style-active="transform:scale(.88);"><svg width="16" height="16" viewBox="0 0 24 24" fill="{{ job.saveFill }}" stroke="{{ job.saveStroke }}" stroke-width="1.8"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></button>
+                    </div>
+                    <div style="display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 16px;">
+                      <span style="display:inline-flex; align-items:center; gap:5px; font-size:12.5px; color:#475569; background:#f4f6fa; padding:5px 10px; border-radius:8px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#64748b" stroke-width="1.8"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>{{ job.location }}</span>
+                      <span style="font-size:12.5px; color:#475569; background:#f4f6fa; padding:5px 10px; border-radius:8px;">{{ job.experience }}</span>
+                      <span style="font-size:12.5px; color:#475569; background:#f4f6fa; padding:5px 10px; border-radius:8px;">{{ job.type }}</span>
+                      <span style="font-size:12.5px; color:#16a34a; background:#ecfdf3; padding:5px 10px; border-radius:8px; font-weight:600;">{{ job.salaryText }}</span>
+                    </div>
+                    <div style="display:flex; flex-wrap:wrap; gap:7px; margin-bottom:15px;">
+                      <sc-for list="{{ job.chips }}" as="c" hint-placeholder-count="4"><span style="font-size:11.5px; font-weight:500; color:#1e3a8a; background:#eef2ff; padding:4px 10px; border-radius:7px;">{{ c.label }}</span></sc-for>
+                    </div>
+                    <div style="display:flex; align-items:center; justify-content:space-between;">
+                      <span style="font-size:12.5px; color:#94a3b8;">{{ job.posted }} · via {{ job.source }}</span>
+                      <button onClick="{{ job.apply }}" style="height:38px; padding:0 20px; border:none; border-radius:11px; background:linear-gradient(180deg,#2456d6,#1e3a8a); color:#fff; font-size:13.5px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:6px; box-shadow:0 8px 18px -10px rgba(30,58,138,.6); transition:filter .15s, transform .12s;" style-hover="filter:brightness(1.1);" style-active="transform:scale(.97);">Apply <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <sc-if value="{{ showPagination }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; justify-content:center; align-items:center; gap:6px; margin-top:28px;">
+            <button onClick="{{ prevPage }}" style="{{ pageNavStyle }}" style-hover="border-color:#c7d4ea; background:#fbfcfe;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"></path></svg></button>
+            <sc-for list="{{ pages }}" as="p" hint-placeholder-count="7"><button onClick="{{ p.go }}" style="{{ p.style }}" style-hover="{{ p.hover }}">{{ p.label }}</button></sc-for>
+            <button onClick="{{ nextPage }}" style="{{ pageNavStyle }}" style-hover="border-color:#c7d4ea; background:#fbfcfe;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg></button>
+          </div>
+          </sc-if>
+          </sc-if>
+          </div><!-- /center -->
+
+          <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+          <aside style="width:272px; flex-shrink:0; position:sticky; top:0;">
+            <div style="background:#fff; border:1px solid #eaedf3; border-radius:18px; padding:24px;">
+              <div style="width:44px; height:44px; border-radius:12px; background:#eef2ff; color:#2563eb; display:flex; align-items:center; justify-content:center; margin-bottom:15px;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></div>
+              <div style="font-size:16px; font-weight:700; letter-spacing:-.01em;">Email job alerts</div>
+              <p style="font-size:13.5px; line-height:1.55; color:#94a3b8; margin:6px 0 20px;">Get notified the moment SyHire finds matching jobs.</p>
+              <label style="display:block; font-size:12.5px; font-weight:500; color:#334155; margin-bottom:8px;">Email address</label>
+              <input value="{{ alertEmail }}" onChange="{{ setAlertEmail }}" style="width:100%; height:44px; padding:0 14px; border:1px solid #e6eaf1; border-radius:11px; font-size:13.5px; background:#fbfcfe; margin-bottom:14px; transition:border-color .15s, box-shadow .15s;" style-focus="border-color:#3D8BFF; box-shadow:0 0 0 3px rgba(61,139,255,.15); background:#fff;">
+              <button onClick="{{ saveAlertEmail }}" style="width:100%; height:44px; border:none; border-radius:11px; background:linear-gradient(180deg,#2456d6,#1e3a8a); color:#fff; font-size:14px; font-weight:600; cursor:pointer; box-shadow:0 8px 18px -10px rgba(30,58,138,.6); transition:transform .12s, filter .15s;" style-hover="filter:brightness(1.08);" style-active="transform:scale(.98);">Save email</button>
+              <div style="display:flex; align-items:center; gap:8px; margin-top:18px; padding-top:18px; border-top:1px solid #f1f4f9;">
+                <span style="width:7px; height:7px; border-radius:50%; background:#22c55e; flex-shrink:0;"></span>
+                <span style="font-size:12.5px; color:#64748b;">Alerts active · daily digest</span>
+              </div>
+            </div>
+            <div style="background:#fff; border:1px solid #eaedf3; border-radius:18px; padding:22px; margin-top:16px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:10px;"><div style="width:36px; height:36px; border-radius:10px; background:#eef2ff; color:#2563eb; display:flex; align-items:center; justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3l2.4 5.4L20 11l-5.6 2.6L12 19l-2.4-5.4L4 11l5.6-2.6z"></path></svg></div><span style="font-size:15px; font-weight:700; letter-spacing:-.01em;">AI Career Insights</span></div>
+                <span style="font-size:10.5px; font-weight:600; color:#64748b; background:#f1f4f9; padding:3px 9px; border-radius:999px;">Soon</span>
+              </div>
+              <p style="font-size:13px; line-height:1.6; color:#94a3b8; margin:0 0 16px;">Resume-match scoring, skill-gap analysis, and application coaching — arriving in Phase 2.</p>
+              <div style="display:flex; flex-direction:column; gap:11px; opacity:.6; pointer-events:none;">
+                <div style="display:flex; align-items:center; justify-content:space-between; font-size:12.5px; color:#475569;"><span>Resume match</span><span style="width:60px; height:6px; border-radius:999px; background:#eef1f6;"></span></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; font-size:12.5px; color:#475569;"><span>Skills gap</span><span style="width:60px; height:6px; border-radius:999px; background:#eef1f6;"></span></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; font-size:12.5px; color:#475569;"><span>Success estimate</span><span style="width:60px; height:6px; border-radius:999px; background:#eef1f6;"></span></div>
+              </div>
+            </div>
+            <!-- AI Career Engine (compact) -->
+            <div style="background:linear-gradient(150deg,#0f2557,#1e3a8a 60%,#1d4ed8); color:#fff; border-radius:18px; padding:20px; margin-top:16px; position:relative; overflow:hidden; box-shadow:0 18px 40px -26px rgba(30,58,138,.8);">
+              <div style="position:absolute; right:-30px; top:-40px; width:150px; height:150px; border-radius:50%; background:radial-gradient(circle, rgba(96,165,250,.3), transparent 70%); pointer-events:none;"></div>
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:15px;">
+                <div style="display:flex; align-items:center; gap:9px;"><div style="width:32px; height:32px; border-radius:9px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#cfe0ff" stroke-width="1.7"><circle cx="12" cy="12" r="9"></circle><path d="M12 3v3M12 18v3M3 12h3M18 12h3"></path><circle cx="12" cy="12" r="3.4"></circle></svg></div><span style="font-size:14.5px; font-weight:700; letter-spacing:-.01em;">AI Career Engine</span></div>
+                <span style="display:inline-flex; align-items:center; gap:5px; font-size:10.5px; font-weight:600; color:#bfd3ff; background:rgba(96,165,250,.16); border:1px solid rgba(96,165,250,.28); padding:2px 8px; border-radius:999px;"><span style="width:6px; height:6px; border-radius:50%; background:#7fd6a3; animation: sypulse 2.6s infinite;"></span>{{ bannerStatus }}</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:15px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; font-size:12.5px;"><span style="color:rgba(255,255,255,.6);">Collected today</span><span style="font-weight:600;">{{ jobsToday }} jobs</span></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; font-size:12.5px;"><span style="color:rgba(255,255,255,.6);">Jobs analyzed</span><span style="font-weight:600; font-family:'Geist Mono',monospace;">{{ bannerScanned }}</span></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; font-size:12.5px;"><span style="color:rgba(255,255,255,.6);">AI matches</span><span style="font-weight:600;">{{ matchesCount }}</span></div>
+                <div style="display:flex; align-items:center; justify-content:space-between; font-size:12.5px;"><span style="color:rgba(255,255,255,.6);">Last scan</span><span style="font-weight:600;">{{ lastScan }}</span></div>
+              </div>
+              <div style="margin-bottom:15px;">
+                <div style="display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.6); margin-bottom:6px;"><span>Next scan</span><span style="font-family:'Geist Mono',monospace; color:#fff;">{{ nextScan }}</span></div>
+                <div style="height:6px; border-radius:999px; background:rgba(255,255,255,.14); overflow:hidden;"><div style="{{ scanProgressStyle }}"></div></div>
+              </div>
+              <button onClick="{{ scanNow }}" style="width:100%; height:38px; border:1px solid rgba(255,255,255,.24); border-radius:11px; background:rgba(255,255,255,.12); color:#fff; font-size:13px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; gap:8px; transition:background .15s, transform .12s;" style-hover="background:rgba(255,255,255,.2);" style-active="transform:scale(.98);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" style="animation: {{ scanIconAnim }}; transform-origin:12px 12px;"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.4 2.6L21 8"></path><path d="M21 3v5h-5"></path></svg>{{ bannerBtnLabel }}</button>
+            </div>
+          </aside>
+          </sc-if>
+
+
+        </div>
+        </sc-if>
+
+
+
+        <!-- ======= SETTINGS ======= -->
+        <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+        <div style="max-width: 760px; margin: 0 auto; animation: syfade .35s ease;">
+          <div style="display: inline-flex; padding: 3px; background: #eef1f6; border-radius: 11px; margin-bottom: 20px;">
+            <button onClick="{{ setTabProfile }}" style="{{ tabProfileStyle }}">Profile</button>
+            <button onClick="{{ setTabAccount }}" style="{{ tabAccountStyle }}">Account</button>
+            <button onClick="{{ setTabNotif }}" style="{{ tabNotifStyle }}">Notifications</button>
+          </div>
+
+          <sc-if value="{{ tabProfile }}" hint-placeholder-val="{{ true }}">
+          <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 16px; padding: 24px;">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
+              <div style="width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700;">AM</div>
+              <div><button style="height: 38px; padding: 0 16px; border: 1px solid #e0e6f0; border-radius: 10px; background: #fff; font-size: 13px; font-weight: 600; color: #1e293b; cursor: pointer;">Upload photo</button><div style="font-size: 12px; color: #94a3b8; margin-top: 6px;">JPG or PNG, max 2MB</div></div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div><label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Full name</label><input value="{{ profileName }}" onChange="{{ setProfileName }}" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 14px; background: #fbfcfe;"></div>
+              <div><label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Job title</label><input value="{{ profileTitle }}" onChange="{{ setProfileTitle }}" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 14px; background: #fbfcfe;"></div>
+              <div style="grid-column: span 2;"><label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Preferred locations</label><input value="{{ profileLocs }}" onChange="{{ setProfileLocs }}" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 14px; background: #fbfcfe;"></div>
+              <div><label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Work setup</label><select value="{{ prefWork }}" onChange="{{ setPrefWork }}" style="width: 100%; height: 44px; padding: 0 32px 0 14px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 14px; background-color: #fbfcfe; color: #334155; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 fill=%22none%22 stroke=%22%2364748b%22 stroke-width=%222%22&gt;&lt;path d=%22m3 5 4 4 4-4%22/&gt;&lt;/svg&gt;'); background-repeat: no-repeat; background-position: right 13px center;"><option value="Remote">Remote</option><option value="Hybrid">Hybrid</option><option value="On-site">On-site</option></select></div>
+              <div><label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Experience level</label><select value="{{ prefExp }}" onChange="{{ setPrefExp }}" style="width: 100%; height: 44px; padding: 0 32px 0 14px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 14px; background-color: #fbfcfe; color: #334155; cursor: pointer; appearance: none; background-image: url('data:image/svg+xml;utf8,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2214%22 fill=%22none%22 stroke=%22%2364748b%22 stroke-width=%222%22&gt;&lt;path d=%22m3 5 4 4 4-4%22/&gt;&lt;/svg&gt;'); background-repeat: no-repeat; background-position: right 13px center;"><option value="Mid">Mid</option><option value="Senior">Senior</option><option value="Staff">Staff</option><option value="Lead">Lead</option></select></div>
+              <div><label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Minimum salary ($k)</label><input type="number" value="{{ prefSalary }}" onChange="{{ setPrefSalary }}" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 14px; background: #fbfcfe;"></div>
+              <div><label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Skills</label><input value="{{ prefSkills }}" onChange="{{ setPrefSkills }}" placeholder="React, TypeScript, GraphQL" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 14px; background: #fbfcfe;"></div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 10px; margin-top: 22px;">
+              <sc-if value="{{ prefsDirty }}" hint-placeholder-val="{{ false }}"><span style="margin-right: auto; font-size: 12.5px; color: #ea9a0b; display: flex; align-items: center; gap: 6px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #ea9a0b;"></span>Unsaved changes</span></sc-if>
+              <button onClick="{{ cancelPrefs }}" style="height: 42px; padding: 0 18px; border: 1px solid #e0e6f0; border-radius: 11px; background: #fff; font-size: 13.5px; font-weight: 600; color: #64748b; cursor: pointer;">Cancel</button>
+              <button onClick="{{ savePrefs }}" style="{{ savePrefsStyle }}">{{ savePrefsLabel }}</button>
+            </div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ tabAccount }}" hint-placeholder-val="{{ false }}">
+          <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 16px; padding: 24px;">
+            <h3 style="font-size: 15px; font-weight: 700; margin: 0 0 16px;">Account &amp; security</h3>
+            <div style="display: grid; gap: 16px;">
+              <div><label style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Email address <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; color: #16a34a; background: #ecfdf3; padding: 2px 8px; border-radius: 999px;"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"></path></svg>Verified</span></label><input value="{{ email }}" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 14px; background: #fbfcfe;"></div>
+              <div><label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">New password</label><input placeholder="••••••••" type="password" style="width: 100%; height: 44px; padding: 0 14px; border: 1px solid #e6eaf1; border-radius: 11px; font-size: 14px; background: #fbfcfe;"><div style="font-size: 12px; color: #94a3b8; margin-top: 6px;">Minimum 8 characters. You'll stay signed in on this device.</div></div>
+            </div>
+            <h3 style="font-size: 15px; font-weight: 700; margin: 24px 0 12px;">Connected accounts</h3>
+            <div style="display: grid; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 13px 16px; border: 1px solid #eaedf3; border-radius: 12px;">
+                <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.7-.4-3.9z"></path><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"></path><path fill="#4CAF50" d="M24 44c5.2 0 10-2 13.6-5.2l-6.3-5.3C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"></path><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.5l6.3 5.3C41.4 34.9 44 30 44 24c0-1.3-.1-2.7-.4-3.9z"></path></svg>
+                <div style="flex: 1;"><div style="font-size: 14px; font-weight: 600; color: #0f172a;">Google</div><div style="font-size: 12.5px; color: #94a3b8;">{{ email }}</div></div>
+                <button style="height: 36px; padding: 0 14px; border: 1px solid #e0e6f0; border-radius: 10px; background: #fff; color: #64748b; font-size: 13px; font-weight: 600; cursor: pointer;">Disconnect</button>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; padding: 13px 16px; border: 1px solid #eaedf3; border-radius: 12px; opacity: .65;">
+                <span style="width: 18px; height: 18px; border-radius: 4px; background: #0A66C2; color: #fff; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;">in</span>
+                <div style="flex: 1;"><div style="font-size: 14px; font-weight: 600; color: #0f172a;">LinkedIn</div><div style="font-size: 12.5px; color: #94a3b8;">Sync your profile automatically</div></div>
+                <span style="font-size: 11px; font-weight: 600; color: #64748b; background: #f1f4f9; padding: 3px 9px; border-radius: 999px;">Coming soon</span>
+              </div>
+            </div>
+            <h3 style="font-size: 15px; font-weight: 700; margin: 24px 0 12px;">Privacy</h3>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; border: 1px solid #eaedf3; border-radius: 12px;">
+              <div><div style="font-size: 14px; font-weight: 600; color: #0f172a;">Download my data</div><div style="font-size: 12.5px; color: #94a3b8;">Export your profile, saved jobs, and preferences</div></div>
+              <button onClick="{{ exportData }}" style="height: 36px; padding: 0 14px; border: 1px solid #e0e6f0; border-radius: 10px; background: #fff; color: #1e293b; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;">Request export</button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 10px; padding: 16px; border: 1px solid #fde2e2; border-radius: 12px; background: #fef6f6;">
+              <div><div style="font-size: 14px; font-weight: 600; color: #b91c1c;">Delete account</div><div style="font-size: 12.5px; color: #ef8a8a;">Permanently remove your account and all data</div></div>
+              <button style="height: 38px; padding: 0 16px; border: 1px solid #f3b4b4; border-radius: 10px; background: #fff; color: #dc2626; font-size: 13px; font-weight: 600; cursor: pointer;">Delete</button>
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 22px;">
+              <button onClick="{{ saveSettings }}" style="height: 42px; padding: 0 22px; border: none; border-radius: 11px; background: #1e3a8a; color: #fff; font-size: 13.5px; font-weight: 600; cursor: pointer;">Save changes</button>
+            </div>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ tabNotif }}" hint-placeholder-val="{{ false }}">
+          <div style="background: #fff; border: 1px solid #eaedf3; border-radius: 16px; padding: 8px 24px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid #f1f4f9;">
+              <div><div style="font-size: 14px; font-weight: 600; color: #0f172a;">New job matches</div><div style="font-size: 12.5px; color: #94a3b8;">Email me when the collector finds relevant roles</div></div>
+              <div onClick="{{ toggleJobEmail }}" style="{{ jobEmailTrack }}"><div style="{{ jobEmailKnob }}"></div></div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid #f1f4f9;">
+              <div><div style="font-size: 14px; font-weight: 600; color: #0f172a;">Weekly summary</div><div style="font-size: 12.5px; color: #94a3b8;">A digest of everything collected each week</div></div>
+              <div onClick="{{ toggleWeekly }}" style="{{ weeklyTrack }}"><div style="{{ weeklyKnob }}"></div></div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 18px 0;">
+              <div><div style="font-size: 14px; font-weight: 600; color: #0f172a;">Product updates</div><div style="font-size: 12.5px; color: #94a3b8;">News about Phase 2 &amp; 3 features</div></div>
+              <div onClick="{{ toggleProduct }}" style="{{ productTrack }}"><div style="{{ productKnob }}"></div></div>
+            </div>
+          </div>
+          </sc-if>
+        </div>
+        </sc-if>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- JOB DETAILS MODAL -->
+  <sc-if value="{{ hasSelected }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeJob }}" style="position: fixed; inset: 0; background: rgba(15,23,42,.42); backdrop-filter: blur(3px); display: flex; align-items: center; justify-content: center; z-index: 100; padding: 24px; animation: syfade .2s ease;">
+    <div onClick="{{ stop }}" style="width: 100%; max-width: 620px; max-height: 88vh; overflow-y: auto; background: #fff; border-radius: 18px; box-shadow: 0 30px 80px -20px rgba(15,23,42,.5); animation: syfade .28s ease;">
+      <div style="padding: 26px 28px; border-bottom: 1px solid #f1f4f9; position: relative;">
+        <button onClick="{{ closeJob }}" style="position: absolute; top: 20px; right: 20px; width: 34px; height: 34px; border-radius: 9px; border: 1px solid #eaedf3; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #64748b;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <div style="width: 56px; height: 56px; border-radius: 14px; background: {{ selLogoBg }}; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700;">{{ selInitial }}</div>
+          <div><h2 style="font-size: 21px; font-weight: 700; letter-spacing: -.02em; margin: 0;">{{ selTitle }}</h2><div style="font-size: 14.5px; color: #64748b; margin-top: 2px;">{{ selCompany }} · {{ selLocation }}</div></div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px;">
+          <span style="font-size: 12.5px; color: #16a34a; background: #ecfdf3; padding: 5px 11px; border-radius: 8px; font-weight: 600;">{{ selSalary }}</span>
+          <span style="font-size: 12.5px; color: #475569; background: #f4f6fa; padding: 5px 11px; border-radius: 8px;">{{ selType }}</span>
+          <span style="font-size: 12.5px; color: #475569; background: #f4f6fa; padding: 5px 11px; border-radius: 8px;">{{ selExperience }}</span>
+          <span style="font-size: 12.5px; color: #475569; background: #f4f6fa; padding: 5px 11px; border-radius: 8px;">Posted {{ selPosted }}</span>
+          <span style="font-size: 12.5px; color: #475569; background: #f4f6fa; padding: 5px 11px; border-radius: 8px;">via {{ selSource }}</span>
+        </div>
+      </div>
+      <div style="padding: 24px 28px;">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 13px 15px; margin-bottom: 22px; background: #f0f6ff; border: 1px solid #dbeafe; border-radius: 12px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.7" style="flex-shrink:0;"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="4.2"></circle></svg>
+          <span style="font-size: 13px; color: #1e40af; font-weight: 500;">Matched by SyHire AI — <strong>{{ selMatch }}% relevance</strong> to your profile</span>
+        </div>
+        <h3 style="font-size: 14px; font-weight: 700; margin: 0 0 12px;">Why this matches you</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px 24px; margin-bottom:24px;">
+          <sc-for list="{{ selBreakdown }}" as="b" hint-placeholder-count="4">
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:6px;"><span style="color:#64748b;">{{ b.label }}</span><span style="font-weight:600; color:#0f172a; font-family:'Geist Mono',monospace;">{{ b.pctText }}</span></div>
+              <div style="height:6px; border-radius:999px; background:#eef1f6; overflow:hidden;"><div style="{{ b.barStyle }}"></div></div>
+            </div>
+          </sc-for>
+        </div>
+        <h3 style="font-size: 14px; font-weight: 700; margin: 0 0 8px;">About the role</h3>
+        <p style="font-size: 14.5px; line-height: 1.65; color: #475569; margin: 0 0 22px;">{{ selDesc }}</p>
+
+        <h3 style="font-size: 14px; font-weight: 700; margin: 0 0 10px;">What you'll do</h3>
+        <div style="margin: 0 0 22px;">
+          <sc-for list="{{ selResponsibilities }}" as="r" hint-placeholder-count="4">
+            <div style="display:flex; gap:10px; align-items:flex-start; margin-bottom:9px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><path d="M20 6 9 17l-5-5"></path></svg><span style="font-size:14px; line-height:1.5; color:#475569;">{{ r.text }}</span></div>
+          </sc-for>
+        </div>
+
+        <h3 style="font-size: 14px; font-weight: 700; margin: 0 0 10px;">What we're looking for</h3>
+        <div style="margin: 0 0 22px;">
+          <sc-for list="{{ selRequirements }}" as="r" hint-placeholder-count="4">
+            <div style="display:flex; gap:10px; align-items:flex-start; margin-bottom:9px;"><span style="width:6px; height:6px; border-radius:50%; background:#c3cede; flex-shrink:0; margin-top:7px;"></span><span style="font-size:14px; line-height:1.5; color:#475569;">{{ r.text }}</span></div>
+          </sc-for>
+        </div>
+
+        <h3 style="font-size: 14px; font-weight: 700; margin: 0 0 10px;">Skills &amp; stack</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px;">
+          <sc-for list="{{ selTags }}" as="t" hint-placeholder-count="4"><span style="font-size: 12.5px; color: #1e3a8a; background: #eef2ff; padding: 5px 12px; border-radius: 8px; font-weight: 500;">{{ t.label }}</span></sc-for>
+        </div>
+
+        <h3 style="font-size: 14px; font-weight: 700; margin: 0 0 10px;">Benefits</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 6px;">
+          <sc-for list="{{ selBenefits }}" as="b" hint-placeholder-count="4">
+            <div style="display:flex; gap:9px; align-items:center; font-size:13.5px; color:#475569; background:#f7f9fc; border:1px solid #eef1f6; border-radius:10px; padding:10px 12px;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" style="flex-shrink:0;"><path d="M20 6 9 17l-5-5"></path></svg>{{ b.text }}</div>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ hasSimilar }}" hint-placeholder-val="{{ false }}">
+        <h3 style="font-size: 14px; font-weight: 700; margin: 24px 0 10px;">Similar roles</h3>
+        <div style="display: grid; gap: 8px;">
+          <sc-for list="{{ selSimilar }}" as="j" hint-placeholder-count="3">
+            <div onClick="{{ j.open }}" style="display:flex; align-items:center; gap:12px; padding:11px 12px; border:1px solid #eef1f6; border-radius:12px; cursor:pointer;" style-hover="background:#f7f9fc; border-color:#dbe3f0;">
+              <div style="width:36px; height:36px; border-radius:9px; background:{{ j.logoBg }}; color:#fff; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:700; flex-shrink:0;">{{ j.initial }}</div>
+              <div style="flex:1; min-width:0;"><div style="font-size:13.5px; font-weight:600; color:#0f172a; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ j.title }}</div><div style="font-size:12px; color:#94a3b8;">{{ j.company }} · {{ j.location }}</div></div>
+              <span style="font-size:12.5px; font-weight:600; color:#16a34a; flex-shrink:0;">{{ j.salaryText }}</span>
+            </div>
+          </sc-for>
+        </div>
+        </sc-if>
+      </div>
+      <div style="padding: 16px 28px; border-top: 1px solid #f1f4f9; display: flex; gap: 10px; position: sticky; bottom: 0; background: #fff;">
+        <button onClick="{{ toggleSelSave }}" style="height: 46px; flex: 0 0 auto; padding: 0 16px; border: 1px solid #e0e6f0; border-radius: 12px; background: #fff; font-size: 14px; font-weight: 600; color: #1e293b; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: border-color .15s, background .15s, transform .12s;" style-hover="border-color: #c7d4ea; background: #fbfcfe;" style-active="transform: scale(.97);"><svg width="16" height="16" viewBox="0 0 24 24" fill="{{ selSaveFill }}" stroke="{{ selSaveStroke }}" stroke-width="1.8"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>{{ selSaveLabel }}</button>
+        <button onClick="{{ shareSel }}" title="Share job" style="height: 46px; width: 46px; flex: 0 0 auto; border: 1px solid #e0e6f0; border-radius: 12px; background: #fff; color: #475569; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"></path></svg></button>
+        <button onClick="{{ applySel }}" style="height: 46px; flex: 1; border: none; border-radius: 12px; background: linear-gradient(180deg, #2456d6, #1e3a8a); color: #fff; font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 8px 20px -8px rgba(30,58,138,.6); transition: filter .15s, transform .12s;" style-hover="filter: brightness(1.1);" style-active="transform: scale(.98);">Apply on {{ selSource }} <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"></path></svg></button>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- TOASTS -->
+  <div style="position: fixed; bottom: 24px; right: 24px; display: flex; flex-direction: column; gap: 10px; z-index: 200;">
+    <sc-for list="{{ toasts }}" as="t" hint-placeholder-count="0">
+      <div style="display: flex; align-items: center; gap: 11px; padding: 13px 16px; background: #0f172a; color: #fff; border-radius: 12px; box-shadow: 0 16px 40px -12px rgba(15,23,42,.5); font-size: 13.5px; font-weight: 500; min-width: 240px; animation: sytoast .3s ease;">
+        <span style="width: 20px; height: 20px; border-radius: 50%; background: {{ t.iconBg }}; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M20 6 9 17l-5-5"></path></svg></span>
+        {{ t.msg }}
+      </div>
+    </sc-for>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;collectorOnline&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Demo&quot;}, &quot;skipAuth&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Demo&quot;}, &quot;startView&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;dashboard&quot;, &quot;jobs&quot;, &quot;alerts&quot;, &quot;settings&quot;], &quot;default&quot;: &quot;dashboard&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Demo&quot;}}">
+class Component extends DCLogic {
+  state = {
+    authed: false,
+    signup: false,
+    authLoading: false,
+    heroCounts: { match: 0, resume: 0, apps: 0, interviews: 0, skillsMini: 0, liveJobs: 0, companies: 0, accuracy: 0 },
+    authMode: 'main',
+    fullName: '',
+    resetPw: '',
+    confirmPw: '',
+    errs: {},
+    resendIn: 0,
+    showPw: false,
+    capsOn: false,
+    remember: true,
+    email: 'demo@syhire.com',
+    password: 'demo1234',
+    view: 'dashboard',
+    loadingJobs: false,
+    search: '',
+    sort: 'recent',
+    filterLocation: 'all',
+    filterType: 'all',
+    minSalary: 0,
+    maxSalary: 300,
+    salaryOpen: false,
+    filterCategory: 'all',
+    filterMode: 'all',
+    filterExp: 'all',
+    loadMsg: 'Searching jobs…',
+    showSaved: false,
+    saved: [4, 10],
+    selected: null,
+    toasts: [],
+    settingsTab: 'profile',
+    visibleCount: 6,
+    nextScanSecs: 214,
+    scanning: false,
+    jobsToday: 47,
+    lastScan: '2 min ago',
+    page: 1,
+    isMobile: false,
+    navOpen: false,
+    alertEmail: null,
+    notif: { jobEmail: true, weekly: false, product: true },
+    profileName: 'Alex Morgan',
+    profileTitle: 'Senior Frontend Engineer',
+    profileLocs: 'Remote, San Francisco, New York',
+    prefWork: 'Remote',
+    prefExp: 'Senior',
+    prefSalary: 150,
+    prefSkills: 'React, TypeScript, GraphQL',
+    prefsSaving: false,
+    prefsSaved: null,
+    activity: null,
+    currency: 'USD',
+  };
+
+  logActivity = (text, color) => {
+    this.setState(s => ({ activity: [{ text, time: 'Just now', color }, ...(s.activity || this.activityFeed)].slice(0, 6) }));
+  };
+
+  toastId = 0;
+
+  jobs = [
+    { id: 1, title: 'Senior Frontend Engineer', company: 'Stripe', initial: 'S', logoBg: '#635bff', location: 'Remote', type: 'Full-time', salaryText: '$160–210k', salaryK: 160, posted: '2h ago', source: 'LinkedIn', match: 96, tags: ['React', 'TypeScript', 'GraphQL', 'Design systems'], desc: 'Join the payments UI team building the interfaces millions of businesses rely on. You will own end-to-end features, shape our component library, and partner closely with design to ship polished, accessible experiences at scale.' },
+    { id: 2, title: 'Product Designer', company: 'Figma', initial: 'F', logoBg: '#f24e1e', location: 'San Francisco', type: 'Full-time', salaryText: '$150–190k', salaryK: 150, posted: '5h ago', source: 'Company Site', match: 91, tags: ['Figma', 'Prototyping', 'Design systems', 'Research'], desc: 'Design core creation tools used by millions of designers daily. You will drive product direction from concept to launch, running research and crafting interactions that feel effortless.' },
+    { id: 3, title: 'Backend Engineer (Go)', company: 'Vercel', initial: 'V', logoBg: '#111111', location: 'Remote', type: 'Full-time', salaryText: '$170–220k', salaryK: 170, posted: '1d ago', source: 'Greenhouse', match: 88, tags: ['Go', 'Distributed systems', 'PostgreSQL', 'Kubernetes'], desc: 'Build the infrastructure that powers the frontend cloud. Work on high-throughput services, edge compute, and the deployment pipeline used by developers worldwide.' },
+    { id: 4, title: 'Machine Learning Engineer', company: 'Cortex AI', initial: 'C', logoBg: '#0ea5e9', location: 'New York', type: 'Full-time', salaryText: '$190–250k', salaryK: 190, posted: '3h ago', source: 'Lever', match: 94, tags: ['Python', 'PyTorch', 'LLMs', 'MLOps'], desc: 'Design and train models that power our AI products end-to-end. From data pipelines to production inference, you will own the full lifecycle of applied machine learning.' },
+    { id: 5, title: 'Full-Stack Developer', company: 'Linear', initial: 'L', logoBg: '#5e6ad2', location: 'Remote', type: 'Full-time', salaryText: '$140–180k', salaryK: 140, posted: '8h ago', source: 'LinkedIn', match: 85, tags: ['React', 'Node.js', 'GraphQL', 'Realtime'], desc: 'Help build the tool that modern software teams love. Work across the stack on performance-obsessed features with a small, high-agency engineering team.' },
+    { id: 6, title: 'DevOps Engineer', company: 'Datadog', initial: 'D', logoBg: '#632ca6', location: 'Austin', type: 'Full-time', salaryText: '$155–195k', salaryK: 155, posted: '1d ago', source: 'Company Site', match: 82, tags: ['AWS', 'Terraform', 'CI/CD', 'Observability'], desc: 'Own the reliability and scalability of a platform ingesting trillions of data points. Automate everything and champion best-in-class operational practices.' },
+    { id: 7, title: 'iOS Engineer', company: 'Notion', initial: 'N', logoBg: '#111111', location: 'San Francisco', type: 'Full-time', salaryText: '$165–205k', salaryK: 165, posted: '6h ago', source: 'Greenhouse', match: 87, tags: ['Swift', 'SwiftUI', 'Offline-first', 'Performance'], desc: 'Craft the mobile experience for one connected workspace. Build fast, beautiful native features and push the limits of what a productivity app can do on iOS.' },
+    { id: 8, title: 'Data Scientist', company: 'Ramp', initial: 'R', logoBg: '#ffdd00', location: 'New York', type: 'Full-time', salaryText: '$150–200k', salaryK: 150, posted: '2d ago', source: 'Lever', match: 80, tags: ['SQL', 'Python', 'Experimentation', 'Modeling'], desc: 'Turn financial data into products that save companies money. Partner with product and engineering to build models and experiments that drive real business impact.' },
+    { id: 9, title: 'Frontend Engineer (Contract)', company: 'Retool', initial: 'R', logoBg: '#4f46e5', location: 'Remote', type: 'Contract', salaryText: '$90–120/hr', salaryK: 180, posted: '4h ago', source: 'LinkedIn', match: 83, tags: ['React', 'TypeScript', 'Canvas', 'Perf'], desc: 'Six-month contract building the visual editor that lets teams assemble internal tools fast. Deep frontend work on a complex, drag-and-drop canvas surface.' },
+    { id: 10, title: 'Staff Software Engineer', company: 'Airtable', initial: 'A', logoBg: '#fcb400', location: 'Remote', type: 'Full-time', salaryText: '$220–280k', salaryK: 220, posted: '1d ago', source: 'Company Site', match: 90, tags: ['Architecture', 'React', 'Node.js', 'Leadership'], desc: 'Set technical direction for a flagship area of the product. Lead cross-team initiatives, mentor engineers, and make the architectural bets that shape the next few years.' },
+    { id: 11, title: 'UX Researcher', company: 'Loom', initial: 'L', logoBg: '#625df5', location: 'London', type: 'Full-time', salaryText: '£70–95k', salaryK: 130, posted: '3d ago', source: 'Greenhouse', match: 78, tags: ['Qualitative', 'Surveys', 'Usability', 'Strategy'], desc: 'Uncover the insights that guide product strategy. Plan and run studies end-to-end and turn findings into decisions the whole company acts on.' },
+    { id: 12, title: 'Platform Engineer', company: 'Render', initial: 'R', logoBg: '#46e3b7', location: 'Remote', type: 'Full-time', salaryText: '$160–200k', salaryK: 160, posted: '5h ago', source: 'Lever', match: 84, tags: ['Go', 'Kubernetes', 'Networking', 'Reliability'], desc: 'Build the cloud platform that makes deploying apps effortless. Work on orchestration, networking, and the core primitives developers build on top of.' },
+  ];
+
+
+
+  activityFeed = [
+    { text: 'AI found 24 new jobs matching your filters', time: '12m ago', color: '#2563eb' },
+    { text: 'You saved Staff Software Engineer · Airtable', time: '1h ago', color: '#ea9a0b' },
+    { text: 'Applied to Senior Frontend Engineer · Stripe', time: '3h ago', color: '#16a34a' },
+    { text: 'Scan completed · 6 sources checked', time: '5h ago', color: '#2563eb' },
+    { text: 'You updated your job preferences', time: 'Yesterday', color: '#94a3b8' },
+  ];
+
+  heroCanvasRef = (el) => { this._initHeroCanvas(el); };
+
+  _initHeroCanvas = (el) => {
+    if (!el || this._heroCanvasEl === el) return;
+    this._heroCanvasEl = el;
+    const ctx = el.getContext('2d');
+    let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let nodes = [];
+    const CONNECT = 122;
+    const build = () => {
+      const rect = el.getBoundingClientRect();
+      w = rect.width; h = rect.height;
+      if (!w || !h) return;
+      el.width = Math.round(w * dpr);
+      el.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.max(36, Math.min(130, Math.round((w * h) / 8600)));
+      nodes = [];
+      for (let i = 0; i < count; i++) {
+        nodes.push({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.15, vy: (Math.random() - 0.5) * 0.15,
+          r: 0.7 + Math.random() * 1.1,
+        });
+      }
+    };
+    build();
+    this._heroCanvasResize = () => { dpr = Math.min(window.devicePixelRatio || 1, 2); build(); };
+    window.addEventListener('resize', this._heroCanvasResize);
+    const draw = () => {
+      if (!w || !h) { build(); this._heroRaf = requestAnimationFrame(draw); return; }
+      ctx.clearRect(0, 0, w, h);
+      for (const n of nodes) {
+        n.x += n.vx; n.y += n.vy;
+        if (n.x < -24) n.x = w + 24; else if (n.x > w + 24) n.x = -24;
+        if (n.y < -24) n.y = h + 24; else if (n.y > h + 24) n.y = -24;
+      }
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < CONNECT * CONNECT) {
+            const alpha = (1 - Math.sqrt(d2) / CONNECT) * 0.32;
+            ctx.strokeStyle = 'rgba(160,198,255,' + alpha.toFixed(3) + ')';
+            ctx.lineWidth = 0.8;
+            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+          }
+        }
+      }
+      for (const n of nodes) {
+        ctx.fillStyle = 'rgba(200,222,255,0.55)';
+        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill();
+      }
+      this._heroRaf = requestAnimationFrame(draw);
+    };
+    this._heroRaf = requestAnimationFrame(draw);
+  };
+
+  componentDidMount() {
+    this._onResize = () => { const m = window.innerWidth < 900; if (m !== this.state.isMobile) this.setState({ isMobile: m, navOpen: false }); };
+    window.addEventListener('resize', this._onResize);
+    this._onResize();
+    this._onHeroMove = (e) => {
+      const el = this._heroFx; if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (!r.width) return;
+      const x = Math.max(-1, Math.min(1, ((e.clientX - r.left) / r.width - .5) * 2));
+      const y = Math.max(-1, Math.min(1, ((e.clientY - r.top) / r.height - .5) * 2));
+      el.style.setProperty('--syx', x.toFixed(3));
+      el.style.setProperty('--syy', y.toFixed(3));
+    };
+    window.addEventListener('mousemove', this._onHeroMove);
+    this._heroTargets = { match: 96, resume: 91, apps: 12, interviews: 3, skillsMini: 92, liveJobs: 5482, companies: 742, accuracy: 98 };
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+    const countStep = (ts) => {
+      if (this._countStart == null) this._countStart = ts;
+      const p = Math.min(1, (ts - this._countStart) / 1500);
+      const e = easeOutCubic(p);
+      const t = this._heroTargets;
+      this.setState({ heroCounts: {
+        match: Math.round(t.match * e), resume: Math.round(t.resume * e),
+        apps: Math.round(t.apps * e), interviews: Math.round(t.interviews * e),
+        skillsMini: Math.round(t.skillsMini * e), liveJobs: Math.round(t.liveJobs * e),
+        companies: Math.round(t.companies * e), accuracy: Math.round(t.accuracy * e),
+      } });
+      if (p < 1) this._countRaf = requestAnimationFrame(countStep);
+    };
+    this._countRaf = requestAnimationFrame(countStep);
+    const expMap = {1:'Senior',2:'Senior',3:'Senior',4:'Senior',5:'Mid',6:'Senior',7:'Mid',8:'Mid',9:'Mid',10:'Staff',11:'Mid',12:'Senior'};
+    const modeMap = {1:'Remote',2:'Hybrid',3:'Remote',4:'On-site',5:'Remote',6:'Hybrid',7:'On-site',8:'Hybrid',9:'Remote',10:'Remote',11:'On-site',12:'Remote'};
+    const catMap = {1:'Frontend',2:'UI/UX Design',3:'Backend',4:'Machine Learning',5:'Full Stack',6:'DevOps',7:'Mobile',8:'Data Science',9:'Frontend',10:'Full Stack',11:'UI/UX Design',12:'Cloud'};
+    const expLabel = { Mid:'Mid-level', Senior:'Senior', Staff:'Staff' };
+    this.jobs.forEach(j => { j.expLevel = expMap[j.id]; j.experience = expLabel[j.expLevel]; j.mode = modeMap[j.id]; j.category = catMap[j.id]; });
+    if (this.props.skipAuth) this.setState({ authed: true });
+    if (this.props.startView) this.setState({ view: this.props.startView });
+    this.setState({ prefsSaved: this.curPrefs(this.state) });
+    this.timer = setInterval(() => {
+      if (this.state.resendIn > 0) this.setState(s => ({ resendIn: Math.max(0, s.resendIn - 1) }));
+      if (!(this.props.collectorOnline ?? true) || this.state.scanning) return;
+      this.setState(s => {
+        let n = s.nextScanSecs - 1;
+        if (n <= 0) {
+          const add = Math.floor(Math.random() * 5 + 2);
+          return { nextScanSecs: 300, lastScan: 'just now', jobsToday: s.jobsToday + add, activity: [{ text: 'Scan completed · AI found ' + add + ' new jobs', time: 'Just now', color: '#2563eb' }, ...(s.activity || this.activityFeed)].slice(0, 6) };
+        }
+        return { nextScanSecs: n };
+      });
+    }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.timer); clearInterval(this._loadTimer); cancelAnimationFrame(this._countRaf); cancelAnimationFrame(this._heroRaf); if (this._heroCanvasResize) window.removeEventListener('resize', this._heroCanvasResize); }
+
+  toast = (msg) => {
+    const id = ++this.toastId;
+    this.setState(s => ({ toasts: [...s.toasts, { id, msg, iconBg: '#22c55e' }] }));
+    setTimeout(() => this.setState(s => ({ toasts: s.toasts.filter(t => t.id !== id) })), 2600);
+  };
+
+  curPrefs(s) { return { profileName: s.profileName, profileTitle: s.profileTitle, profileLocs: s.profileLocs, prefWork: s.prefWork, prefExp: s.prefExp, prefSalary: s.prefSalary, prefSkills: s.prefSkills }; }
+
+  prefScore(j, s) {
+    let score = j.match;
+    const skills = (s.prefSkills || '').toLowerCase().split(',').map(x => x.trim()).filter(Boolean);
+    const jt = (j.tags || []).map(t => t.toLowerCase());
+    const overlap = skills.filter(sk => jt.some(t => t.includes(sk) || sk.includes(t))).length;
+    score += Math.min(9, overlap * 3);
+    const locs = (s.profileLocs || '').toLowerCase();
+    if (j.location === 'Remote' && (s.prefWork === 'Remote' || locs.includes('remote'))) score += 6;
+    else if (locs.includes(j.location.toLowerCase())) score += 5;
+    const exp = (s.prefExp || '').toLowerCase();
+    if (exp && j.title.toLowerCase().includes(exp)) score += 4;
+    if (j.salaryK >= (+s.prefSalary || 0)) score += 3;
+    return Math.min(99, Math.round(score));
+  }
+
+  renderVals() {
+    const s = this.state;
+    const online = this.props.collectorOnline ?? true;
+    const prefsDirty = !!s.prefsSaved && JSON.stringify(this.curPrefs(s)) !== JSON.stringify(s.prefsSaved);
+    const cur = s.currency ?? 'USD';
+    const curRate = { USD: 1, EUR: 0.92, GBP: 0.79 }[cur] || 1;
+    const curSym = { USD: '$', EUR: '€', GBP: '£' }[cur] || '$';
+    const fmtK = (v) => curSym + Math.round(v * curRate) + 'k';
+    const seg = (active) => ({ height: '34px', padding: '0 14px', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: 600, cursor: 'pointer', background: active ? '#fff' : 'transparent', color: active ? '#1e3a8a' : '#64748b', boxShadow: active ? '0 1px 3px rgba(15,23,42,.12)' : 'none' });
+    const nav = (active) => ({ display: 'flex', alignItems: 'center', gap: '11px', width: '100%', padding: '9px 11px', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: 500, cursor: 'pointer', textAlign: 'left', background: active ? 'rgba(37,99,235,.22)' : 'transparent', color: active ? '#fff' : 'rgba(255,255,255,.62)', marginBottom: '2px', boxShadow: active ? '0 8px 22px -10px rgba(37,99,235,.85), inset 0 0 0 1px rgba(96,165,250,.28)' : 'none' });
+    const tab = (active) => ({ height: '34px', padding: '0 18px', border: 'none', borderRadius: '8px', fontSize: '13.5px', fontWeight: 600, cursor: 'pointer', background: active ? '#fff' : 'transparent', color: active ? '#1e3a8a' : '#64748b', boxShadow: active ? '0 1px 3px rgba(15,23,42,.12)' : 'none' });
+    const authTab = (active) => ({ height: '36px', padding: '0 18px', border: 'none', borderRadius: '8px', fontSize: '13.5px', fontWeight: 600, cursor: 'pointer', background: active ? '#fff' : 'transparent', color: active ? '#1e3a8a' : '#64748b', boxShadow: active ? '0 1px 3px rgba(15,23,42,.1)' : 'none' });
+    const toggle = (on) => ({
+      track: { width: '46px', height: '26px', borderRadius: '999px', background: on ? '#1e3a8a' : '#d5dbe6', cursor: 'pointer', position: 'relative', transition: 'background .2s', flexShrink: 0 },
+      knob: { position: 'absolute', top: '3px', left: on ? '23px' : '3px', width: '20px', height: '20px', borderRadius: '50%', background: '#fff', transition: 'left .2s', boxShadow: '0 1px 3px rgba(0,0,0,.2)' },
+    });
+
+    // filter + sort
+    const q = s.search.trim().toLowerCase();
+    let list = this.jobs.filter(j => {
+      if (q && !(j.title + ' ' + j.company + ' ' + j.tags.join(' ') + ' ' + j.location).toLowerCase().includes(q)) return false;
+      if (s.filterLocation !== 'all' && j.location !== s.filterLocation) return false;
+      if (s.filterType !== 'all' && j.type !== s.filterType) return false;
+      if (s.filterCategory !== 'all' && j.category !== s.filterCategory) return false;
+      if (s.filterMode !== 'all' && j.mode !== s.filterMode) return false;
+      if (s.filterExp !== 'all' && j.expLevel !== s.filterExp) return false;
+      if (j.salaryK < s.minSalary) return false;
+      if (j.salaryK > s.maxSalary) return false;
+      if (s.showSaved && !s.saved.includes(j.id)) return false;
+      return true;
+    });
+    if (s.sort === 'salary') list = [...list].sort((a, b) => b.salaryK - a.salaryK);
+    else if (s.sort === 'relevance') list = [...list].sort((a, b) => b.match - a.match);
+
+    const decorate = (j) => ({
+      ...j,
+      open: () => this.setState({ selected: j.id }),
+      toggleSave: (e) => { if (e) e.stopPropagation(); this.doToggleSave(j.id); },
+      apply: (e) => { if (e) e.stopPropagation(); this.toast('Opening ' + j.company + ' on ' + j.source); this.logActivity('Applied to ' + j.title + ' · ' + j.company, '#16a34a'); },
+      saveBg: s.saved.includes(j.id) ? '#eef2ff' : '#fff',
+      saveFill: s.saved.includes(j.id) ? '#1e3a8a' : 'none',
+      saveStroke: s.saved.includes(j.id) ? '#1e3a8a' : '#94a3b8',
+      matchBg: j.match >= 90 ? '#ecfdf3' : j.match >= 85 ? '#eef2ff' : '#f4f6fa',
+      matchFg: j.match >= 90 ? '#16a34a' : j.match >= 85 ? '#2563eb' : '#64748b',
+      chips: (j.tags || []).slice(0, 4).map(t => ({ label: t })),
+    });
+
+    const pageSize = 6;
+    const totalPages = Math.max(1, Math.ceil(list.length / pageSize));
+    const curPage = Math.min(s.page, totalPages);
+    const visible = list.slice((curPage - 1) * pageSize, curPage * pageSize).map(decorate);
+    const sel = this.jobs.find(j => j.id === s.selected);
+    let sim = [];
+    if (sel) {
+      sim = this.jobs.filter(j => j.id !== sel.id && j.category === sel.category).slice(0, 3);
+      if (sim.length < 3) {
+        const extra = this.jobs.filter(j => j.id !== sel.id && j.category !== sel.category)
+          .sort((a, b) => Math.abs(a.match - sel.match) - Math.abs(b.match - sel.match))
+          .slice(0, 3 - sim.length);
+        sim = [...sim, ...extra];
+      }
+    }
+
+    const selBreakdown = (() => {
+      if (!sel) return [];
+      const locs = (s.profileLocs ?? '').toLowerCase();
+      const clamp = (n) => Math.max(60, Math.min(99, Math.round(n)));
+      const location = sel.location === 'Remote' ? 97 : (locs.includes(sel.location.toLowerCase()) ? 93 : 79);
+      const mk = (label, pct, color) => ({ label, pct, pctText: pct + '%', barStyle: 'width:' + pct + '%; height:100%; border-radius:999px; background:' + color + ';' });
+      return [
+        mk('Skills match', clamp(sel.match + 2), '#16a34a'),
+        mk('Experience', clamp(sel.match - 4), '#2563eb'),
+        mk('Salary fit', clamp(72 + (sel.salaryK - 140) * 0.3), '#16a34a'),
+        mk('Location', location, '#2563eb'),
+      ];
+    })();
+
+    const mm = Math.floor(s.nextScanSecs / 60), ss = String(s.nextScanSecs % 60).padStart(2, '0');
+    const hr = new Date().getHours();
+    const daypart = hr < 12 ? 'morning' : hr < 18 ? 'afternoon' : 'evening';
+
+    return {
+      showAuth: !s.authed,
+      isAuthed: s.authed,
+      isSignup: s.signup,
+      email: s.email, password: s.password,
+      setEmail: (e) => this.setState({ email: e.target.value }),
+      setPassword: (e) => this.setState({ password: e.target.value }),
+      setLogin: () => this.setState({ signup: false }),
+      setSignup: () => this.setState({ signup: true }),
+      tabLoginStyle: authTab(!s.signup), tabSignupStyle: authTab(s.signup),
+      authTitle: s.signup ? 'Create your account' : 'Welcome back',
+      authSubtitle: s.signup ? 'Start collecting jobs with AI in minutes.' : 'Sign in to your AI job collector.',
+      authCta: s.signup ? 'Create account' : 'Sign in',
+      login: () => {
+        if (s.authLoading) return;
+        const errs = {};
+        const emailRe = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+        if (s.signup && !s.fullName.trim()) errs.name = 'Enter your full name';
+        if (!emailRe.test((s.email || '').trim())) errs.email = 'Enter a valid email address';
+        if ((s.password || '').length < 8) errs.pw = 'Password must be at least 8 characters';
+        if (Object.keys(errs).length) { this.setState({ errs }); return; }
+        this.setState({ errs: {}, authLoading: true });
+        clearTimeout(this._authT);
+        this._authT = setTimeout(() => {
+          if (s.signup) { this.setState({ authLoading: false, authMode: 'verify', resendIn: 30 }); this.toast('Verification email sent'); }
+          else { this.setState({ authed: true, authLoading: false }); this.toast('Welcome back, Alex'); }
+        }, 900);
+      },
+      googleLogin: () => { this.setState({ authed: true, authLoading: false, errs: {} }); this.toast('Signed in with Google'); },
+      goForgot: () => this.setState({ authMode: 'forgot', errs: {}, authLoading: false }),
+      backToLogin: () => this.setState({ authMode: 'main', errs: {}, authLoading: false }),
+      sendReset: () => {
+        if (s.authLoading) return;
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test((s.email || '').trim())) { this.setState({ errs: { email: 'Enter a valid email address' } }); return; }
+        this.setState({ errs: {}, authLoading: true });
+        clearTimeout(this._authT);
+        this._authT = setTimeout(() => { this.setState({ authLoading: false, authMode: 'forgotSent' }); this.toast('Reset link sent'); }, 900);
+      },
+      openResetDemo: () => this.setState({ authMode: 'reset', resetPw: '', confirmPw: '', errs: {} }),
+      doReset: () => {
+        if (s.authLoading) return;
+        const errs = {};
+        if ((s.resetPw || '').length < 8) errs.resetPw = 'Password must be at least 8 characters';
+        else if (s.resetPw !== s.confirmPw) errs.confirm = 'Passwords do not match';
+        if (Object.keys(errs).length) { this.setState({ errs }); return; }
+        this.setState({ errs: {}, authLoading: true });
+        clearTimeout(this._authT);
+        this._authT = setTimeout(() => {
+          this.setState({ authLoading: false, authMode: 'main', signup: false, password: '' });
+          this.toast('Password updated — sign in with your new password');
+        }, 900);
+      },
+      resendVerify: () => { if (s.resendIn > 0) return; this.setState({ resendIn: 30 }); this.toast('Verification email resent'); },
+      verifiedContinue: () => { this.setState({ authed: true, authMode: 'main', authLoading: false }); this.toast('Account created — welcome to SyHire'); },
+      authViewMain: s.authMode === 'main',
+      authViewForgot: s.authMode === 'forgot',
+      authViewForgotSent: s.authMode === 'forgotSent',
+      authViewReset: s.authMode === 'reset',
+      authViewVerify: s.authMode === 'verify',
+      fullName: s.fullName, setFullName: (e) => this.setState({ fullName: e.target.value }),
+      resetPw: s.resetPw, setResetPw: (e) => this.setState({ resetPw: e.target.value }),
+      confirmPw: s.confirmPw, setConfirmPw: (e) => this.setState({ confirmPw: e.target.value }),
+      hasErrName: !!s.errs.name, errName: s.errs.name,
+      hasErrEmail: !!s.errs.email, errEmail: s.errs.email,
+      hasErrPw: !!s.errs.pw, errPw: s.errs.pw,
+      hasErrResetPw: !!s.errs.resetPw, errResetPw: s.errs.resetPw,
+      hasErrConfirm: !!s.errs.confirm, errConfirm: s.errs.confirm,
+      forgotBtnLabel: s.authLoading ? 'Sending link…' : 'Send reset link',
+      resetBtnLabel: s.authLoading ? 'Updating…' : 'Update password',
+      resendLabel: s.resendIn > 0 ? 'Resend in ' + s.resendIn + 's' : 'Resend verification email',
+      resendStyle: 'font-size: 13px; font-weight: 500; cursor: ' + (s.resendIn > 0 ? 'default; color: #94a3b8;' : 'pointer; color: #2563eb;'),
+      pwType: s.showPw ? 'text' : 'password',
+      showPw: s.showPw, hidePw: !s.showPw,
+      togglePw: () => this.setState(st => ({ showPw: !st.showPw })),
+      pwToggleLabel: s.showPw ? 'Hide password' : 'Show password',
+      onPwKey: (e) => { try { if (e.getModifierState) this.setState({ capsOn: e.getModifierState('CapsLock') }); } catch (_) {} },
+      capsOn: s.capsOn,
+      remember: s.remember ?? true,
+      toggleRemember: (e) => this.setState({ remember: e.target.checked }),
+      authLoading: s.authLoading,
+      authBtnLabel: s.authLoading ? (s.signup ? 'Creating account…' : 'Signing in…') : (s.signup ? 'Create account' : 'Sign in'),
+      forgotPw: () => this.toast('Password reset link sent'),
+
+      // nav
+      view: s.view,
+      isDashboard: s.view === 'dashboard', isJobs: s.view === 'jobs', isSettings: s.view === 'settings',
+      navDashStyle: nav(s.view === 'dashboard'), navJobsStyle: nav(s.view === 'jobs'), navSettingsStyle: nav(s.view === 'settings'),
+      goDashboard: () => this.setState({ view: 'dashboard', navOpen: false }),
+      goJobs: () => { this.doGoJobs(); this.setState({ navOpen: false }); },
+      goSaved: () => this.setState({ view: 'jobs', showSaved: true, navOpen: false }),
+      alertEmail: s.alertEmail ?? s.email,
+      setAlertEmail: (e) => this.setState({ alertEmail: e.target.value }),
+      saveAlertEmail: () => this.toast('Alert email saved — daily digest on'),
+      goSettings: () => this.setState({ view: 'settings', navOpen: false, settingsTab: 'profile' }),
+      matchesCount: this.jobs.filter(j => this.prefScore(j, s) >= 95).length,
+      isMobile: s.isMobile, isDesktop: !s.isMobile, navOpen: s.navOpen,
+      heroFxRef: (el) => { this._heroFx = el; },
+      heroCanvasRef: this.heroCanvasRef,
+      heroMatchNum: s.heroCounts.match + '%',
+      heroResumeNum: s.heroCounts.resume + '%',
+      heroAppsNum: s.heroCounts.apps,
+      heroInterviewsNum: s.heroCounts.interviews,
+      heroSkillsMiniNum: s.heroCounts.skillsMini + '%',
+      statLiveNum: s.heroCounts.liveJobs.toLocaleString(),
+      statCompaniesNum: s.heroCounts.companies,
+      statAccuracyNum: s.heroCounts.accuracy + '%',
+      heroMatchBarStyle: 'width:' + s.heroCounts.match + '%; height:100%; border-radius:999px; background: linear-gradient(90deg,#7fd6a3,#8fc0ff);',
+      heroResumeBarStyle: 'width:' + s.heroCounts.resume + '%; height:100%; border-radius:999px; background: linear-gradient(90deg,#8fc0ff,#3D8BFF);',
+      toggleNav: () => this.setState(st => ({ navOpen: !st.navOpen })),
+      closeNav: () => this.setState({ navOpen: false }),
+      sidebarStyle: (s.isMobile ? 'position: fixed; left: 0; top: 0; bottom: 0; z-index: 95; box-shadow: 0 20px 60px rgba(7,26,61,.45); transition: transform .28s ease; transform: translateX(' + (s.navOpen ? '0' : '-103%') + '); ' : '') + 'width: 248px; flex-shrink: 0; background: linear-gradient(180deg, #0c1f4a 0%, #0a1631 100%); display: flex; flex-direction: column; padding: 20px 15px; overflow-y: auto; color: #fff;',
+      statCols: s.isMobile ? '1fr' : 'repeat(3, 1fr)',
+      dashCols: s.isMobile ? '1fr' : '1.55fr 1fr',
+      mainPad: s.isMobile ? '16px 14px 40px' : '28px',
+      topbarPad: s.isMobile ? '14px' : '28px',
+      authPanelStyle: 'flex: 1 1 46%; position: relative; overflow: hidden; background: linear-gradient(165deg, #0a2049 0%, #163A8F 34%, #1F4FB8 64%, #255EEA 100%); color: #fff; padding: clamp(28px, 5vh, 56px) clamp(34px, 4vw, 56px); flex-direction: column; justify-content: space-between; gap: 18px; display: ' + (s.isMobile ? 'none' : 'flex') + ';',
+      particles: (() => {
+        if (this._parts) return this._parts;
+        let seed = 1234567;
+        const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
+        const arr = [];
+        for (let i = 0; i < 90; i++) {
+          const layer = i % 3;
+          const size = layer === 0 ? 2 + rnd() * 1.4 : layer === 1 ? 2.6 + rnd() * 1.8 : 3.6 + rnd() * 2.4;
+          const left = rnd() * 100, top = rnd() * 100;
+          const base = layer === 0 ? 0.3 : layer === 1 ? 0.52 : 0.78;
+          const tw = 4 + rnd() * 6, dr = 9 + rnd() * 11, delay = rnd() * 8;
+          const color = rnd() > 0.5 ? '255,255,255' : '150,190,255';
+          const shadow = layer === 2
+            ? '0 0 8px rgba(255,255,255,.18), 0 0 24px rgba(120,170,255,.12), 0 0 48px rgba(80,120,255,.08)'
+            : layer === 1
+            ? '0 0 6px rgba(255,255,255,.16), 0 0 18px rgba(120,170,255,.1)'
+            : '0 0 5px rgba(255,255,255,.12)';
+          arr.push({ style: 'position:absolute; left:' + left.toFixed(2) + '%; top:' + top.toFixed(2) + '%; width:' + size.toFixed(1) + 'px; height:' + size.toFixed(1) + 'px; border-radius:50%; background:rgba(' + color + ',' + base + '); box-shadow:' + shadow + '; opacity:' + base + '; animation: sytwinkle ' + tw.toFixed(1) + 's ease-in-out ' + delay.toFixed(1) + 's infinite, sydrift ' + dr.toFixed(1) + 's ease-in-out ' + (delay / 2).toFixed(1) + 's infinite alternate;' });
+        }
+        this._parts = arr;
+        return arr;
+      })(),
+      logout: () => { this.setState({ authed: false, authMode: 'main', authLoading: false, errs: {}, signup: false }); },
+      comingSoon: () => this.toast('This feature is coming soon'),
+      soonBadge: 'margin-left: auto; font-size: 10px; font-weight: 600; background: #f1f4f9; color: #94a3b8; padding: 2px 7px; border-radius: 999px; letter-spacing: .02em;',
+      jobCount: this.jobs.length,
+
+      // page header
+      pageTitle: { dashboard: 'Dashboard', jobs: 'Job Posts', settings: 'Settings' }[s.view],
+      pageSubtitle: { dashboard: 'Your AI collector at a glance', jobs: 'Roles matched to your profile', settings: 'Manage your account and preferences' }[s.view],
+      search: s.search, setSearch: (e) => this.setState({ search: e.target.value, view: 'jobs' }),
+
+      // collector hero
+      statusText: online ? 'Active' : 'Offline',
+      statusChipBg: online ? 'rgba(74,222,128,.18)' : 'rgba(248,113,113,.2)',
+      statusDot: online ? '#4ade80' : '#f87171',
+      statusAnim: online ? 'sypulse 2s infinite' : 'none',
+      daypart,
+      scanLine: online ? 'Scanning 6 sources for your next opportunity' : 'Collector paused — resume in settings',
+      scanNow: () => this.doScan(),
+      scanBtnLabel: s.scanning ? 'Scanning…' : 'Scan now',
+      scanIconAnim: s.scanning ? 'syspin .9s linear infinite' : 'none',
+      lastScan: s.lastScan,
+      nextScan: online ? (mm + ':' + ss) : 'Paused',
+      jobsToday: s.jobsToday,
+      savedCount: s.saved.length,
+
+      bannerStatus: s.scanning ? 'Scanning' : (online ? 'Live' : 'Paused'),
+      bannerScanned: (s.jobsToday * 53).toLocaleString(),
+      bannerNew: s.jobsToday,
+      bannerUpdated: s.lastScan,
+      bannerBtnLabel: s.scanning ? 'Scanning…' : 'Refresh',
+      scanProgressStyle: 'width:' + (online ? Math.max(3, Math.min(100, Math.round((1 - s.nextScanSecs / 300) * 100))) : 0) + '%; height:100%; border-radius:999px; background:linear-gradient(90deg,#7fd6a3,#cfe0ff);',
+      trendingChips: ['React', 'Python', 'AI Engineer', 'Product Design', 'DevOps', 'Remote'].map(term => ({ label: term, go: () => this.setState({ search: term, view: 'jobs', page: 1, showSaved: false }) })),
+
+      recentJobs: this.jobs.slice(0, 4).map(decorate),
+      recommendedJobs: [...this.jobs].sort((a, b) => this.prefScore(b, s) - this.prefScore(a, s) || b.match - a.match).slice(0, 4).map(decorate),
+      activity: s.activity || this.activityFeed,
+      prefChips: (() => {
+        const chips = [{ label: (s.profileTitle ?? 'Senior Frontend Engineer') || 'Any role', bg: '#eef2ff', fg: '#1e3a8a' }];
+        if (s.prefWork) chips.push({ label: s.prefWork, bg: '#f4f6fa', fg: '#475569' });
+        if (s.prefExp) chips.push({ label: s.prefExp + ' level', bg: '#f4f6fa', fg: '#475569' });
+        (s.profileLocs ?? '').split(',').map(t => t.trim()).filter(Boolean).slice(0, 2).forEach(label => chips.push({ label, bg: '#f4f6fa', fg: '#475569' }));
+        if (+s.prefSalary > 0) chips.push({ label: '$' + s.prefSalary + 'k+', bg: '#ecfdf3', fg: '#16a34a' });
+        return chips;
+      })(),
+      profileName: s.profileName ?? 'Alex Morgan',
+      profileTitle: s.profileTitle ?? 'Senior Frontend Engineer',
+      profileLocs: s.profileLocs ?? 'Remote, San Francisco, New York',
+      setProfileName: (e) => this.setState({ profileName: e.target.value }),
+      setProfileTitle: (e) => this.setState({ profileTitle: e.target.value }),
+      setProfileLocs: (e) => this.setState({ profileLocs: e.target.value }),
+      prefWork: s.prefWork ?? 'Remote', setPrefWork: (e) => this.setState({ prefWork: e.target.value }),
+      prefExp: s.prefExp ?? 'Senior', setPrefExp: (e) => this.setState({ prefExp: e.target.value }),
+      prefSalary: s.prefSalary ?? 150, setPrefSalary: (e) => this.setState({ prefSalary: +e.target.value || 0 }),
+      prefSkills: s.prefSkills ?? '', setPrefSkills: (e) => this.setState({ prefSkills: e.target.value }),
+      prefsDirty,
+      cancelPrefs: () => { if (s.prefsSaved) this.setState(s.prefsSaved); },
+      savePrefs: () => {
+        if (!prefsDirty || s.prefsSaving) return;
+        this.setState({ prefsSaving: true });
+        clearTimeout(this._prefT);
+        this._prefT = setTimeout(() => {
+          this.setState(st => ({ prefsSaving: false, prefsSaved: this.curPrefs(st) }));
+          this.toast('Preferences updated');
+          this.logActivity('You updated your job preferences', '#2563eb');
+        }, 650);
+      },
+      savePrefsLabel: s.prefsSaving ? 'Saving…' : (prefsDirty ? 'Save changes' : 'Saved'),
+      savePrefsStyle: 'height: 42px; padding: 0 22px; border: none; border-radius: 11px; font-size: 13.5px; font-weight: 600; color: #fff; cursor: ' + ((prefsDirty && !s.prefsSaving) ? 'pointer' : 'default') + '; background: ' + ((prefsDirty && !s.prefsSaving) ? '#1e3a8a' : '#9fb0cf') + '; transition: background .15s, transform .12s;',
+
+      // jobs
+      filterLocation: s.filterLocation, setLocation: (e) => this.setState({ filterLocation: e.target.value, visibleCount: 6 }),
+      filterCategory: s.filterCategory, setCategory: (e) => this.setState({ filterCategory: e.target.value, visibleCount: 6, page: 1 }),
+      filterMode: s.filterMode, setMode: (e) => this.setState({ filterMode: e.target.value, visibleCount: 6 }),
+      filterType: s.filterType, setType: (e) => this.setState({ filterType: e.target.value, visibleCount: 6 }),
+      filterExp: s.filterExp, setExp: (e) => this.setState({ filterExp: e.target.value, visibleCount: 6 }),
+      setJobSearch: (e) => this.setState({ search: e.target.value, visibleCount: 6 }),
+      hasSearch: q.length > 0,
+      clearSearch: () => this.setState({ search: '', visibleCount: 6 }),
+      loadMsg: s.loadMsg,
+      categories: [
+        { label: 'All Jobs', value: 'all', count: '12.4K', icon: 'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z' },
+        { label: 'Software Engineering', value: 'Software Engineering', count: '3.2K', icon: 'M8 6 2 12l6 6M16 6l6 6-6 6' },
+        { label: 'Frontend', value: 'Frontend', count: '1.6K', icon: 'M3 4h18v12H3zM8 20h8M12 16v4' },
+        { label: 'Backend', value: 'Backend', count: '1.6K', icon: 'M4 5h16v6H4zM4 13h16v6H4zM8 8h.01M8 16h.01' },
+        { label: 'Full Stack', value: 'Full Stack', count: '1.8K', icon: 'M12 3 2 8l10 5 10-5zM2 14l10 5 10-5' },
+        { label: 'Mobile', value: 'Mobile', count: '798', icon: 'M7 3h10v18H7zM11 18h2' },
+        { label: 'AI / Machine Learning', value: 'Machine Learning', count: '1.2K', icon: 'M6 6h12v12H6zM9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3' },
+        { label: 'Data Science', value: 'Data Science', count: '927', icon: 'M4 20V10M10 20V4M16 20v-8M22 20H2' },
+        { label: 'DevOps', value: 'DevOps', count: '642', icon: 'M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5' },
+        { label: 'Cloud', value: 'Cloud', count: '584', icon: 'M17 18a4 4 0 0 0 0-8 6 6 0 0 0-11-2 4 4 0 0 0-1 8' },
+        { label: 'Cybersecurity', value: 'Cybersecurity', count: '456', icon: 'M12 2 4 6v6c0 5 8 10 8 10s8-5 8-10V6z' },
+        { label: 'QA / Testing', value: 'QA', count: '732', icon: 'M9 12l2 2 4-4M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z' },
+        { label: 'UI / UX Design', value: 'UI/UX Design', count: '512', icon: 'M12 19l7-7-4-4-7 7zM5 19h4' },
+        { label: 'Product Management', value: 'Product Management', count: '468', icon: 'M21 8 12 3 3 8l9 5zM3 8v8l9 5 9-5V8' },
+        { label: 'Marketing', value: 'Marketing', count: '384', icon: 'M3 11v2l14 5V6zM3 11h4v6H3z' },
+        { label: 'Finance', value: 'Finance', count: '298', icon: 'M12 2v20M17 6H9a3 3 0 0 0 0 6h6a3 3 0 0 1 0 6H7' },
+        { label: 'Human Resources', value: 'Human Resources', count: '267', icon: 'M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8' },
+        { label: 'Customer Support', value: 'Customer Support', count: '312', icon: 'M4 14v-2a8 8 0 0 1 16 0v2M4 14h3v5H5a1 1 0 0 1-1-1zM20 14h-3v5h2a1 1 0 0 0 1-1z' },
+        { label: 'Sales', value: 'Sales', count: '278', icon: 'M3 17l6-6 4 4 8-8M21 7v5h-5' },
+        { label: 'Education', value: 'Education', count: '184', icon: 'M22 10 12 5 2 10l10 5zM6 12v5c0 1 3 2 6 2s6-1 6-2v-5' },
+        { label: 'Legal', value: 'Legal', count: '132', icon: 'M12 3v18M5 7h14M7 7l-3 7h6zM17 7l3 7h-6z' },
+        { label: 'Others', value: 'Others', count: '97', icon: 'M5 12h.01M12 12h.01M19 12h.01' },
+      ].map(c => {
+        const active = s.filterCategory === c.value;
+        return {
+          label: c.label,
+          count: c.count,
+          iconPath: c.icon,
+          style: 'display:flex; align-items:center; gap:10px; width:100%; padding:8px 11px; border:none; border-radius:10px; text-align:left; cursor:pointer; font-size:13px; font-weight:' + (active ? 600 : 500) + '; background:' + (active ? 'rgba(37,99,235,.22)' : 'transparent') + '; color:' + (active ? '#fff' : 'rgba(255,255,255,.6)') + '; box-shadow:' + (active ? 'inset 0 0 0 1px rgba(96,165,250,.28)' : 'none') + '; transition:background .15s;',
+          countStyle: 'font-size:11px; font-weight:600; padding:2px 8px; border-radius:999px; background:' + (active ? 'rgba(96,165,250,.25)' : 'rgba(255,255,255,.07)') + '; color:' + (active ? '#cfe0ff' : 'rgba(255,255,255,.55)') + ';',
+          optionLabel: c.value === 'all' ? 'All categories' : (c.label + ' (' + c.count + ')'),
+          select: () => this.setState({ filterCategory: c.value, view: 'jobs', visibleCount: 6 }),
+        };
+      }),
+      collectorFg: online ? '#4ade80' : 'rgba(255,255,255,.5)',
+
+      anyFilter: s.filterLocation !== 'all' || s.filterMode !== 'all' || s.filterType !== 'all' || s.filterExp !== 'all' || s.filterCategory !== 'all' || s.minSalary > 0 || s.maxSalary < 300 || q.length > 0,
+      minSalary: s.minSalary, setSalary: (e) => this.setState({ minSalary: Math.min(+e.target.value, s.maxSalary), visibleCount: 6 }),
+      maxSalary: s.maxSalary, setMaxSalary: (e) => this.setState({ maxSalary: Math.max(+e.target.value, s.minSalary), visibleCount: 6 }),
+      minSalaryText: s.minSalary === 0 ? curSym + '0' : fmtK(s.minSalary),
+      maxSalaryText: s.maxSalary >= 300 ? fmtK(300) + '+' : fmtK(s.maxSalary),
+      currency: cur,
+      setCurrency: (e) => this.setState({ currency: e.target.value }),
+      salaryOpen: s.salaryOpen,
+      toggleSalary: () => this.setState(st => ({ salaryOpen: !st.salaryOpen })),
+      closeSalary: () => this.setState({ salaryOpen: false }),
+      applySalary: () => { this.setState({ salaryOpen: false }); this.toast('Salary filter applied'); },
+      resetSalary: () => this.setState({ minSalary: 0, maxSalary: 300, visibleCount: 6 }),
+      salaryLabel: (s.minSalary > 0 || s.maxSalary < 300) ? (fmtK(s.minSalary) + ' – ' + (s.maxSalary >= 300 ? fmtK(300) + '+' : fmtK(s.maxSalary))) : 'Salary',
+      salaryBtnStyle: 'height:40px; padding:0 12px; border:1px solid ' + ((s.minSalary > 0 || s.maxSalary < 300) ? '#1e3a8a' : '#e6eaf1') + '; border-radius:11px; font-size:13px; background:' + ((s.minSalary > 0 || s.maxSalary < 300) ? '#eef2ff' : '#fff') + '; color:' + ((s.minSalary > 0 || s.maxSalary < 300) ? '#1e3a8a' : '#334155') + '; font-weight:' + ((s.minSalary > 0 || s.maxSalary < 300) ? 600 : 400) + '; cursor:pointer; display:inline-flex; align-items:center; gap:7px;',
+      sort: s.sort, setSort: (e) => this.setState({ sort: e.target.value }),
+      showAllJobs: () => this.setState({ showSaved: false }), showSavedJobs: () => this.setState({ showSaved: true }),
+      toggleSavedView: () => this.setState(st => ({ showSaved: !st.showSaved, visibleCount: 6 })),
+      savedToggleFill: s.showSaved ? '#1e3a8a' : 'none',
+      savedToggleStyle: 'height:40px; padding:0 15px; border:1px solid ' + (s.showSaved ? '#1e3a8a' : '#e6eaf1') + '; border-radius:11px; font-size:13px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:7px; background:' + (s.showSaved ? '#eef2ff' : '#fff') + '; color:' + (s.showSaved ? '#1e3a8a' : '#475569') + ';',
+      segAllStyle: seg(!s.showSaved), segSavedStyle: seg(s.showSaved),
+      loadingJobs: s.loadingJobs,
+      showGrid: !s.loadingJobs && list.length > 0,
+      showEmpty: !s.loadingJobs && list.length === 0,
+      resultLine: list.length + (list.length === 1 ? ' role' : ' roles') + (s.showSaved ? ' saved' : ' found') + (q ? ' for "' + s.search + '"' : ''),
+      visibleJobs: visible,
+      skeletons: [1, 2, 3, 4, 5, 6].map(n => ({ n })),
+      hasMore: list.length > s.visibleCount,
+      loadMore: () => this.setState(st => ({ visibleCount: st.visibleCount + 4 })),
+      clearFilters: () => this.setState({ filterLocation: 'all', filterMode: 'all', filterType: 'all', filterExp: 'all', filterCategory: 'all', minSalary: 0, maxSalary: 300, salaryOpen: false, search: '', showSaved: false, visibleCount: 6 }),
+
+      // modal
+      hasSelected: !!sel,
+      selInitial: sel ? sel.initial : '', selLogoBg: sel ? sel.logoBg : '#1e3a8a',
+      selTitle: sel ? sel.title : '', selCompany: sel ? sel.company : '', selLocation: sel ? sel.location : '',
+      selSalary: sel ? sel.salaryText : '', selType: sel ? sel.type : '', selPosted: sel ? sel.posted : '', selSource: sel ? sel.source : '',
+      selDesc: sel ? sel.desc : '', selMatch: sel ? sel.match : '',
+      selExperience: sel ? ({ Mid: 'Mid-level', Senior: 'Senior', Staff: 'Staff / Lead' }[sel.expLevel] || sel.experience) : '',
+      selResponsibilities: sel ? this.buildResp(sel).map(text => ({ text })) : [],
+      selRequirements: sel ? this.buildReq(sel).map(text => ({ text })) : [],
+      selBenefits: [{ text: 'Competitive salary & equity' }, { text: 'Health, dental & vision' }, { text: 'Flexible / remote-friendly' }, { text: 'Learning & wellness stipend' }],
+      selSimilar: sim.map(decorate),
+      hasSimilar: !!sel && sim.length > 0,
+      shareSel: () => this.toast('Job link copied to clipboard'),
+      selTags: sel ? sel.tags.map(t => ({ label: t })) : [],
+      selBreakdown,
+      selSaveFill: sel && s.saved.includes(sel.id) ? '#1e3a8a' : 'none',
+      selSaveStroke: sel && s.saved.includes(sel.id) ? '#1e3a8a' : '#64748b',
+      selSaveLabel: sel && s.saved.includes(sel.id) ? 'Saved' : 'Save',
+      toggleSelSave: () => { if (sel) this.doToggleSave(sel.id); },
+      applySel: () => { if (sel) { this.toast('Opening ' + sel.company + ' on ' + sel.source); this.logActivity('Applied to ' + sel.title + ' · ' + sel.company, '#16a34a'); } },
+      closeJob: () => this.setState({ selected: null }),
+      stop: (e) => e.stopPropagation(),
+
+      exportData: () => this.toast('Export requested — check your email shortly'),
+
+      // settings
+      settingsTab: s.settingsTab,
+      tabProfile: s.settingsTab === 'profile', tabAccount: s.settingsTab === 'account', tabNotif: s.settingsTab === 'notif',
+      tabProfileStyle: tab(s.settingsTab === 'profile'), tabAccountStyle: tab(s.settingsTab === 'account'), tabNotifStyle: tab(s.settingsTab === 'notif'),
+      setTabProfile: () => this.setState({ settingsTab: 'profile' }), setTabAccount: () => this.setState({ settingsTab: 'account' }), setTabNotif: () => this.setState({ settingsTab: 'notif' }),
+      saveSettings: () => { this.toast('Changes saved'); this.logActivity('You updated your job preferences', '#94a3b8'); },
+      jobEmailTrack: toggle(s.notif.jobEmail).track, jobEmailKnob: toggle(s.notif.jobEmail).knob,
+      weeklyTrack: toggle(s.notif.weekly).track, weeklyKnob: toggle(s.notif.weekly).knob,
+      productTrack: toggle(s.notif.product).track, productKnob: toggle(s.notif.product).knob,
+      toggleJobEmail: () => this.setState(st => ({ notif: { ...st.notif, jobEmail: !st.notif.jobEmail } })),
+      toggleWeekly: () => this.setState(st => ({ notif: { ...st.notif, weekly: !st.notif.weekly } })),
+      toggleProduct: () => this.setState(st => ({ notif: { ...st.notif, product: !st.notif.product } })),
+
+      page: curPage,
+      showPagination: totalPages > 1,
+      pages: Array.from({ length: totalPages }, (_, i) => i + 1).map(p => {
+        const active = p === curPage;
+        return {
+          label: '' + p,
+          style: 'min-width:40px; height:40px; padding:0 6px; border:1px solid ' + (active ? '#1e3a8a' : '#e6eaf1') + '; border-radius:10px; background:' + (active ? '#1e3a8a' : '#fff') + '; color:' + (active ? '#fff' : '#475569') + '; font-size:13.5px; font-weight:600; cursor:pointer; transition:all .15s;',
+          go: () => this.setState({ page: p }),
+          hover: active ? '' : 'border-color:#c7d4ea; background:#fbfcfe;',
+        };
+      }),
+      prevPage: () => this.setState(st => ({ page: Math.max(1, st.page - 1) })),
+      nextPage: () => this.setState({ page: Math.min(totalPages, curPage + 1) }),
+      pageNavStyle: 'width:40px; height:40px; border:1px solid #e6eaf1; border-radius:10px; background:#fff; color:#475569; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:border-color .15s, background .15s;',
+      toasts: s.toasts,
+    };
+  }
+
+  buildResp(j) {
+    return [
+      'Own end-to-end delivery of ' + j.category.toLowerCase() + ' work at ' + j.company + ', from scoping through launch.',
+      'Partner with cross-functional teammates to ship polished, reliable features.',
+      'Raise the bar on quality, performance and maintainability across the codebase.',
+      'Mentor teammates and help shape the technical direction of the team.',
+    ];
+  }
+
+  buildReq(j) {
+    const yrs = j.expLevel === 'Staff' ? '8+' : j.expLevel === 'Senior' ? '5+' : '3+';
+    return [
+      yrs + ' years of relevant experience in a ' + j.category + ' role.',
+      'Strong hands-on skills with ' + j.tags.slice(0, 2).join(' and ') + '.',
+      'A track record of shipping user-facing products at scale.',
+      'Excellent communication and a strong bias for action.',
+    ];
+  }
+
+  doGoJobs() {
+    const msgs = ['Searching jobs…', 'AI filtering for relevance…', 'Collecting fresh opportunities…'];
+    let i = 0;
+    this.setState({ view: 'jobs', loadingJobs: true, loadMsg: msgs[0], visibleCount: 6 });
+    clearInterval(this._loadTimer);
+    this._loadTimer = setInterval(() => { i++; if (i < msgs.length) this.setState({ loadMsg: msgs[i] }); }, 320);
+    setTimeout(() => { clearInterval(this._loadTimer); this.setState({ loadingJobs: false }); }, 1000);
+  }
+
+  doToggleSave(id) {
+    const has = this.state.saved.includes(id);
+    const j = this.jobs.find(x => x.id === id);
+    this.setState(st => ({ saved: has ? st.saved.filter(x => x !== id) : [...st.saved, id] }));
+    this.toast(has ? 'Removed from saved' : 'Job saved');
+    if (j) this.logActivity((has ? 'Removed ' : 'You saved ') + j.title + ' · ' + j.company + (has ? ' from saved' : ''), has ? '#94a3b8' : '#ea9a0b');
+  }
+
+  doScan() {
+    if (this.state.scanning) return;
+    this.setState({ scanning: true });
+    setTimeout(() => {
+      const n = Math.floor(Math.random() * 6 + 3);
+      this.setState(st => ({ scanning: false, lastScan: 'just now', nextScanSecs: 300, jobsToday: st.jobsToday + n }));
+      this.toast('Scan complete — new matches found');
+      this.logActivity('Scan completed · AI found ' + n + ' new jobs', '#2563eb');
+    }, 1800);
+  }
+}
+</script>
+</body>
+</html>
