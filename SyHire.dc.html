@@ -54,11 +54,32 @@
   @keyframes sytwinkle { 0%, 100% { opacity: .25; } 50% { opacity: .9; } }
   @keyframes sydrift { from { transform: translateY(0); } to { transform: translateY(-12px); } }
   @keyframes syhoverlite { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+  @keyframes syCardIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes syStream { from { stroke-dashoffset: 327; } to { stroke-dashoffset: 0; } }
+  @keyframes syActIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes syScanGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(147,197,253,0); } 50% { box-shadow: 0 0 20px 0 rgba(147,197,253,.4); } }
+  @keyframes syShake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
+  @keyframes syBubbleIn { from { opacity: 0; transform: scale(.95); } to { opacity: 1; transform: scale(1); } }
+  @keyframes syNewJob { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes syCardFloat { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(2px); } }
+  @keyframes syIconPulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 22px rgba(61,139,255,.15); } 50% { transform: scale(1.09); box-shadow: 0 0 30px rgba(61,139,255,.4); } }
+  @media (prefers-reduced-motion: reduce) { .sy-fcard { animation: syCardIn .5s ease-out both !important; } }
   @keyframes syflow { 0%, 100% { opacity: .2; stroke-width: 2.5px; } 50% { opacity: .35; stroke-width: 2.8px; } }
-  @keyframes sydrift { 0% { opacity: 1; transform: translate(0, 0); } 100% { opacity: 0; transform: translate(180px, -280px); } }
   @keyframes syBreathe { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.8; } }
-  @keyframes syGlowPulse { 0%, 100% { opacity: .35; stroke-width: 3.2px; } 50% { opacity: .6; stroke-width: 3.5px; } }
-  @keyframes syDriftPath { 0% { opacity: 1; transform: translate(0, 0); } 100% { opacity: 0; transform: translate(220px, -320px); } }
+  @keyframes syRobotRun { 0% { transform: translateX(-100px); } 34% { transform: translateX(36vw); } 40% { transform: translateX(37.5vw); } 70% { transform: translateX(72vw); } 76% { transform: translateX(73.5vw); } 100% { transform: translateX(calc(100vw + 100px)); } }
+  @keyframes syRobotBob { from { transform: translateY(0); } to { transform: translateY(-3.5px); } }
+  @keyframes syRobotLeg { 0%, 100% { transform: rotate(26deg); } 50% { transform: rotate(-26deg); } }
+  @keyframes syRobotArm { 0%, 100% { transform: rotate(-22deg); } 50% { transform: rotate(24deg); } }
+  @keyframes syRobotWave { 0%, 100% { transform: rotate(-140deg); } 50% { transform: rotate(-104deg); } }
+  @keyframes syRobotBlink { 0%, 90%, 100% { transform: scaleY(1); } 94% { transform: scaleY(.1); } }
+  @keyframes syRobotGlow { 0%, 100% { opacity: .3; } 50% { opacity: .55; } }
+  @keyframes syRobotPing { 0%, 100% { opacity: .45; } 50% { opacity: 1; } }
+  @keyframes syRobotDrop { 0% { transform: scaleY(.86) scaleX(1.08); } 45% { transform: scaleY(1.06) scaleX(.96); } 100% { transform: none; } }
+  @keyframes syRobotNod { 0%, 100% { transform: rotate(0); } 35% { transform: rotate(10deg) translateY(2px); } 70% { transform: rotate(-4deg); } }
+  @keyframes syRobotHop { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-14px); } 70% { transform: translateY(0) scaleY(.92); } }
+  @keyframes syRobotSpin { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(15deg); } }
+  input::placeholder { color: #6b7d99; }
+  @keyframes syMarq { to { transform: translateX(-50%); } }
 </style>
 </helmet>
 
@@ -73,242 +94,264 @@
 </template>
 
 <div style="height: 100vh; width: 100%; overflow: hidden; background: #f4f6fa;">
+    <!-- SyHire AI companion: docks above the SyHire logo, fully draggable -->
+    <div onMouseEnter="{{ robotEnter }}" onMouseLeave="{{ robotLeave }}" onMouseDown="{{ robotDown }}" onClick="{{ robotClick }}" onDoubleClick="{{ robotDbl }}" onKeyDown="{{ robotKey }}" tabindex="0" role="button" aria-label="SyHire AI Assistant" title="SyHire AI Assistant" style="{{ robotRunnerStyle }}">
+        <sc-if value="{{ robotBubble }}" hint-placeholder-val="{{ false }}">
+        <div style="{{ robotBubbleStyle }}">{{ robotBubbleText }}<div style="{{ robotBubbleTailStyle }}"></div></div>
+        </sc-if>
+        <div style="position: absolute; left: 50%; bottom: -3px; transform: translateX(-50%); width: 46px; height: 12px; border-radius: 50%; background: radial-gradient(ellipse, rgba(59,130,246,.55), transparent 70%); filter: blur(4px); animation: syRobotGlow 2.4s ease-in-out infinite; pointer-events: none;"></div>
+        <div style="{{ robotBobStyle }}">
+          <svg width="64" height="78" viewBox="0 0 64 78" fill="none" style="overflow: visible; display: block;">
+            <ellipse cx="32" cy="73" rx="17" ry="3.5" fill="rgba(6,182,212,.16)"></ellipse>
+            <g style="{{ robotLegAStyle }}"><rect x="24" y="53" width="6.5" height="17" rx="3.2" fill="#0d2450" stroke="rgba(61,139,255,.5)" stroke-width="1"></rect></g>
+            <g style="{{ robotLegBStyle }}"><rect x="33.5" y="53" width="6.5" height="17" rx="3.2" fill="#0d2450" stroke="rgba(61,139,255,.5)" stroke-width="1"></rect></g>
+            <g style="{{ robotArmBackStyle }}"><rect x="16.5" y="33" width="6" height="16" rx="3" fill="#0c2049" stroke="rgba(61,139,255,.4)" stroke-width="1"></rect></g>
+            <rect x="20" y="31" width="24" height="24" rx="9.5" fill="#0d2450" stroke="rgba(61,139,255,.55)" stroke-width="1.1"></rect>
+            <circle cx="32" cy="43" r="3.2" fill="#06B6D4" style="animation: syRobotPing 2.2s ease-in-out infinite;"></circle>
+            <g style="{{ robotArmFrontStyle }}"><rect x="41.5" y="33" width="6" height="16" rx="3" fill="#123063" stroke="rgba(94,162,255,.55)" stroke-width="1"></rect></g>
+            <g style="{{ robotHeadStyle }}">
+              <line x1="32" y1="4" x2="32" y2="0" stroke="rgba(94,162,255,.7)" stroke-width="1.4"></line>
+              <circle cx="32" cy="-1.5" r="2.2" fill="#06B6D4" style="animation: syRobotPing 1.8s ease-in-out infinite;"></circle>
+              <rect x="14" y="4" width="36" height="26" rx="11" fill="#0d2450" stroke="rgba(61,139,255,.55)" stroke-width="1.1"></rect>
+              <rect x="19" y="10" width="26" height="14" rx="7" fill="#071A3D"></rect>
+              <g style="transform-origin: 32px 17px; animation: syRobotBlink 4.6s ease-in-out infinite;">
+                <circle cx="26.5" cy="17" r="2.7" fill="#5EA2FF"></circle>
+                <circle cx="37.5" cy="17" r="2.7" fill="#5EA2FF"></circle>
+              </g>
+            </g>
+          </svg>
+        </div>
+    </div>
+
+    <!-- SyHire AI Assistant panel -->
+    <sc-if value="{{ robotPanel }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 1200; background: rgba(4,8,20,.5); backdrop-filter: blur(3px); display: flex; align-items: flex-end; justify-content: flex-end; padding: 26px;" onClick="{{ closeRobotPanel }}">
+      <div onClick="{{ stopProp }}" style="width: 340px; max-width: calc(100vw - 40px); background: linear-gradient(165deg, #0b1836, #071022); border: 1px solid rgba(61,139,255,.3); border-radius: 20px; box-shadow: 0 30px 80px rgba(0,0,0,.55), 0 0 60px rgba(37,99,235,.18); overflow: hidden; color: #fff; animation: syCardIn .35s ease-out both;">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 16px 18px; border-bottom: 1px solid rgba(61,139,255,.16);">
+          <div style="width: 34px; height: 34px; border-radius: 10px; background: rgba(61,139,255,.14); border: 1px solid rgba(61,139,255,.3); display: flex; align-items: center; justify-content: center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5EA2FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="14" height="11" rx="4"></rect><path d="M12 3v3M8 13h.01M16 13h.01"></path></svg></div>
+          <div style="flex: 1;"><div style="font-size: 15px; font-weight: 700;">SyHire AI</div><div style="font-size: 11px; color: #8fa3c4;">{{ robotRoleLabel }}</div></div>
+          <button onClick="{{ closeRobotPanel }}" aria-label="Close" style="width: 30px; height: 30px; border-radius: 8px; border: 1px solid rgba(255,255,255,.12); background: rgba(255,255,255,.04); color: #8fa3c4; cursor: pointer; font-size: 16px; line-height: 1;">&times;</button>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; padding: 16px 18px 6px;">
+          <sc-for list="{{ robotTabs }}" as="t" hint-placeholder-count="5"><div style="font-size: 12px; font-weight: 600; padding: 7px 12px; border-radius: 999px; background: rgba(61,139,255,.1); border: 1px solid rgba(61,139,255,.26); color: #b9cdf0;">{{ t }}</div></sc-for>
+        </div>
+        <div style="padding: 18px; text-align: center; color: #8fa3c4;">
+          <div style="font-size: 34px; margin-bottom: 8px;">👋</div>
+          <div style="font-size: 14px; line-height: 1.55;">Hi! SyHire AI is coming soon.<br>Your intelligent career copilot is on the way.</div>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
 
   <!-- ============ AUTH ============ -->
   <sc-if value="{{ showAuth }}" hint-placeholder-val="{{ true }}">
-  <div style="display: flex; height: 100vh; width: 100%; overflow-y: auto;">
-    <!-- brand panel -->
-    
+  <div data-screen-label="Auth" style="height: 100vh; width: 100%; overflow-y: auto; overflow-x: hidden; background: #04070F;">
+  <div style="position: relative; min-height: 100vh; display: flex; flex-direction: column; color: #fff;">
+    <canvas ref="{{ authBgRef }}" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none;"></canvas>
+    <div style="position: absolute; top: -220px; left: -160px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(61,139,255,.14), transparent 65%); filter: blur(40px); pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -260px; right: -140px; width: 680px; height: 680px; border-radius: 50%; background: radial-gradient(circle, rgba(6,182,212,.07), transparent 65%); filter: blur(50px); pointer-events: none;"></div>
 
-    <!-- form panel -->
-    <div style="{{ authPanelStyle }}">
-      <div ref="{{ heroFxRef }}" style="position: absolute; inset: 0; overflow: hidden; pointer-events: none;">
-        <div style="position: absolute; left: -8%; top: 10%; width: 520px; height: 520px; border-radius: 50%; opacity: .07; filter: blur(300px); background-color: #0A173D"></div>
-        <div style="position: absolute; left: 5%; top: 52%; width: 560px; height: 560px; border-radius: 50%; opacity: .06; filter: blur(300px); background-color: #0A173D"></div>
-        <div style="position: absolute; right: -6%; top: -8%; width: 520px; height: 520px; border-radius: 50%; opacity: .06; filter: blur(340px); background-color: #0A173D"></div>
-        <div style="position: absolute; left: -10%; bottom: -12%; width: 560px; height: 560px; border-radius: 50%; opacity: .05; filter: blur(360px); background-color: #0A173D"></div>
-        <div style="position: absolute; inset: 0; transform: translate3d(calc(var(--syx, 0) * 6px), calc(var(--syy, 0) * 6px), 0); transition: transform .18s ease-out;">
-          <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 62% 48% at 80% 12%, rgba(61,139,255,.30), transparent 65%), radial-gradient(ellipse 55% 45% at 8% 92%, rgba(29,78,216,.38), transparent 62%), radial-gradient(ellipse 45% 40% at 50% 55%, rgba(96,165,250,.10), transparent 70%); animation: sybreathe 14s ease-in-out infinite alternate;"></div>
-          <div style="position: absolute; width: 560px; height: 560px; left: -150px; top: 30%; background: radial-gradient(circle, rgba(61,139,255,.16), transparent 65%); filter: blur(8px);"></div>
-          <div style="position: absolute; width: 480px; height: 380px; right: -80px; top: -90px; background: radial-gradient(ellipse, rgba(96,165,250,.13), transparent 65%); filter: blur(10px);"></div>
-          <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 145% 135% at 42% 40%, transparent 38%, rgba(0,1,6,.88) 100%);"></div>
-      <!-- ambient lights (subtle) -->
-      <div style="position: absolute; width: 500px; height: 500px; top: 12%; left: 28%; background: radial-gradient(circle, rgba(61,139,255,.06), transparent 60%); filter: blur(520px); pointer-events: none;"></div>
-      <div style="position: absolute; width: 600px; height: 600px; top: 48%; right: 10%; background: radial-gradient(circle, rgba(80,130,250,.04), transparent 65%); filter: blur(640px); pointer-events: none;"></div>
-          <div style="position: absolute; right: 0; top: 8%; height: 84%; width: 1px; background: linear-gradient(180deg, transparent, rgba(143,192,255,.22) 50%, transparent);"></div>
-          
-        </div>
+    <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap: 48px; width: 100%; max-width: 1280px; margin: 0 auto; padding: clamp(28px, 5vh, 60px) 44px 20px; align-items: center; flex: 1;">
 
-        
-      </div>
-      <div style="display: flex; align-items: center; gap: 12px; position: relative;">
-        <div style="width: 40px; height: 40px; border-radius: 11px; background: #fff; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.35); box-shadow: 0 6px 18px -8px rgba(4,12,32,.5);">
-          <img src="assets/syhire-mark-premium.png" alt="SyHire" style="width: 27px; height: 27px; object-fit: contain;">
+      <!-- LEFT: brand -->
+      <div style="display: flex; flex-direction: column; gap: 26px; min-width: 0; max-width: 540px; margin: 0 auto; width: 100%;">
+        <div ref="{{ robotDockRef }}" style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 42px; height: 42px; border-radius: 12px; background: #fff; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.3); box-shadow: 0 0 26px rgba(61,139,255,.35), 0 6px 18px -8px rgba(4,12,32,.5); flex-shrink: 0;">
+            <img src="assets/syhire-mark-premium.png" alt="SyHire" style="width: 27px; height: 27px; object-fit: contain;">
+          </div>
+          <div>
+            <div style="font-size: 23px; font-weight: 700; letter-spacing: -.02em;">SyHire</div>
+            <div style="font-size: 10.5px; letter-spacing: 3px; color: #8fa3c4; font-weight: 600; margin-top: 2px;">SMARTER HIRING. BETTER FUTURES.</div>
+          </div>
         </div>
-        <span style="font-size: 21px; font-weight: 700; letter-spacing: -.02em;">SyHire</span>
-      </div>
-      <div style="position: relative; max-width: 620px;">
-        <h1 style="font-size: clamp(32px, 3.6vh + 16px, 50px); line-height: 1.05; font-weight: 700; letter-spacing: -.03em; margin: 0 0 18px;">Your AI Career Operating System</h1>
-        <p style="font-size: 16px; line-height: 1.6; color: rgba(255,255,255,.72); margin: 0; max-width: 560px;">Discover jobs, organize applications, optimize resumes, and land interviews—all in one intelligent workspace built to move your career forward.</p>
-        <!-- product preview: hero focal point -->
-        <div style="margin-top: clamp(22px, 4vh, 38px); max-width: 560px; animation: syhoverlite 12s ease-in-out infinite alternate;">
-        <div style="position: relative; overflow: hidden; border-radius: 18px; padding: 20px; background: linear-gradient(180deg, #162B5F 0%, #12234A 45%, #0D1C3E 100%); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 30px 80px rgba(0,0,0,.45), 0 12px 30px rgba(0,0,0,.22); transition: all .3s ease">
-          <div style="position: absolute; left: 14px; right: 14px; top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent); pointer-events: none;"></div>
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
-            <div style="display: flex; align-items: center; gap: 9px;">
-              <div style="width: 26px; height: 26px; border-radius: 8px; background: #fff; display: flex; align-items: center; justify-content: center;"><img src="assets/syhire-mark-premium.png" alt="" style="width: 17px; height: 17px; object-fit: contain;"></div>
-              <span style="font-size: 13px; font-weight: 600; color: #fff;">Your Dashboard</span>
-            </div>
-            <span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; color: #bfe0c8; background: rgba(34,197,94,.16); border: 1px solid rgba(34,197,94,.28); padding: 3px 9px; border-radius: 999px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #7fd6a3; animation: sypulse 2.6s infinite;"></span>AI Collector · Active</span>
-          </div>
-          <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-            <div style="flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 13px 14px;">
-              <div style="font-size: 11.5px; color: rgba(255,255,255,.6); margin-bottom: 8px;">AI Match Score</div>
-              <div style="display: flex; align-items: baseline; gap: 6px;"><span style="font-size: 22px; font-weight: 700; color: #fff;">{{ heroMatchNum }}</span><span style="font-size: 11px; color: #7fd6a3;">Excellent</span></div>
-              <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.14); margin-top: 9px; overflow: hidden;"><div style="{{ heroMatchBarStyle }}"></div></div>
-            </div>
-            <div style="flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 13px 14px;">
-              <div style="font-size: 11.5px; color: rgba(255,255,255,.6); margin-bottom: 8px;">Resume Score</div>
-              <div style="display: flex; align-items: baseline; gap: 6px;"><span style="font-size: 22px; font-weight: 700; color: #fff;">{{ heroResumeNum }}</span><span style="font-size: 11px; color: #8fc0ff;">Strong</span></div>
-              <div style="height: 5px; border-radius: 999px; background: rgba(255,255,255,.14); margin-top: 9px; overflow: hidden;"><div style="{{ heroResumeBarStyle }}"></div></div>
+        <div>
+          <h1 style="font-size: clamp(34px, 3.6vw, 52px); line-height: 1.12; font-weight: 800; margin: 0 0 16px; letter-spacing: -1px; text-wrap: balance;">Intelligent Hiring.<br><span style="background: linear-gradient(90deg, #3D8BFF, #7db4ff); -webkit-background-clip: text; background-clip: text; color: transparent;">Seamless Future.</span></h1>
+          <p style="font-size: 16.5px; line-height: 1.65; color: #8fa3c4; margin: 0; max-width: 440px; text-wrap: pretty;">SyHire connects the right talent with the right opportunities using AI.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="sy-fcard" style="display: flex; align-items: flex-start; gap: 16px; padding: 10px 12px; margin: -10px -12px; border: 1px solid transparent; border-radius: 14px; transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease; animation: syCardIn .6s ease-out both, syCardFloat 8s ease-in-out infinite; animation-delay: 0ms, .6s; will-change: transform;" style-hover="background: rgba(61,139,255,.06); border-color: rgba(61,139,255,.3); box-shadow: 0 12px 30px rgba(61,139,255,.15); transform: translateY(-5px); animation: none;">
+            <div style="width: 54px; height: 54px; border-radius: 14px; background: rgba(61,139,255,.1); border: 1px solid rgba(61,139,255,.28); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 22px rgba(61,139,255,.15); animation: syIconPulse 12s ease-in-out infinite; animation-delay: 0s;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5EA2FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"></circle><path d="M3.5 19c.6-3 2.8-5 5.5-5s4.9 2 5.5 5"></path><circle cx="17" cy="9" r="2.6"></circle><path d="M15.5 14.4c2.3.3 4 2 4.5 4.6"></path></svg></div>
+            <div>
+              <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">AI-Powered Smart Matching</div>
+              <div style="font-size: 13.5px; line-height: 1.55; color: #8fa3c4;">Match the right talent faster and smarter.</div>
             </div>
           </div>
-          <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-            <div style="flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 12px 14px;">
-              <div style="font-size: 22px; font-weight: 700; color: #fff;">{{ heroAppsNum }}</div>
-              <div style="font-size: 11.5px; color: rgba(255,255,255,.6); margin-top: 2px;">Active Applications</div>
-            </div>
-            <div style="flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 12px 14px;">
-              <div style="font-size: 22px; font-weight: 700; color: #fff;">{{ heroInterviewsNum }}</div>
-              <div style="font-size: 11.5px; color: rgba(255,255,255,.6); margin-top: 2px;">Upcoming Interviews</div>
+          <div class="sy-fcard" style="display: flex; align-items: flex-start; gap: 16px; padding: 10px 12px; margin: -10px -12px; border: 1px solid transparent; border-radius: 14px; transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease; animation: syCardIn .6s ease-out both, syCardFloat 9s ease-in-out infinite; animation-delay: 120ms, .72s; will-change: transform;" style-hover="background: rgba(61,139,255,.06); border-color: rgba(61,139,255,.3); box-shadow: 0 12px 30px rgba(61,139,255,.15); transform: translateY(-5px); animation: none;">
+            <div style="width: 54px; height: 54px; border-radius: 14px; background: rgba(61,139,255,.1); border: 1px solid rgba(61,139,255,.28); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 22px rgba(61,139,255,.15); animation: syIconPulse 12s ease-in-out infinite; animation-delay: 4s;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5EA2FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="5" rx="1.2"></rect><rect x="3" y="16" width="6" height="5" rx="1.2"></rect><rect x="15" y="16" width="6" height="5" rx="1.2"></rect><path d="M12 8v3.5M6 16v-2h12v2M12 11.5v2.5"></path></svg></div>
+            <div>
+              <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Automated Workflows</div>
+              <div style="font-size: 13.5px; line-height: 1.55; color: #8fa3c4;">Streamline hiring with intelligent automation.</div>
             </div>
           </div>
-          <div style="font-size: 11.5px; color: rgba(255,255,255,.6); margin-bottom: 9px;">Job Recommendations</div>
-          <div style="display: flex; flex-direction: column; gap: 8px;">
-            <div style="display: flex; align-items: center; gap: 11px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 9px 12px; animation: syfade .6s ease .2s both;">
-              <div style="width: 30px; height: 30px; border-radius: 8px; background: rgba(99,91,255,.9); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff;">S</div>
-              <div style="flex: 1; min-width: 0;"><div style="font-size: 12.5px; font-weight: 600; color: #fff;">Senior Frontend Engineer</div><div style="font-size: 11px; color: rgba(255,255,255,.55);">Stripe · Remote</div></div>
-              <span style="font-size: 11px; font-weight: 600; color: #7fd6a3;">96%</span>
-            </div>
-            <div style="display: flex; align-items: center; gap: 11px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: 10px; padding: 9px 12px; animation: syfade .6s ease .35s both;">
-              <div style="width: 30px; height: 30px; border-radius: 8px; background: rgba(15,23,42,.55); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff;">L</div>
-              <div style="flex: 1; min-width: 0;"><div style="font-size: 12.5px; font-weight: 600; color: #fff;">Product Designer</div><div style="font-size: 11px; color: rgba(255,255,255,.55);">Linear · Hybrid</div></div>
-              <span style="font-size: 11px; font-weight: 600; color: #8fc0ff;">{{ heroSkillsMiniNum }}</span>
+          <div class="sy-fcard" style="display: flex; align-items: flex-start; gap: 16px; padding: 10px 12px; margin: -10px -12px; border: 1px solid transparent; border-radius: 14px; transition: background .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease; animation: syCardIn .6s ease-out both, syCardFloat 7.5s ease-in-out infinite; animation-delay: 240ms, .84s; will-change: transform;" style-hover="background: rgba(61,139,255,.06); border-color: rgba(61,139,255,.3); box-shadow: 0 12px 30px rgba(61,139,255,.15); transform: translateY(-5px); animation: none;">
+            <div style="width: 54px; height: 54px; border-radius: 14px; background: rgba(61,139,255,.1); border: 1px solid rgba(61,139,255,.28); display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 22px rgba(61,139,255,.15); animation: syIconPulse 12s ease-in-out infinite; animation-delay: 8s;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5EA2FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3.4v5.1c0 4.7-3.2 8.4-7.5 10.5-4.3-2.1-7.5-5.8-7.5-10.5V5.9L12 2.5z"></path><path d="M8.8 12l2.3 2.3 4.1-4.6"></path></svg></div>
+            <div>
+              <div style="font-size: 16px; font-weight: 700; margin-bottom: 4px;">Secure &amp; Reliable</div>
+              <div style="font-size: 13.5px; line-height: 1.55; color: #8fa3c4;">Enterprise-grade security you can trust.</div>
             </div>
           </div>
         </div>
-        </div>
-        <div style="display: flex; gap: 12px; margin-top: clamp(20px, 4vh, 40px);">
-          <div style="flex: 1; padding: 14px 15px; border-radius: 14px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 16px 36px -22px rgba(3,9,24,.85); transition: transform .2s ease, background .2s, border-color .2s; animation: syfade .6s ease 0s both;" style-hover="transform: translateY(-3px); background: rgba(255,255,255,.11); border-color: rgba(143,192,255,.35);">
-            <div style="display: flex; align-items: center; gap: 7px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #7fd6a3; animation: sypulse 2.6s infinite;"></span><span style="font-size: 24px; font-weight: 700; letter-spacing: -.02em;">{{ statLiveNum }}</span></div>
-            <div style="font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.62); margin-top: 4px;">Live Opportunities</div>
-          </div>
-          <div style="flex: 1; padding: 14px 15px; border-radius: 14px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 16px 36px -22px rgba(3,9,24,.85); transition: transform .2s ease, background .2s, border-color .2s; animation: syfade .6s ease .1s both;" style-hover="transform: translateY(-3px); background: rgba(255,255,255,.11); border-color: rgba(143,192,255,.35);">
-            <div style="font-size: 24px; font-weight: 700; letter-spacing: -.02em;">{{ statCompaniesNum }}</div>
-            <div style="font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.62); margin-top: 4px;">Hiring Companies</div>
-          </div>
-          <div style="flex: 1; padding: 14px 15px; border-radius: 14px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 16px 36px -22px rgba(3,9,24,.85); transition: transform .2s ease, background .2s, border-color .2s; animation: syfade .6s ease .2s both;" style-hover="transform: translateY(-3px); background: rgba(255,255,255,.11); border-color: rgba(143,192,255,.35);">
-            <div style="font-size: 24px; font-weight: 700; letter-spacing: -.02em;">{{ statAccuracyNum }}</div>
-            <div style="font-size: 12px; line-height: 1.4; color: rgba(255,255,255,.62); margin-top: 4px;">AI Match Accuracy</div>
-          </div>
-        </div>
       </div>
-      <div style="position: relative;">
-        <div style="font-size: 12.5px; color: rgba(255,255,255,.5);">© 2026 SyHire. All rights reserved.</div>
-        <div style="font-size: 12.5px; font-weight: 500; color: rgba(255,255,255,.72); margin-top: 4px;">Making Hiring Easy. Empowering Every Opportunity.</div>
-      </div>
-    <div style="position: absolute; inset: 0; transform: translate3d(calc(var(--syx, 0) * 10px), calc(var(--syy, 0) * 10px), 0); transition: transform .18s ease-out; animation: syappear 1.6s ease .3s both; left: 4300px; top: 3px">
-          
-          <!-- minimal ambient particles -->
-          <!-- glowing AI particle field (3 depth layers) -->
-          <sc-for list="{{ particles }}" as="p" hint-placeholder-count="0"><div style="{{ p.style }}"></div></sc-for>
-          <!-- Ambient AI particle field (neural connections, clipped inside Hero) -->
-          
-        </div></div><div style="flex: 1 1 54%; display: flex; align-items: center; justify-content: center; padding: clamp(22px, 4vh, 40px) 40px; background: radial-gradient(ellipse 90% 70% at 50% 0%, #f7f9fd, #eef2f8); position: relative; overflow: hidden;">
-      <div style="width: 100%; max-width: 428px; background: #fff; border: 1px solid #e9edf4; border-radius: 24px; box-shadow: 0 30px 64px -32px rgba(15,23,42,.22), 0 8px 24px -18px rgba(15,23,42,.12); padding: clamp(26px, 3.6vh, 40px); animation: syfade .25s ease; position: relative; z-index: 1;">
+
+      <!-- RIGHT: auth card -->
+      <div style="display: flex; justify-content: center; min-width: 0;">
+        <div style="{{ authCardStyle }}">
+
         <sc-if value="{{ authViewMain }}" hint-placeholder-val="{{ true }}">
-        <div style="display: inline-flex; padding: 4px; background: #f1f4f9; border-radius: 11px; margin-bottom: 28px;">
-          <button onClick="{{ setLogin }}" style="{{ tabLoginStyle }}">Sign in</button>
-          <button onClick="{{ setSignup }}" style="{{ tabSignupStyle }}">Create account</button>
+        <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 22px;">
+          <div style="width: 66px; height: 66px; border-radius: 50%; background: #fff; border: 1px solid rgba(61,139,255,.35); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; box-shadow: 0 0 30px rgba(61,139,255,.3);">
+            <img src="assets/syhire-mark-premium.png" alt="" style="width: 38px; height: 38px; object-fit: contain;">
+          </div>
+          <h2 style="font-size: 28px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">{{ authTitle }}</h2>
+          <p style="font-size: 14.5px; color: #8fa3c4; margin: 0;">{{ authSubtitle }}</p>
         </div>
-        <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">{{ authTitle }}</h2>
-        <p style="font-size: 14.5px; color: #64748b; margin: 0 0 26px;">{{ authSubtitle }}</p>
+        <div style="display: flex; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 24px;">
+          <button onClick="{{ setLogin }}" style="{{ tabLoginStyle }}">Login</button>
+          <button onClick="{{ setSignup }}" style="{{ tabSignupStyle }}">Create Account</button>
+        </div>
 
         <sc-if value="{{ isSignup }}" hint-placeholder-val="{{ false }}">
-          <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Full name</label>
-          <input value="{{ fullName }}" onChange="{{ setFullName }}" placeholder="Alex Morgan" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid #e2e8f0; border-radius: 11px; font-size: 14.5px; margin-bottom: 16px; background: #fbfcfe; transition: border-color .15s, box-shadow .15s, background .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15); background: #fff;">
-          <sc-if value="{{ hasErrName }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin: -10px 0 14px;">{{ errName }}</div></sc-if>
+          <label style="display: block; font-size: 13px; font-weight: 600; color: #b6c4dc; margin-bottom: 7px;">Full name</label>
+          <input value="{{ fullName }}" onChange="{{ setFullName }}" placeholder="Alex Morgan" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; font-size: 14.5px; margin-bottom: 16px; background: rgba(4,10,26,.55); color: #fff; transition: border-color .15s, box-shadow .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.3); background: rgba(4,10,26,.75);">
+          <sc-if value="{{ hasErrName }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #f28b82; margin: -10px 0 14px;">{{ errName }}</div></sc-if>
         </sc-if>
 
-        <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Email address</label>
         <div style="position: relative; margin-bottom: 16px;">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.7" style="position: absolute; left: 15px; top: 24px; transform: translateY(-50%); pointer-events: none;"><rect x="2.5" y="5" width="19" height="14" rx="2.5"></rect><path d="M3 7l9 6 9-6"></path></svg>
-          <input value="{{ email }}" onChange="{{ setEmail }}" type="email" autoComplete="email" aria-label="Email address" placeholder="you@company.com" style="width: 100%; height: 48px; padding: 0 14px 0 44px; border: 1px solid #e2e8f0; border-radius: 16px; font-size: 14.5px; background: #fbfcfe; transition: border-color .18s, box-shadow .18s, background .18s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 4px rgba(61,139,255,.16); background: #fff;" style-hover="border-color: #cdd8ea;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6b7d99" stroke-width="1.7" style="position: absolute; left: 15px; top: 24px; transform: translateY(-50%); pointer-events: none;"><rect x="2.5" y="5" width="19" height="14" rx="2.5"></rect><path d="M3 7l9 6 9-6"></path></svg>
+          <input value="{{ email }}" onChange="{{ setEmail }}" type="email" autoComplete="email" aria-label="Email address" placeholder="Email address" style="width: 100%; height: 48px; padding: 0 14px 0 44px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; font-size: 14.5px; background: rgba(4,10,26,.55); color: #fff; transition: border-color .15s, box-shadow .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.3); background: rgba(4,10,26,.75);" style-hover="border-color: rgba(255,255,255,.22);">
         </div>
-        <sc-if value="{{ hasErrEmail }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin: -8px 0 14px;">{{ errEmail }}</div></sc-if>
+        <sc-if value="{{ hasErrEmail }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #f28b82; margin: -8px 0 14px;">{{ errEmail }}</div></sc-if>
 
-        <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Password</label>
         <div style="position: relative;">
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.7" style="position: absolute; left: 15px; top: 24px; transform: translateY(-50%); pointer-events: none;"><rect x="4" y="10.5" width="16" height="10" rx="2.5"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>
-          <input value="{{ password }}" onChange="{{ setPassword }}" onKeyUp="{{ onPwKey }}" onKeyDown="{{ onPwKey }}" type="{{ pwType }}" autoComplete="current-password" aria-label="Password" placeholder="••••••••" style="width: 100%; height: 48px; padding: 0 46px 0 44px; border: 1px solid #e2e8f0; border-radius: 16px; font-size: 14.5px; background: #fbfcfe; transition: border-color .18s, box-shadow .18s, background .18s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 4px rgba(61,139,255,.16); background: #fff;" style-hover="border-color: #cdd8ea;">
-          <button onClick="{{ togglePw }}" type="button" aria-label="{{ pwToggleLabel }}" style="position: absolute; right: 6px; top: 24px; transform: translateY(-50%); width: 34px; height: 34px; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #94a3b8; border-radius: 8px; transition: color .15s, background .15s;" style-hover="color: #475569; background: #f1f4f9;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6b7d99" stroke-width="1.7" style="position: absolute; left: 15px; top: 24px; transform: translateY(-50%); pointer-events: none;"><rect x="4" y="10.5" width="16" height="10" rx="2.5"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>
+          <input value="{{ password }}" onChange="{{ setPassword }}" onKeyUp="{{ onPwKey }}" onKeyDown="{{ onPwKey }}" type="{{ pwType }}" autoComplete="current-password" aria-label="Password" placeholder="Password" style="width: 100%; height: 48px; padding: 0 46px 0 44px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; font-size: 14.5px; background: rgba(4,10,26,.55); color: #fff; transition: border-color .15s, box-shadow .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.3); background: rgba(4,10,26,.75);" style-hover="border-color: rgba(255,255,255,.22);">
+          <button onClick="{{ togglePw }}" type="button" aria-label="{{ pwToggleLabel }}" style="position: absolute; right: 6px; top: 24px; transform: translateY(-50%); width: 34px; height: 34px; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #6b7d99; border-radius: 8px; transition: color .15s, background .15s;" style-hover="color: #b6c4dc; background: rgba(255,255,255,.06);">
             <sc-if value="{{ hidePw }}" hint-placeholder-val="{{ true }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></sc-if>
             <sc-if value="{{ showPw }}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"></path><path d="M10.6 5.2A9.7 9.7 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.1 4M6.2 6.2A17 17 0 0 0 2 12s3.5 7 10 7a9.6 9.6 0 0 0 4.2-1"></path></svg></sc-if>
           </button>
         </div>
-        <sc-if value="{{ capsOn }}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #ea9a0b; margin-top: 8px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 8h-5v6H9v-6H4l8-8z"></path></svg>Caps Lock is on</div></sc-if>
-        <sc-if value="{{ hasErrPw }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin-top: 8px;">{{ errPw }}</div></sc-if>
+        <sc-if value="{{ capsOn }}" hint-placeholder-val="{{ false }}"><div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #f5b942; margin-top: 8px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 8h-5v6H9v-6H4l8-8z"></path></svg>Caps Lock is on</div></sc-if>
+        <sc-if value="{{ hasErrPw }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #f28b82; margin-top: 8px;">{{ errPw }}</div></sc-if>
 
         <div style="display: flex; align-items: center; justify-content: space-between; margin: 16px 0 20px;">
-          <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #475569; cursor: pointer; user-select: none;">
-            <input type="checkbox" checked="{{ remember }}" onChange="{{ toggleRemember }}" style="width: 16px; height: 16px; accent-color: #1e3a8a; cursor: pointer;"> Remember me
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #b6c4dc; cursor: pointer; user-select: none;">
+            <input type="checkbox" checked="{{ remember }}" onChange="{{ toggleRemember }}" style="width: 16px; height: 16px; accent-color: #3D8BFF; cursor: pointer;"> Remember me
           </label>
-          <a onClick="{{ goForgot }}" style="font-size: 13px; color: #2563eb; font-weight: 500; cursor: pointer;">Forgot password?</a>
+          <a onClick="{{ goForgot }}" style="font-size: 13px; color: #5EA2FF; font-weight: 600; cursor: pointer; transition: color .15s;" style-hover="color: #8fc0ff;">Forgot password?</a>
         </div>
 
-        <button onClick="{{ login }}" style="width: 100%; height: 48px; border: none; border-radius: 16px; background: linear-gradient(180deg, #2f66e0, #1e3a8a); color: #fff; font-size: 15px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 24px -8px rgba(30,58,138,.55), 0 2px 6px -2px rgba(30,58,138,.4); transition: filter .18s, transform .12s, box-shadow .25s;" style-hover="filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 16px 32px -10px rgba(37,99,235,.6), 0 0 0 3px rgba(61,139,255,.14);" style-active="transform: translateY(0) scale(.985);">
+        <button onClick="{{ login }}" style="width: 100%; height: 48px; border: none; border-radius: 13px; background: linear-gradient(180deg, #3D8BFF, #2563EB); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 28px -8px rgba(37,99,235,.55); transition: filter .25s ease, transform .2s ease, box-shadow .3s ease;" style-hover="filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 20px 40px -10px rgba(61,139,255,.65);" style-active="transform: translateY(0) scale(.985);">
           <sc-if value="{{ authLoading }}" hint-placeholder-val="{{ false }}"><span style="width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; display: inline-block; animation: syspin .7s linear infinite;"></span></sc-if>
           <span>{{ authBtnLabel }}</span>
+          <span aria-hidden="true" style="font-size: 18px; line-height: 1; transition: transform .2s ease;">→</span>
         </button>
 
-        <div style="display: flex; align-items: center; gap: 12px; margin: 22px 0; color: #94a3b8; font-size: 12.5px;">
-          <div style="flex: 1; height: 1px; background: #e8ecf2;"></div> or <div style="flex: 1; height: 1px; background: #e8ecf2;"></div>
+        <div style="display: flex; align-items: center; gap: 12px; margin: 20px 0; color: #6b7d99; font-size: 12px; letter-spacing: 1px;">
+          <div style="flex: 1; height: 1px; background: rgba(255,255,255,.1);"></div> OR <div style="flex: 1; height: 1px; background: rgba(255,255,255,.1);"></div>
         </div>
-        <button onClick="{{ googleLogin }}" style="width: 100%; height: 48px; border: 1px solid #e2e8f0; border-radius: 16px; background: #fff; color: #1e293b; font-size: 14.5px; font-weight: 500; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: border-color .18s, background .18s, box-shadow .18s;" style-hover="border-color: #c7d4ea; background: #fbfcfe; box-shadow: 0 4px 14px -8px rgba(15,23,42,.2);">
+        <button onClick="{{ googleLogin }}" style="width: 100%; height: 48px; border: 1px solid rgba(255,255,255,.12); border-radius: 12px; background: rgba(255,255,255,.04); color: #fff; font-size: 14.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: border-color .18s, background .18s;" style-hover="border-color: rgba(255,255,255,.24); background: rgba(255,255,255,.08);">
           <svg width="17" height="17" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.5 12.2c0-.7-.1-1.4-.2-2H12v3.8h5.9a5 5 0 0 1-2.2 3.3v2.7h3.6c2.1-1.9 3.2-4.8 3.2-7.8z"></path><path fill="#34A853" d="M12 23c2.9 0 5.4-1 7.2-2.6l-3.6-2.7c-1 .7-2.3 1.1-3.6 1.1-2.8 0-5.1-1.9-6-4.4H2.3v2.8A11 11 0 0 0 12 23z"></path><path fill="#FBBC05" d="M6 14.4a6.6 6.6 0 0 1 0-4.2V7.4H2.3a11 11 0 0 0 0 9.8L6 14.4z"></path><path fill="#EA4335" d="M12 5.6c1.6 0 3 .5 4.1 1.6l3.1-3.1A11 11 0 0 0 2.3 7.4L6 10.2c.9-2.6 3.2-4.6 6-4.6z"></path></svg>
           Continue with Google
         </button>
-        <div style="margin-top: 22px; padding-top: 20px; border-top: 1px solid #eef1f6;">
-          <div style="display: flex; align-items: center; gap: 7px; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #94a3b8; margin-bottom: 12px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3.4v5.1c0 4.7-3.2 8.4-7.5 10.5-4.3-2.1-7.5-5.8-7.5-10.5V5.9L12 2.5z"></path></svg>Enterprise Security</div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 9px 14px;">
-            <div style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #475569;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>256-bit Encryption</div>
-            <div style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #475569;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>GDPR Ready</div>
-            <div style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #475569;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Secure Authentication</div>
-            <div style="display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: #475569;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>Privacy First</div>
-          </div>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 20px; font-size: 12.5px; color: #6b7d99;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5EA2FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10" rx="2.5"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>
+          Secured with enterprise-grade encryption
         </div>
         </sc-if>
 
         <!-- forgot password -->
         <sc-if value="{{ authViewForgot }}" hint-placeholder-val="{{ false }}">
         <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">Reset your password</h2>
-        <p style="font-size: 14.5px; color: #64748b; margin: 0 0 26px; line-height: 1.55;">Enter the email linked to your account and we'll send you a secure reset link.</p>
-        <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Email address</label>
-        <input value="{{ email }}" onChange="{{ setEmail }}" placeholder="you@company.com" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid #e2e8f0; border-radius: 11px; font-size: 14.5px; margin-bottom: 16px; background: #fbfcfe; transition: border-color .15s, box-shadow .15s, background .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15); background: #fff;">
-        <sc-if value="{{ hasErrEmail }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin: -10px 0 14px;">{{ errEmail }}</div></sc-if>
-        <button onClick="{{ sendReset }}" style="width: 100%; height: 47px; border: none; border-radius: 11px; background: linear-gradient(180deg, #2456d6, #1e3a8a); color: #fff; font-size: 14.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 20px -8px rgba(30,58,138,.6); transition: filter .15s, transform .12s;" style-hover="filter: brightness(1.1);" style-active="transform: scale(.98);">
+        <p style="font-size: 14.5px; color: #8fa3c4; margin: 0 0 26px; line-height: 1.55;">Enter the email linked to your account and we'll send you a secure reset link.</p>
+        <label style="display: block; font-size: 13px; font-weight: 600; color: #b6c4dc; margin-bottom: 7px;">Email address</label>
+        <input value="{{ email }}" onChange="{{ setEmail }}" placeholder="you@company.com" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; font-size: 14.5px; margin-bottom: 16px; background: rgba(4,10,26,.55); color: #fff; transition: border-color .15s, box-shadow .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.3); background: rgba(4,10,26,.75);">
+        <sc-if value="{{ hasErrEmail }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #f28b82; margin: -10px 0 14px;">{{ errEmail }}</div></sc-if>
+        <button onClick="{{ sendReset }}" style="width: 100%; height: 48px; border: none; border-radius: 13px; background: linear-gradient(180deg, #3D8BFF, #2563EB); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 28px -8px rgba(37,99,235,.55); transition: filter .25s ease, transform .2s ease, box-shadow .3s ease;" style-hover="filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 20px 40px -10px rgba(61,139,255,.65);" style-active="transform: scale(.98);">
           <sc-if value="{{ authLoading }}" hint-placeholder-val="{{ false }}"><span style="width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; display: inline-block; animation: syspin .7s linear infinite;"></span></sc-if>
           <span>{{ forgotBtnLabel }}</span>
         </button>
-        <a onClick="{{ backToLogin }}" style="display: block; text-align: center; font-size: 13px; color: #2563eb; font-weight: 500; cursor: pointer; margin-top: 22px;">← Back to sign in</a>
+        <a onClick="{{ backToLogin }}" style="display: block; text-align: center; font-size: 13px; color: #5EA2FF; font-weight: 600; cursor: pointer; margin-top: 22px;">← Back to sign in</a>
         </sc-if>
 
         <!-- reset link sent -->
         <sc-if value="{{ authViewForgotSent }}" hint-placeholder-val="{{ false }}">
-        <div style="width: 52px; height: 52px; border-radius: 15px; background: #ecfdf3; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"></rect><path d="M3 7l9 6 9-6"></path></svg>
+        <div style="width: 52px; height: 52px; border-radius: 15px; background: rgba(34,197,94,.12); border: 1px solid rgba(34,197,94,.3); display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"></rect><path d="M3 7l9 6 9-6"></path></svg>
         </div>
         <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">Check your inbox</h2>
-        <p style="font-size: 14.5px; color: #64748b; margin: 0 0 26px; line-height: 1.55;">We sent a password reset link to <strong style="color: #0f172a;">{{ email }}</strong>. The link expires in 60 minutes.</p>
-        <button onClick="{{ openResetDemo }}" style="width: 100%; height: 47px; border: none; border-radius: 11px; background: linear-gradient(180deg, #2456d6, #1e3a8a); color: #fff; font-size: 14.5px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 20px -8px rgba(30,58,138,.6); transition: filter .15s, transform .12s;" style-hover="filter: brightness(1.1);" style-active="transform: scale(.98);">Open reset link (demo)</button>
+        <p style="font-size: 14.5px; color: #8fa3c4; margin: 0 0 26px; line-height: 1.55;">We sent a password reset link to <strong style="color: #fff;">{{ email }}</strong>. The link expires in 60 minutes.</p>
+        <button onClick="{{ openResetDemo }}" style="width: 100%; height: 48px; border: none; border-radius: 13px; background: linear-gradient(180deg, #3D8BFF, #2563EB); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 28px -8px rgba(37,99,235,.55); transition: filter .25s ease, transform .2s ease, box-shadow .3s ease;" style-hover="filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 20px 40px -10px rgba(61,139,255,.65);" style-active="transform: scale(.98);">Open reset link (demo)</button>
         <div style="display: flex; justify-content: center; gap: 18px; margin-top: 22px;">
-          <a onClick="{{ sendReset }}" style="font-size: 13px; color: #2563eb; font-weight: 500; cursor: pointer;">Resend email</a>
-          <a onClick="{{ backToLogin }}" style="font-size: 13px; color: #64748b; font-weight: 500; cursor: pointer;">Back to sign in</a>
+          <a onClick="{{ sendReset }}" style="font-size: 13px; color: #5EA2FF; font-weight: 600; cursor: pointer;">Resend email</a>
+          <a onClick="{{ backToLogin }}" style="font-size: 13px; color: #8fa3c4; font-weight: 500; cursor: pointer;">Back to sign in</a>
         </div>
         </sc-if>
 
         <!-- reset password -->
         <sc-if value="{{ authViewReset }}" hint-placeholder-val="{{ false }}">
         <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">Create a new password</h2>
-        <p style="font-size: 14.5px; color: #64748b; margin: 0 0 26px;">Must be at least 8 characters.</p>
-        <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">New password</label>
-        <input value="{{ resetPw }}" onChange="{{ setResetPw }}" type="password" placeholder="••••••••" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid #e2e8f0; border-radius: 11px; font-size: 14.5px; margin-bottom: 16px; background: #fbfcfe; transition: border-color .15s, box-shadow .15s, background .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15); background: #fff;">
-        <sc-if value="{{ hasErrResetPw }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin: -10px 0 14px;">{{ errResetPw }}</div></sc-if>
-        <label style="display: block; font-size: 13px; font-weight: 500; color: #334155; margin-bottom: 7px;">Confirm password</label>
-        <input value="{{ confirmPw }}" onChange="{{ setConfirmPw }}" type="password" placeholder="••••••••" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid #e2e8f0; border-radius: 11px; font-size: 14.5px; margin-bottom: 22px; background: #fbfcfe; transition: border-color .15s, box-shadow .15s, background .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.15); background: #fff;">
-        <sc-if value="{{ hasErrConfirm }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #dc2626; margin: -16px 0 16px;">{{ errConfirm }}</div></sc-if>
-        <button onClick="{{ doReset }}" style="width: 100%; height: 47px; border: none; border-radius: 11px; background: linear-gradient(180deg, #2456d6, #1e3a8a); color: #fff; font-size: 14.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 20px -8px rgba(30,58,138,.6); transition: filter .15s, transform .12s;" style-hover="filter: brightness(1.1);" style-active="transform: scale(.98);">
+        <p style="font-size: 14.5px; color: #8fa3c4; margin: 0 0 26px;">Must be at least 8 characters.</p>
+        <label style="display: block; font-size: 13px; font-weight: 600; color: #b6c4dc; margin-bottom: 7px;">New password</label>
+        <input value="{{ resetPw }}" onChange="{{ setResetPw }}" type="password" placeholder="••••••••" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; font-size: 14.5px; margin-bottom: 16px; background: rgba(4,10,26,.55); color: #fff; transition: border-color .15s, box-shadow .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.3); background: rgba(4,10,26,.75);">
+        <sc-if value="{{ hasErrResetPw }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #f28b82; margin: -10px 0 14px;">{{ errResetPw }}</div></sc-if>
+        <label style="display: block; font-size: 13px; font-weight: 600; color: #b6c4dc; margin-bottom: 7px;">Confirm password</label>
+        <input value="{{ confirmPw }}" onChange="{{ setConfirmPw }}" type="password" placeholder="••••••••" style="width: 100%; height: 46px; padding: 0 14px; border: 1px solid rgba(255,255,255,.16); border-radius: 12px; font-size: 14.5px; margin-bottom: 22px; background: rgba(4,10,26,.55); color: #fff; transition: border-color .15s, box-shadow .15s;" style-focus="border-color: #3D8BFF; box-shadow: 0 0 0 3px rgba(61,139,255,.3); background: rgba(4,10,26,.75);">
+        <sc-if value="{{ hasErrConfirm }}" hint-placeholder-val="{{ false }}"><div style="font-size: 12.5px; color: #f28b82; margin: -16px 0 16px;">{{ errConfirm }}</div></sc-if>
+        <button onClick="{{ doReset }}" style="width: 100%; height: 48px; border: none; border-radius: 13px; background: linear-gradient(180deg, #3D8BFF, #2563EB); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 28px -8px rgba(37,99,235,.55); transition: filter .25s ease, transform .2s ease, box-shadow .3s ease;" style-hover="filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 20px 40px -10px rgba(61,139,255,.65);" style-active="transform: scale(.98);">
           <sc-if value="{{ authLoading }}" hint-placeholder-val="{{ false }}"><span style="width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; display: inline-block; animation: syspin .7s linear infinite;"></span></sc-if>
           <span>{{ resetBtnLabel }}</span>
         </button>
-        <a onClick="{{ backToLogin }}" style="display: block; text-align: center; font-size: 13px; color: #2563eb; font-weight: 500; cursor: pointer; margin-top: 22px;">← Back to sign in</a>
+        <a onClick="{{ backToLogin }}" style="display: block; text-align: center; font-size: 13px; color: #5EA2FF; font-weight: 600; cursor: pointer; margin-top: 22px;">← Back to sign in</a>
         </sc-if>
 
         <!-- verify email -->
         <sc-if value="{{ authViewVerify }}" hint-placeholder-val="{{ false }}">
-        <div style="width: 52px; height: 52px; border-radius: 15px; background: #eef2ff; display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3.4v5.1c0 4.7-3.2 8.4-7.5 10.5-4.3-2.1-7.5-5.8-7.5-10.5V5.9L12 2.5z"></path><path d="M8.8 12l2.3 2.3 4.1-4.6"></path></svg>
+        <div style="width: 52px; height: 52px; border-radius: 15px; background: rgba(61,139,255,.12); border: 1px solid rgba(61,139,255,.3); display: flex; align-items: center; justify-content: center; margin-bottom: 18px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5EA2FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3.4v5.1c0 4.7-3.2 8.4-7.5 10.5-4.3-2.1-7.5-5.8-7.5-10.5V5.9L12 2.5z"></path><path d="M8.8 12l2.3 2.3 4.1-4.6"></path></svg>
         </div>
         <h2 style="font-size: 26px; font-weight: 700; letter-spacing: -.02em; margin: 0 0 6px;">Verify your email</h2>
-        <p style="font-size: 14.5px; color: #64748b; margin: 0 0 26px; line-height: 1.55;">We sent a verification link to <strong style="color: #0f172a;">{{ email }}</strong>. Click it to activate your account.</p>
-        <button onClick="{{ verifiedContinue }}" style="width: 100%; height: 47px; border: none; border-radius: 11px; background: linear-gradient(180deg, #2456d6, #1e3a8a); color: #fff; font-size: 14.5px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 20px -8px rgba(30,58,138,.6); transition: filter .15s, transform .12s;" style-hover="filter: brightness(1.1);" style-active="transform: scale(.98);">I've verified — continue</button>
+        <p style="font-size: 14.5px; color: #8fa3c4; margin: 0 0 26px; line-height: 1.55;">We sent a verification link to <strong style="color: #fff;">{{ email }}</strong>. Click it to activate your account.</p>
+        <button onClick="{{ verifiedContinue }}" style="width: 100%; height: 48px; border: none; border-radius: 13px; background: linear-gradient(180deg, #3D8BFF, #2563EB); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 10px 28px -8px rgba(37,99,235,.55); transition: filter .25s ease, transform .2s ease, box-shadow .3s ease;" style-hover="filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 20px 40px -10px rgba(61,139,255,.65);" style-active="transform: scale(.98);">I've verified — continue</button>
         <div style="display: flex; justify-content: center; gap: 18px; margin-top: 22px;">
           <a onClick="{{ resendVerify }}" style="{{ resendStyle }}">{{ resendLabel }}</a>
-          <a onClick="{{ backToLogin }}" style="font-size: 13px; color: #64748b; font-weight: 500; cursor: pointer;">Use a different email</a>
+          <a onClick="{{ backToLogin }}" style="font-size: 13px; color: #8fa3c4; font-weight: 500; cursor: pointer;">Use a different email</a>
         </div>
         </sc-if>
+        </div>
       </div>
     </div>
+
+    <!-- Trust marquee -->
+    <div style="position: relative; padding: 44px 0 36px;">
+      <div style="display: flex; align-items: center; gap: 20px; max-width: 1280px; margin: 0 auto 30px; padding: 0 56px;">
+        <div style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(94,162,255,.35));"></div>
+        <div style="font-size: 12px; letter-spacing: 4px; color: #8fa3c4; font-weight: 700; white-space: nowrap;">TRUSTED BY LEADING COMPANIES</div>
+        <div style="flex: 1; height: 1px; background: linear-gradient(90deg, rgba(94,162,255,.35), transparent);"></div>
+      </div>
+      <div style="overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);">
+        <div style="display: flex; gap: 84px; width: max-content; animation: syMarq 42s linear infinite; padding: 6px 0;" style-hover="animation-play-state: paused;">
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">accenture</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">Microsoft</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">Google</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">aws</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">Deloitte.</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">ORACLE</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">Salesforce</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">IBM</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">accenture</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">Microsoft</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">Google</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">aws</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">Deloitte.</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">ORACLE</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">Salesforce</div>
+          <div style="font-size: 20px; font-weight: 700; color: rgba(148,163,184,.75); white-space: nowrap; letter-spacing: .5px; transition: color .25s ease;" style-hover="color: rgba(226,232,240,.9);">IBM</div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 34px; font-size: 12.5px; color: #6b7d99;">© 2026 SyHire. All rights reserved.</div>
+    </div>
+  </div>
   </div>
   </sc-if>
 
@@ -415,6 +458,14 @@
               <div style="position: absolute; left: 88%; top: 20%; width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.4); animation: syfloat 10s ease-in-out 2.4s infinite alternate;"></div>
             </div>
             <div style="position: absolute; inset: 0; background: radial-gradient(ellipse 46% 130% at 24% 50%, rgba(255,255,255,.05), transparent 70%), radial-gradient(ellipse 120% 100% at 50% 135%, rgba(4,12,28,.35), transparent 55%); pointer-events: none;"></div>
+            <svg viewBox="0 0 1000 260" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .9;">
+              <path d="M-40,150 C180,90 340,200 540,140 C720,86 860,170 1040,120" fill="none" stroke="rgba(59,130,246,.30)" stroke-width="1.1" stroke-dasharray="7 320" style="animation: syStream 7s linear infinite;"></path>
+              <path d="M-40,190 C160,140 360,235 560,180 C760,128 880,205 1040,165" fill="none" stroke="rgba(6,182,212,.24)" stroke-width="1" stroke-dasharray="6 340" style="animation: syStream 9s linear infinite reverse;"></path>
+              <path d="M-40,110 C200,60 380,150 560,96 C760,40 900,120 1040,78" fill="none" stroke="rgba(14,165,233,.16)" stroke-width=".9" stroke-dasharray="5 360" style="animation: syStream 11s linear infinite;"></path>
+              <path d="M-40,150 C180,90 340,200 540,140 C720,86 860,170 1040,120" fill="none" stroke="rgba(103,232,249,.10)" stroke-width=".7"></path>
+              <path d="M-40,190 C160,140 360,235 560,180 C760,128 880,205 1040,165" fill="none" stroke="rgba(147,197,253,.09)" stroke-width=".7"></path>
+              <path d="M-40,110 C200,60 380,150 560,96 C760,40 900,120 1040,78" fill="none" stroke="rgba(147,197,253,.07)" stroke-width=".6"></path>
+            </svg>
 
             <div style="position: relative; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
               <div style="display: flex; gap: 18px; align-items: center;">
@@ -429,7 +480,7 @@
                   <div style="font-size: 14px; color: rgba(255,255,255,.72); margin-top: 2px;">{{ scanLine }}</div>
                 </div>
               </div>
-              <button onClick="{{ scanNow }}" style="height: 42px; padding: 0 18px; border-radius: 11px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.14); color: #fff; font-size: 13.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 9px;">
+              <button onClick="{{ scanNow }}" style="height: 42px; padding: 0 18px; border-radius: 11px; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.14); color: #fff; font-size: 13.5px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 9px; animation: syScanGlow 3.6s ease-in-out infinite;" style-hover="background: rgba(255,255,255,.22); transform: translateY(-1px);">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" style="animation: {{ scanIconAnim }}; transform-origin: 12px 12px;"><path d="M21 12a9 9 0 1 1-9-9c2.5 0 4.7 1 6.4 2.6L21 8"></path><path d="M21 3v5h-5"></path></svg>
                 {{ scanBtnLabel }}
               </button>
@@ -490,7 +541,7 @@
               <h3 style="font-size: 15px; font-weight: 700; margin: 0 0 4px; letter-spacing: -.01em;">Recent activity</h3>
               <p style="font-size: 12.5px; color: #94a3b8; margin: 0 0 12px;">The latest from your collector</p>
               <sc-for list="{{ activity }}" as="a" hint-placeholder-count="5">
-                <div style="display: flex; gap: 11px; padding: 8px 0; align-items: flex-start;">
+                <div style="{{ a.rowStyle }}">
                   <span style="width: 8px; height: 8px; border-radius: 50%; background: {{ a.color }}; margin-top: 6px; flex-shrink: 0;"></span>
                   <div style="flex: 1;"><div style="font-size: 13px; color: #334155; line-height: 1.4;">{{ a.text }}</div><div style="font-size: 11.5px; color: #94a3b8; margin-top: 1px;">{{ a.time }}</div></div>
                 </div>
@@ -623,15 +674,18 @@
 
           <!-- job grid -->
           <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ true }}">
+          <sc-if value="{{ hasNewJobs }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ clearNewJobs }}" style="display:inline-flex; align-items:center; gap:8px; font-size:13px; font-weight:600; color:#16a34a; background:#e7f9ef; border:1px solid #bcecca; padding:7px 14px; border-radius:999px; margin-bottom:14px; cursor:pointer; animation: syNewJob .5s ease-out both;"><span style="width:7px; height:7px; border-radius:50%; background:#16a34a; animation: sypulse 1.8s infinite;"></span>{{ newJobsCount }} new jobs found</div>
+          </sc-if>
           <div style="display: grid; grid-template-columns: 1fr; gap: 16px;">
             <sc-for list="{{ visibleJobs }}" as="job" hint-placeholder-count="6">
-              <div onClick="{{ job.open }}" style="background:#fff; border:1px solid #eef1f6; border-radius:18px; padding:22px 24px; cursor:pointer; transition:box-shadow .18s, transform .18s, border-color .18s;" style-hover="box-shadow:0 18px 44px -24px rgba(15,23,42,.28); border-color:#dbe3f0; transform:translateY(-2px);">
+              <div onClick="{{ job.open }}" style="{{ job.cardStyle }}" style-hover="box-shadow:0 18px 44px -24px rgba(15,23,42,.28); border-color:#dbe3f0; transform:translateY(-2px);">
                 <div style="display:flex; align-items:flex-start; gap:15px;">
                   <div style="width:50px; height:50px; border-radius:13px; background:{{ job.logoBg }}; color:#fff; display:flex; align-items:center; justify-content:center; font-size:19px; font-weight:700; flex-shrink:0;">{{ job.initial }}</div>
                   <div style="flex:1; min-width:0;">
                     <div style="display:flex; align-items:flex-start; gap:12px;">
                       <div style="flex:1; min-width:0;">
-                        <div style="font-size:16.5px; font-weight:700; color:#0f172a; letter-spacing:-.015em;">{{ job.title }}</div>
+                        <div style="display:flex; align-items:center; gap:8px;"><div style="font-size:16.5px; font-weight:700; color:#0f172a; letter-spacing:-.015em;">{{ job.title }}</div><sc-if value="{{ job.isNew }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex; align-items:center; gap:4px; font-size:10.5px; font-weight:700; color:#16a34a; background:#e7f9ef; border:1px solid #bcecca; padding:2px 8px; border-radius:999px; animation: sypulse 2.4s infinite;"><span style="width:5px; height:5px; border-radius:50%; background:#16a34a;"></span>NEW</span></sc-if></div>
                         <div style="font-size:13.5px; color:#64748b; margin-top:1px;">{{ job.company }}</div>
                       </div>
                       <span title="AI match score" style="display:inline-flex; align-items:center; gap:5px; font-size:12px; font-weight:600; color:#16a34a; background:#ecfdf3; padding:5px 11px; border-radius:999px; flex-shrink:0;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3.5"></circle></svg>{{ job.match }}% Match</span>
@@ -705,6 +759,7 @@
                 <div style="display:flex; align-items:center; justify-content:space-between; font-size:12.5px;"><span style="color:rgba(255,255,255,.6);">Last scan</span><span style="font-weight:600;">{{ lastScan }}</span></div>
               </div>
               <div style="margin-bottom:15px;">
+                <div style="display:flex; align-items:center; gap:7px; font-size:11.5px; color:#bfd3ff; margin-bottom:11px; min-height:16px;"><span style="width:6px; height:6px; border-radius:50%; background:#7fd6a3; flex-shrink:0; animation: sypulse 1.6s infinite;"></span><span style="{{ liveScanStyle }}">{{ liveScanLine }}</span></div>
                 <div style="display:flex; justify-content:space-between; font-size:11px; color:rgba(255,255,255,.6); margin-bottom:6px;"><span>Next scan</span><span style="font-family:'Geist Mono',monospace; color:#fff;">{{ nextScan }}</span></div>
                 <div style="height:6px; border-radius:999px; background:rgba(255,255,255,.14); overflow:hidden;"><div style="{{ scanProgressStyle }}"></div></div>
               </div>
@@ -995,67 +1050,217 @@ class Component extends DCLogic {
     { text: 'You updated your job preferences', time: 'Yesterday', color: '#94a3b8' },
   ];
 
-  heroCanvasRef = (el) => { this._initHeroCanvas(el); };
 
-  _initHeroCanvas = (el) => {
-    if (!el || this._heroCanvasEl === el) return;
-    this._heroCanvasEl = el;
+  authBgRef = (el) => { this._initAuthBg(el); };
+
+  _initAuthBg = (el) => {
+    if (!el || el === this._authBgEl) return;
+    this._authBgEl = el;
     const ctx = el.getContext('2d');
-    let w = 0, h = 0, dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let nodes = [];
-    const CONNECT = 122;
-    const build = () => {
-      const rect = el.getBoundingClientRect();
-      w = rect.width; h = rect.height;
-      if (!w || !h) return;
-      el.width = Math.round(w * dpr);
-      el.height = Math.round(h * dpr);
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.max(36, Math.min(130, Math.round((w * h) / 8600)));
-      nodes = [];
-      for (let i = 0; i < count; i++) {
-        nodes.push({
-          x: Math.random() * w, y: Math.random() * h,
-          vx: (Math.random() - 0.5) * 0.15, vy: (Math.random() - 0.5) * 0.15,
-          r: 0.7 + Math.random() * 1.1,
-        });
-      }
+    let W = el.width = el.offsetWidth, H = el.height = el.offsetHeight;
+    const resize = () => { W = el.width = el.offsetWidth; H = el.height = el.offsetHeight; };
+    window.addEventListener('resize', resize);
+    const parts = [], waveDots = [];
+    for (let i = 0; i < 26; i++) parts.push({ x: Math.random() * W, y: Math.random() * H * .5, vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28, r: Math.random() * 1.6 + .6, tw: Math.random() * 6.28, vio: false });
+    // enterprise data streams: 6 layers, blue/cyan only
+    const N_STREAMS = 6;
+    const streamCfg = [];
+    for (let i = 0; i < N_STREAMS; i++) streamCfg.push({
+      base: 14 + i * 15,
+      amp1: 10 + (i % 3) * 6, amp2: 6 + ((i * 7) % 3) * 4,
+      f1: .004 + (i % 3) * .0013, f2: .0017 + (i % 2) * .0008,
+      sp1: .5 + (i % 3) * .22, sp2: .3 + ((i + 1) % 3) * .16,
+      ph: i * 1.7,
+      color: i % 3 === 1 ? '6,182,212' : i % 3 === 2 ? '14,165,233' : '59,130,246',
+      alpha: i < 2 ? .16 : i < 4 ? .10 : .05,
+      lw: i < 2 ? 1.1 : i < 4 ? .8 : .6,
+    });
+    for (let i = 0; i < 30; i++) waveDots.push({ x: Math.random() * W, layer: Math.floor(Math.random() * 4), speed: .35 + Math.random() * .8, off: 0, r: Math.random() * .9 + .9, cyan: Math.random() < .4 });
+    const waveY = (x, layer, t) => {
+      const c = streamCfg[layer];
+      // converge toward the center: amplitude tapers near mid-width
+      const conv = 1 - Math.exp(-Math.pow((x - W / 2) / (W * .3), 2)) * .55;
+      return H - c.base
+        + (Math.sin(x * c.f1 + t * c.sp1 + c.ph) * c.amp1
+        + Math.sin(x * c.f2 - t * c.sp2 + c.ph * 2) * c.amp2) * conv;
     };
-    build();
-    this._heroCanvasResize = () => { dpr = Math.min(window.devicePixelRatio || 1, 2); build(); };
-    window.addEventListener('resize', this._heroCanvasResize);
-    const draw = () => {
-      if (!w || !h) { build(); this._heroRaf = requestAnimationFrame(draw); return; }
-      ctx.clearRect(0, 0, w, h);
-      for (const n of nodes) {
-        n.x += n.vx; n.y += n.vy;
-        if (n.x < -24) n.x = w + 24; else if (n.x > w + 24) n.x = -24;
-        if (n.y < -24) n.y = h + 24; else if (n.y > h + 24) n.y = -24;
+    // ---- half-globe AI network (upper-right, partially cropped) ----
+    const N_NODES = 130;
+    const nodes3 = [];
+    for (let i = 0; i < N_NODES; i++) {
+      const y = 1 - (i / (N_NODES - 1)) * 2;
+      const rad = Math.sqrt(1 - y * y);
+      const th = i * 2.39996323;
+      nodes3.push({ x: Math.cos(th) * rad, y, z: Math.sin(th) * rad, pulse: Math.random() * 6.283, blink: Math.random() < .1 ? Math.random() * 6.283 : null });
+    }
+    const edges = [];
+    for (let i = 0; i < N_NODES; i++) {
+      for (let j = i + 1; j < N_NODES; j++) {
+        const a = nodes3[i], b = nodes3[j];
+        const dx = a.x - b.x, dy = a.y - b.y, dz = a.z - b.z;
+        if (dx * dx + dy * dy + dz * dz < .15) edges.push([i, j]);
       }
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const a = nodes[i], b = nodes[j];
-          const dx = a.x - b.x, dy = a.y - b.y;
-          const d2 = dx * dx + dy * dy;
-          if (d2 < CONNECT * CONNECT) {
-            const alpha = (1 - Math.sqrt(d2) / CONNECT) * 0.32;
-            ctx.strokeStyle = 'rgba(160,198,255,' + alpha.toFixed(3) + ')';
-            ctx.lineWidth = 0.8;
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+    const packets = [];
+    for (let i = 0; i < 8; i++) packets.push({ e: Math.floor(Math.random() * edges.length), p: Math.random(), s: .003 + Math.random() * .005 });
+    const tilt = .35, cosT = Math.cos(tilt), sinT = Math.sin(tilt);
+    const proj = new Array(N_NODES);
+    const drawGlobe = (t) => {
+      const R = Math.min(H * .5, W * .3);
+      const cx = W - R * .45, cy = R * .22 + Math.sin(t * .4) * 6;
+      const rot = t * .045, cosR = Math.cos(rot), sinR = Math.sin(rot);
+      const halo = ctx.createRadialGradient(cx, cy, R * .2, cx, cy, R * 1.25);
+      halo.addColorStop(0, 'rgba(61,139,255,.16)');
+      halo.addColorStop(.7, 'rgba(61,139,255,.05)');
+      halo.addColorStop(1, 'rgba(61,139,255,0)');
+      ctx.fillStyle = halo;
+      ctx.beginPath(); ctx.arc(cx, cy, R * 1.25, 0, 6.2832); ctx.fill();
+      // radial + viewport-edge dissolve: outer ~30% of globe melts into the background
+      const fade = (x, y) => {
+        const d = Math.hypot(x - cx, y - cy) / R;
+        const rf = d < .68 ? 1 : Math.max(0, 1 - (d - .68) / .4);
+        const ef = Math.max(0, Math.min(1, Math.min((W - x) / 110, y / 96, x / 110) + .12));
+        return rf * ef;
+      };
+      const projPt = (x0, y0, z0) => {
+        let x = x0 * cosR + z0 * sinR;
+        let z = -x0 * sinR + z0 * cosR;
+        let y = y0 * cosT - z * sinT;
+        z = y0 * sinT + z * cosT;
+        return { x: cx + x * R, y: cy + y * R, z };
+      };
+      const drawRing = (ptFn) => {
+        let prev = null;
+        for (let k = 0; k <= 72; k++) {
+          const p = ptFn(k / 72 * 6.2832);
+          if (prev) {
+            const zAvg = (p.z + prev.z) / 2;
+            const f = fade((p.x + prev.x) / 2, (p.y + prev.y) / 2);
+            if (f > .01) {
+              ctx.strokeStyle = 'rgba(94,162,255,' + ((zAvg > 0 ? .06 + zAvg * .12 : .025) * f).toFixed(4) + ')';
+              ctx.lineWidth = (zAvg > 0 ? .9 : .5) + (1 - f) * .5;
+              ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+            }
           }
+          prev = p;
         }
+      };
+      for (let m = 0; m < 6; m++) {
+        const a0 = m / 6 * Math.PI;
+        drawRing(u => projPt(Math.cos(a0) * Math.sin(u), Math.cos(u), Math.sin(a0) * Math.sin(u)));
       }
-      for (const n of nodes) {
-        ctx.fillStyle = 'rgba(200,222,255,0.55)';
-        ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.2832); ctx.fill();
+      for (let q = 1; q < 5; q++) {
+        const y0 = -1 + q / 2.5, r0 = Math.sqrt(1 - y0 * y0);
+        drawRing(u => projPt(Math.cos(u) * r0, y0, Math.sin(u) * r0));
       }
-      this._heroRaf = requestAnimationFrame(draw);
+      for (let i = 0; i < N_NODES; i++) {
+        const n = nodes3[i];
+        let x = n.x * cosR + n.z * sinR;
+        let z = -n.x * sinR + n.z * cosR;
+        let y = n.y * cosT - z * sinT;
+        z = n.y * sinT + z * cosT;
+        proj[i] = { x: cx + x * R, y: cy + y * R, z };
+      }
+      for (const pair of edges) {
+        const a = proj[pair[0]], b = proj[pair[1]];
+        const zAvg = (a.z + b.z) / 2;
+        const ef = fade((a.x + b.x) / 2, (a.y + b.y) / 2);
+        if (ef <= .01) continue;
+        ctx.strokeStyle = 'rgba(94,162,255,' + ((zAvg > 0 ? .08 + zAvg * .22 : .03) * ef).toFixed(4) + ')';
+        ctx.lineWidth = zAvg > 0 ? 1 : .6;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+      // activation boost: packets light up the nodes they travel between
+      const boost = new Float32Array(N_NODES);
+      for (const pk of packets) {
+        const pr = edges[pk.e];
+        boost[pr[0]] = Math.max(boost[pr[0]], 1 - pk.p);
+        boost[pr[1]] = Math.max(boost[pr[1]], pk.p);
+      }
+      for (let i = 0; i < N_NODES; i++) {
+        const n = nodes3[i], p = proj[i];
+        const front = p.z > 0;
+        const nf = fade(p.x, p.y);
+        if (nf <= .01) continue;
+        let a = front ? .3 + p.z * .45 : .08;
+        a *= .8 + Math.sin(n.pulse + t * .55) * .2;
+        if (n.blink !== null) a *= .55 + Math.sin(n.blink + t * .9) * .45;
+        const act = boost[i] * (front ? 1 : .3);
+        a = Math.min(1, a * (1 + act * 1.3)) * nf;
+        const r = (front ? 1.6 : 1) * (.85 + Math.sin(n.pulse + t * .55) * .15) + act * .9;
+        if (front && nf > .25) {
+          // layered glow: soft cyan bloom + ambient halo
+          const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, r * 6);
+          g.addColorStop(0, 'rgba(6,182,212,' + (a * .26).toFixed(3) + ')');
+          g.addColorStop(.45, 'rgba(6,182,212,' + (a * .07).toFixed(3) + ')');
+          g.addColorStop(1, 'rgba(6,182,212,0)');
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(p.x, p.y, r * 6, 0, 6.2832); ctx.fill();
+        }
+        ctx.fillStyle = 'rgba(94,162,255,' + a.toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(p.x, p.y, r, 0, 6.2832); ctx.fill();
+      }
+      for (const pk of packets) {
+        pk.p += pk.s;
+        if (pk.p > 1) { pk.p = 0; pk.e = Math.floor(Math.random() * edges.length); }
+        const pair = edges[pk.e], a = proj[pair[0]], b = proj[pair[1]];
+        const zAvg = (a.z + b.z) / 2;
+        if (zAvg < -.1) continue;
+        const x = a.x + (b.x - a.x) * pk.p, y = a.y + (b.y - a.y) * pk.p;
+        const pf = fade(x, y);
+        if (pf <= .01) continue;
+        // illuminate the active edge while the packet travels it
+        ctx.strokeStyle = 'rgba(14,165,233,' + (.3 * pf * Math.sin(pk.p * Math.PI)).toFixed(3) + ')';
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        ctx.fillStyle = 'rgba(191,219,254,' + ((.3 + zAvg * .3) * pf).toFixed(4) + ')';
+        ctx.shadowColor = 'rgba(61,139,255,.6)'; ctx.shadowBlur = 5;
+        ctx.beginPath(); ctx.arc(x, y, 1.6, 0, 6.2832); ctx.fill();
+        ctx.shadowBlur = 0;
+      }
     };
-    this._heroRaf = requestAnimationFrame(draw);
+    let t = 0;
+    const draw = () => {
+      if (!el.isConnected) { window.removeEventListener('resize', resize); this._authBgEl = null; return; }
+      t += .01;
+      ctx.clearRect(0, 0, W, H);
+      drawGlobe(t);
+      // enterprise data streams (blue/cyan, three depth tiers)
+      for (let w = N_STREAMS - 1; w >= 0; w--) {
+        const c = streamCfg[w];
+        ctx.beginPath();
+        for (let x = 0; x <= W; x += 6) {
+          const y = waveY(x, w, t * .6);
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = 'rgba(' + c.color + ',' + c.alpha + ')';
+        ctx.lineWidth = c.lw;
+        ctx.shadowColor = 'rgba(' + c.color + ',.35)';
+        ctx.shadowBlur = w < 2 ? 6 : 3;
+        ctx.stroke();
+      }
+      ctx.shadowBlur = 0;
+      // tiny data packets traveling along streams
+      for (const d of waveDots) {
+        d.x += d.speed;
+        if (d.x > W + 10) d.x = -10;
+        const y = waveY(d.x, d.layer, t * .6);
+        const a = .22 + Math.sin(d.x * .02 + t * 2) * .12;
+        ctx.fillStyle = d.cyan ? 'rgba(103,232,249,' + a.toFixed(3) + ')' : 'rgba(147,197,253,' + a.toFixed(3) + ')';
+        ctx.beginPath(); ctx.arc(d.x, y, d.r, 0, 6.2832); ctx.fill();
+      }
+      this._authBgRaf = requestAnimationFrame(draw);
+    };
+    draw();
   };
 
   componentDidMount() {
-    this._onResize = () => { const m = window.innerWidth < 900; if (m !== this.state.isMobile) this.setState({ isMobile: m, navOpen: false }); };
+    try { localStorage.removeItem('syhire.robotPos'); } catch (err) {}
+    if (false) try { const p = JSON.parse(localStorage.getItem('syhire.robotPos')); if (p && typeof p.x === 'number' && typeof p.y === 'number') this.setState({ robotPos: { x: Math.min(p.x, window.innerWidth - 76), y: Math.min(p.y, window.innerHeight - 96) } }); } catch (err) {}
+    this._rbHomeTimer = setTimeout(() => this._robotComputeHome(), 120);
+    this._robotPoke();
+    this._rbSayT = setTimeout(() => this._robotSay(), 2200);
+    this._onResize = () => { const m = window.innerWidth < 900; this._robotComputeHome(); if (m !== this.state.isMobile) this.setState({ isMobile: m, navOpen: false }); };
     window.addEventListener('resize', this._onResize);
     this._onResize();
     this._onHeroMove = (e) => {
@@ -1104,8 +1309,232 @@ class Component extends DCLogic {
         return { nextScanSecs: n };
       });
     }, 1000);
+    // live activity feed — periodic ambient updates
+    this._feedMsgs = [
+      ['AI Collector scanned 12 career sites', '#2563eb'],
+      ['Resume re-analyzed · match refreshed', '#16a34a'],
+      ['3 roles matched your preferences', '#7c3aed'],
+      ['New remote opportunities detected', '#0891b2'],
+      ['Profile strength recalculated', '#ea9a0b'],
+      ['Salary insights updated for your roles', '#16a34a'],
+    ];
+    this._feedTimer = setInterval(() => {
+      if (this.state.view !== 'dashboard') return;
+      const m = this._feedMsgs[Math.floor(Math.random() * this._feedMsgs.length)];
+      this.setState(s => ({ activityTick: (s.activityTick || 0) + 1, activity: [{ text: m[0], time: 'Just now', color: m[1], fresh: true }, ...(s.activity || this.activityFeed).map(a => ({ ...a, fresh: false }))].slice(0, 6) }));
+    }, 6500);
+    // live AI collector source ticker (Jobs page)
+    this._scanSources = ['Scanning LinkedIn…', 'Scanning Greenhouse…', 'Scanning Company Careers…', 'Scanning Lever…', 'Scanning AngelList…', 'Found 3 new opportunities.', 'Verifying job details…', 'Ranking by AI match…'];
+    this._scanTicker = setInterval(() => {
+      if (this.state.view !== 'jobs') return;
+      this.setState(s => ({ scanTick: ((s.scanTick || 0) + 1) % this._scanSources.length }));
+    }, 3200);
+    // robot re-shows a contextual bubble periodically (idle prompt)
+    this._rbLoop = setInterval(() => {
+      if (this._rbDragging || this.state.robotBubble || this.state.robotPanel) return;
+      this._robotSay();
+    }, 30000);
   }
-  componentWillUnmount() { clearInterval(this.timer); clearInterval(this._loadTimer); cancelAnimationFrame(this._countRaf); cancelAnimationFrame(this._heroRaf); if (this._heroCanvasResize) window.removeEventListener('resize', this._heroCanvasResize); }
+
+  componentDidUpdate(prevProps, prevState) {
+    const s = this.state;
+    const pa = this._prevAuthed, pv = this._prevView;
+    this._prevAuthed = s.authed; this._prevView = s.view;
+    if (pa === undefined && pv === undefined) return;
+    if (pa !== s.authed || pv !== s.view) {
+      this._robotComputeHome();
+      clearTimeout(this._rbSayT);
+      this._rbMsgI = -1;
+      this._rbSayT = setTimeout(() => this._robotSay(), 900);
+    }
+  }
+  componentWillUnmount() { clearInterval(this.timer); clearInterval(this._feedTimer); clearInterval(this._scanTicker); clearInterval(this._rbLoop); clearInterval(this._loadTimer); cancelAnimationFrame(this._countRaf); cancelAnimationFrame(this._heroRaf); clearTimeout(this._rbIdleT); clearTimeout(this._rbHomeTimer); if (this._heroCanvasResize) window.removeEventListener('resize', this._heroCanvasResize); }
+
+  robotEnter = () => { clearTimeout(this._robotT); if (!this.state.robotHover) this.setState({ robotHover: true }); this._robotPoke(); };
+  robotLeave = () => { clearTimeout(this._robotT); this._robotT = setTimeout(() => this.setState({ robotHover: false }), 1100); };
+
+  robotDockRef = (el) => { this._rbDock = el; if (el && !this.state.robotPos) this._robotComputeHome(); };
+
+  _robotComputeHome = () => {
+    const auth = !this.state.authed;
+    const el = this._rbDock;
+    if (auth && el) {
+      const r = el.getBoundingClientRect();
+      if (r.width) {
+        // perch centered over the logo MARK (left 42px tile), feet resting on it
+        this._rbHome = { x: Math.max(6, Math.round(r.left + 21 - 32)), y: Math.max(6, Math.round(r.top - 78 + 6)) };
+        if (!this.state.robotPos && !this._rbDragging) this.forceUpdate();
+        return;
+      }
+    }
+    // non-auth views: default bottom-right corner
+    this._rbHome = { x: Math.max(6, window.innerWidth - 92), y: Math.max(6, window.innerHeight - 128) };
+    if (!this.state.robotPos && !this._rbDragging) this.forceUpdate();
+  };
+
+  // contextual dialogue per view
+  _robotMsgs = () => {
+    const s = this.state;
+    const auth = !s.authed;
+    if (auth) return ['👋 Welcome to SyHire!', '🤖 Your AI hiring copilot is here.', '✨ Sign in to see your matches.'];
+    if (s.view === 'jobs') return ['🎯 I found jobs matching your profile.', '⭐ Sort by AI match to see the best fits.', '💡 Add a skill to unlock more jobs.', '📍 Try filtering by Remote.'];
+    if (s.view === 'settings') return ['🔒 Your security settings look great.', '🔔 Manage notifications anytime.', '⚙️ Need help configuring your account?'];
+    // dashboard / default
+    const m = this.jobs.filter(j => this.prefScore(j, s) >= 95).length;
+    return ['👋 Welcome back!', '📊 Here\'s today\'s hiring activity.', '💼 You have ' + m + ' new job matches.', '📈 Complete your profile to boost matches.'];
+  };
+
+  _robotRole = () => {
+    const s = this.state;
+    if (!s.authed) return 'AI Career Assistant';
+    if (s.view === 'jobs') return 'Job Match Assistant';
+    if (s.view === 'settings') return 'Support Assistant';
+    return 'Personal AI Assistant';
+  };
+
+  _robotSay = () => {
+    const msgs = this._robotMsgs();
+    this._rbMsgI = ((this._rbMsgI || 0) + 1) % msgs.length;
+    this.setState({ robotBubble: true, robotBubbleText: msgs[this._rbMsgI] });
+    clearTimeout(this._rbBubbleT);
+    this._rbBubbleT = setTimeout(() => this.setState({ robotBubble: false }), 6000);
+  };
+
+  // action-triggered reaction: pose + custom bubble
+  _robotReact = (text, act) => {
+    if (act) { this.setState({ robotAct: act }); clearTimeout(this._rbActT); this._rbActT = setTimeout(() => this.setState({ robotAct: null }), 950); }
+    this.setState({ robotBubble: true, robotBubbleText: text });
+    clearTimeout(this._rbBubbleT);
+    this._rbBubbleT = setTimeout(() => this.setState({ robotBubble: false }), 5000);
+  };
+
+  closeRobotPanel = () => this.setState({ robotPanel: false });
+  stopProp = (e) => { e.stopPropagation(); };
+
+  _shakeCard = () => { this.setState({ authShake: true }); clearTimeout(this._shakeT); this._shakeT = setTimeout(() => this.setState({ authShake: false }), 480); };
+  _focusInvalid = (errs) => { setTimeout(() => { try { const sel = errs.name ? 'input[placeholder="Alex Morgan"]' : errs.email ? 'input[aria-label="Email address"]' : errs.pw ? 'input[aria-label="Password"]' : null; if (sel) { const el = document.querySelector(sel); if (el) el.focus(); } } catch (_) {} }, 60); };
+
+  _robotPoke = () => {
+    // reset the 30s inactivity → return-home timer
+    clearTimeout(this._rbIdleT);
+    this._rbIdleT = setTimeout(() => this._robotGoHome(), 30000);
+  };
+
+  _robotGoHome = () => {
+    this._robotComputeHome();
+    if (!this.state.robotPos) return; // already home
+    try { localStorage.removeItem('syhire.robotPos'); } catch (err) {}
+    this.setState({ robotPos: null, robotReturning: true });
+    setTimeout(() => this.setState({ robotReturning: false }), 900);
+  };
+
+  robotDown = (e) => {
+    e.preventDefault();
+    this._robotPoke();
+    this._rbDragging = true;
+    const el = e.currentTarget;
+    const r = el.getBoundingClientRect();
+    this._rbEl = el; this._rbMoved = 0;
+    this._rbOff = { x: e.clientX - r.left, y: e.clientY - r.top };
+    this._rbCur = { x: r.left, y: r.top };
+    this._rbTgt = { x: r.left, y: r.top };
+    this._rbStart = { x: e.clientX, y: e.clientY };
+    el.style.transition = 'none';
+    el.style.cursor = 'grabbing'; el.style.zIndex = '999';
+    el.style.transform = 'translate3d(' + r.left + 'px,' + r.top + 'px,0)';
+    const step = () => {
+      const c = this._rbCur, tg = this._rbTgt;
+      c.x += (tg.x - c.x) * .3; c.y += (tg.y - c.y) * .3;
+      el.style.transform = 'translate3d(' + c.x.toFixed(1) + 'px,' + c.y.toFixed(1) + 'px,0)';
+      if (Math.abs(tg.x - c.x) + Math.abs(tg.y - c.y) > .5) this._rbRaf = requestAnimationFrame(step);
+      else this._rbRaf = null;
+    };
+    const move = (ev) => {
+      this._rbMoved = Math.max(this._rbMoved, Math.abs(ev.clientX - this._rbStart.x) + Math.abs(ev.clientY - this._rbStart.y));
+      this._rbTgt = { x: ev.clientX - this._rbOff.x, y: ev.clientY - this._rbOff.y };
+      if (!this._rbRaf) step();
+    };
+    const up = () => {
+      window.removeEventListener('mousemove', move);
+      window.removeEventListener('mouseup', up);
+      if (this._rbRaf) { cancelAnimationFrame(this._rbRaf); this._rbRaf = null; }
+      this._rbDragging = false;
+      this._robotPoke();
+      if (this._rbMoved <= 5) { this.forceUpdate(); return; }
+      const pad = 12, snap = 24, rw = 76, rhh = 96;
+      let x = Math.max(pad, Math.min(window.innerWidth - rw, this._rbTgt.x));
+      let y = Math.max(pad, Math.min(window.innerHeight - rhh, this._rbTgt.y));
+      if (x < snap && y < snap) { x = snap; y = snap; }
+      if (x > window.innerWidth - rw - snap && y > window.innerHeight - rhh - snap) { x -= snap; y -= snap; }
+      try { localStorage.setItem('syhire.robotPos', JSON.stringify({ x, y })); } catch (err) {}
+      const bob = el.lastElementChild;
+      if (bob) { bob.style.animation = 'syRobotDrop .45s ease'; setTimeout(() => { bob.style.animation = ''; }, 500); }
+      this.setState({ robotPos: { x, y }, robotHover: false });
+    };
+    window.addEventListener('mousemove', move);
+    window.addEventListener('mouseup', up);
+  };
+
+  robotClick = () => {
+    this._robotPoke();
+    if (this._rbMoved > 5) return;
+    const acts = ['wave', 'nod', 'hop', 'spin'];
+    const act = acts[Math.floor(Math.random() * acts.length)];
+    clearTimeout(this._rbActT);
+    this.setState({ robotAct: act });
+    this._rbActT = setTimeout(() => this.setState({ robotAct: null }), 950);
+  };
+  robotDbl = () => { this._robotPoke(); this.setState({ robotPanel: true, robotBubble: false }); };
+  robotKey = (e) => {
+    if (e.key === 'Enter') { this._rbMoved = 0; this.robotClick(); }
+    else if (e.key === ' ') { e.preventDefault(); this.robotDbl(); }
+  };
+
+  _robotVals() {
+    const rh = this.state.robotHover, act = this.state.robotAct, pos = this.state.robotPos;
+    const home = this._rbHome || { x: 44, y: 40 };
+    const p = pos || home;
+    const still = rh || !!act;
+    const ret = this.state.robotReturning;
+    return {
+      robotEnter: this.robotEnter,
+      robotLeave: this.robotLeave,
+      robotDown: this.robotDown,
+      robotClick: this.robotClick,
+      robotDbl: this.robotDbl,
+      robotKey: this.robotKey,
+      robotDockRef: this.robotDockRef,
+      robotRunnerStyle: 'position: fixed; left: 0; top: 0; transform: translate3d(' + p.x + 'px,' + p.y + 'px,0); width: 64px; height: 84px; pointer-events: auto; cursor: grab; will-change: transform; z-index: 60; outline: none;' + (ret ? ' transition: transform .85s cubic-bezier(.22,1,.36,1);' : ''),
+      robotBobStyle: 'position: relative; width: 64px; height: 78px;' + (act === 'hop' ? ' animation: syRobotHop .55s ease;' : act === 'spin' ? ' animation: syRobotSpin .55s ease; transform-origin: 32px 60px;' : still ? '' : ' animation: syRobotBob .5s ease-in-out infinite alternate;'),
+      robotLegAStyle: 'transform-origin: 27px 55px; transform: rotate(5deg);',
+      robotLegBStyle: 'transform-origin: 37px 55px; transform: rotate(-5deg);',
+      robotArmBackStyle: 'transform-origin: 19.5px 35px; transform: rotate(8deg); transition: transform .3s;',
+      robotArmFrontStyle: 'transform-origin: 44.5px 35px;' + (rh || act === 'wave' ? ' animation: syRobotWave .55s ease-in-out 4 both;' : ' transform: rotate(-8deg);'),
+      robotHeadStyle: 'transform-origin: 32px 20px; transition: transform .35s ease;' + (act === 'nod' ? ' animation: syRobotNod .6s ease;' : rh ? ' transform: rotate(-9deg) translateY(-1.5px);' : ''),
+      robotBubble: !!this.state.robotBubble,
+      robotBubbleText: this.state.robotBubbleText || '',
+      ...(() => {
+        const vw = window.innerWidth;
+        const rp = pos || home, rx = rp.x, ry = rp.y, RW = 64;
+        const BW = 270, EDGE = 16;
+        const below = ry < 100;
+        const common = 'position: absolute; width: max-content; min-width: 180px; max-width: 300px; background: linear-gradient(165deg, #0d1c3d, #08122a); color: #eaf1ff; font-size: 13px; font-weight: 500; line-height: 1.45; word-break: break-word; white-space: normal; padding: 12px 16px; border-radius: 14px; border: 1px solid rgba(61,139,255,.35); box-shadow: 0 16px 40px rgba(0,0,0,.45), 0 0 30px rgba(37,99,235,.14); z-index: 61; pointer-events: none; transform-origin: center ' + (below ? 'top' : 'bottom') + '; animation: syBubbleIn .3s ease-out both;';
+        const centered = rx + RW / 2 - BW / 2;
+        const clampedLeft = Math.max(EDGE, Math.min(vw - EDGE - BW, centered));
+        const leftLocal = clampedLeft - rx; // relative to robot wrapper
+        const tailLeft = (rx + RW / 2) - clampedLeft - 6; // aligns tail under robot head center
+        const style = common + ' left: ' + leftLocal + 'px;' + (below ? ' top: calc(100% + 14px);' : ' bottom: calc(100% + 14px);');
+        const tstyle = 'position: absolute; left: ' + tailLeft + 'px; width: 11px; height: 11px; background: #0d1c3d; border: 1px solid rgba(61,139,255,.35); '
+          + (below ? 'top: -6px; transform: rotate(45deg); border-right: none; border-bottom: none;' : 'bottom: -6px; transform: rotate(45deg); border-left: none; border-top: none;');
+        return { robotBubbleStyle: style, robotBubbleTailStyle: tstyle };
+      })(),
+      robotPanel: !!this.state.robotPanel,
+      robotRoleLabel: this._robotRole(),
+      robotTabs: ['Ask AI', 'Resume Review', 'Job Match', 'Career Coach', 'Interview Prep'],
+      closeRobotPanel: this.closeRobotPanel,
+      stopProp: this.stopProp,
+    };
+  }
 
   toast = (msg) => {
     const id = ++this.toastId;
@@ -1141,7 +1570,7 @@ class Component extends DCLogic {
     const seg = (active) => ({ height: '34px', padding: '0 14px', border: 'none', borderRadius: '8px', fontSize: '13px', fontWeight: 600, cursor: 'pointer', background: active ? '#fff' : 'transparent', color: active ? '#1e3a8a' : '#64748b', boxShadow: active ? '0 1px 3px rgba(15,23,42,.12)' : 'none' });
     const nav = (active) => ({ display: 'flex', alignItems: 'center', gap: '11px', width: '100%', padding: '9px 11px', border: 'none', borderRadius: '10px', fontSize: '14px', fontWeight: 500, cursor: 'pointer', textAlign: 'left', background: active ? 'rgba(37,99,235,.22)' : 'transparent', color: active ? '#fff' : 'rgba(255,255,255,.62)', marginBottom: '2px', boxShadow: active ? '0 8px 22px -10px rgba(37,99,235,.85), inset 0 0 0 1px rgba(96,165,250,.28)' : 'none' });
     const tab = (active) => ({ height: '34px', padding: '0 18px', border: 'none', borderRadius: '8px', fontSize: '13.5px', fontWeight: 600, cursor: 'pointer', background: active ? '#fff' : 'transparent', color: active ? '#1e3a8a' : '#64748b', boxShadow: active ? '0 1px 3px rgba(15,23,42,.12)' : 'none' });
-    const authTab = (active) => ({ height: '36px', padding: '0 18px', border: 'none', borderRadius: '8px', fontSize: '13.5px', fontWeight: 600, cursor: 'pointer', background: active ? '#fff' : 'transparent', color: active ? '#1e3a8a' : '#64748b', boxShadow: active ? '0 1px 3px rgba(15,23,42,.1)' : 'none' });
+    const authTab = (active) => ({ height: '40px', padding: '0 6px', marginRight: '28px', border: 'none', borderBottom: active ? '2px solid #3D8BFF' : '2px solid transparent', fontSize: '14.5px', fontWeight: 600, cursor: 'pointer', background: 'transparent', color: active ? '#5EA2FF' : 'rgba(255,255,255,.6)', transition: 'color .15s, border-color .15s' });
     const toggle = (on) => ({
       track: { width: '46px', height: '26px', borderRadius: '999px', background: on ? '#1e3a8a' : '#d5dbe6', cursor: 'pointer', position: 'relative', transition: 'background .2s', flexShrink: 0 },
       knob: { position: 'absolute', top: '3px', left: on ? '23px' : '3px', width: '20px', height: '20px', borderRadius: '50%', background: '#fff', transition: 'left .2s', boxShadow: '0 1px 3px rgba(0,0,0,.2)' },
@@ -1166,9 +1595,13 @@ class Component extends DCLogic {
 
     const decorate = (j) => ({
       ...j,
+      isNew: (s.newJobIds || []).includes(j.id),
+      cardStyle: (s.newJobIds || []).includes(j.id)
+        ? 'background:#fff; border:1px solid #bcd3ff; border-radius:18px; padding:22px 24px; cursor:pointer; box-shadow:0 0 0 3px rgba(61,139,255,.12); transition:box-shadow .18s, transform .18s, border-color .18s; animation: syNewJob .6s ease-out both;'
+        : 'background:#fff; border:1px solid #eef1f6; border-radius:18px; padding:22px 24px; cursor:pointer; transition:box-shadow .18s, transform .18s, border-color .18s;',
       open: () => this.setState({ selected: j.id }),
-      toggleSave: (e) => { if (e) e.stopPropagation(); this.doToggleSave(j.id); },
-      apply: (e) => { if (e) e.stopPropagation(); this.toast('Opening ' + j.company + ' on ' + j.source); this.logActivity('Applied to ' + j.title + ' · ' + j.company, '#16a34a'); },
+      toggleSave: (e) => { if (e) e.stopPropagation(); const wasSaved = s.saved.includes(j.id); this.doToggleSave(j.id); if (!wasSaved) this._robotReact('Saved! I\u2019ll keep track of this.', 'nod'); },
+      apply: (e) => { if (e) e.stopPropagation(); this.toast('Opening ' + j.company + ' on ' + j.source); this.logActivity('Applied to ' + j.title + ' \u00b7 ' + j.company, '#16a34a'); this._robotReact('Good luck! \uD83D\uDE80', 'hop'); },
       saveBg: s.saved.includes(j.id) ? '#eef2ff' : '#fff',
       saveFill: s.saved.includes(j.id) ? '#1e3a8a' : 'none',
       saveStroke: s.saved.includes(j.id) ? '#1e3a8a' : '#94a3b8',
@@ -1212,6 +1645,7 @@ class Component extends DCLogic {
     const daypart = hr < 12 ? 'morning' : hr < 18 ? 'afternoon' : 'evening';
 
     return {
+      ...this._robotVals(),
       showAuth: !s.authed,
       isAuthed: s.authed,
       isSignup: s.signup,
@@ -1220,23 +1654,44 @@ class Component extends DCLogic {
       setPassword: (e) => this.setState({ password: e.target.value }),
       setLogin: () => this.setState({ signup: false }),
       setSignup: () => this.setState({ signup: true }),
+      authBgRef: this.authBgRef,
       tabLoginStyle: authTab(!s.signup), tabSignupStyle: authTab(s.signup),
       authTitle: s.signup ? 'Create your account' : 'Welcome back',
-      authSubtitle: s.signup ? 'Start collecting jobs with AI in minutes.' : 'Sign in to your AI job collector.',
+      authSubtitle: s.signup ? 'Create your account to get started with SyHire.' : 'Sign in to access your SyHire dashboard',
       authCta: s.signup ? 'Create account' : 'Sign in',
       login: () => {
         if (s.authLoading) return;
+        // rate limiting
+        if (this._lockUntil && Date.now() < this._lockUntil) {
+          this.setState({ errs: { pw: 'Too many login attempts. Please wait a few minutes before trying again.' } }); this._shakeCard(); return;
+        }
         const errs = {};
         const emailRe = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-        if (s.signup && !s.fullName.trim()) errs.name = 'Enter your full name';
-        if (!emailRe.test((s.email || '').trim())) errs.email = 'Enter a valid email address';
-        if ((s.password || '').length < 8) errs.pw = 'Password must be at least 8 characters';
-        if (Object.keys(errs).length) { this.setState({ errs }); return; }
+        const email = (s.email || '').trim();
+        if (s.signup && !s.fullName.trim()) errs.name = 'Please enter your full name.';
+        if (!email) errs.email = 'Email is required.';
+        else if (!emailRe.test(email)) errs.email = 'Please enter a valid email address.';
+        if (!s.password) errs.pw = 'Password is required.';
+        else if (s.password.length < 8) errs.pw = 'Password must be at least 8 characters.';
+        if (s.signup && !s.confirmPw) errs.confirm = 'Please confirm your password.';
+        else if (s.signup && s.password !== s.confirmPw) errs.confirm = 'Passwords do not match.';
+        if (Object.keys(errs).length) { this.setState({ errs }); this._shakeCard(); this._focusInvalid(errs); return; }
         this.setState({ errs: {}, authLoading: true });
         clearTimeout(this._authT);
         this._authT = setTimeout(() => {
-          if (s.signup) { this.setState({ authLoading: false, authMode: 'verify', resendIn: 30 }); this.toast('Verification email sent'); }
-          else { this.setState({ authed: true, authLoading: false }); this.toast('Welcome back, Alex'); }
+          if (s.signup) { this._loginFails = 0; this.setState({ authLoading: false, authMode: 'verify', resendIn: 30 }); this.toast('Verification email sent'); return; }
+          // demo credential check
+          const okEmail = email.toLowerCase() === 'demo@syhire.com';
+          const okPw = s.password === 'demo1234';
+          if (!okEmail) { this.setState({ authLoading: false, errs: { email: 'No account found with this email.' } }); this._shakeCard(); this._focusInvalid({ email: 1 }); return; }
+          if (!okPw) {
+            this._loginFails = (this._loginFails || 0) + 1;
+            if (this._loginFails >= 5) { this._lockUntil = Date.now() + 120000; this.setState({ authLoading: false, password: '', errs: { pw: 'Too many login attempts. Please wait a few minutes before trying again.' } }); this._shakeCard(); return; }
+            this.setState({ authLoading: false, password: '', errs: { pw: 'Incorrect email or password.' } }); this._shakeCard(); this._focusInvalid({ pw: 1 }); return;
+          }
+          this._loginFails = 0;
+          try { if (s.remember) localStorage.setItem('syhire.session', '1'); else localStorage.removeItem('syhire.session'); } catch (_) {}
+          this.setState({ authed: true, authLoading: false, errs: {} }); this.toast('Welcome back, Alex');
         }, 900);
       },
       googleLogin: () => { this.setState({ authed: true, authLoading: false, errs: {} }); this.toast('Signed in with Google'); },
@@ -1289,6 +1744,7 @@ class Component extends DCLogic {
       onPwKey: (e) => { try { if (e.getModifierState) this.setState({ capsOn: e.getModifierState('CapsLock') }); } catch (_) {} },
       capsOn: s.capsOn,
       remember: s.remember ?? true,
+      authCardStyle: 'width: 100%; max-width: 440px; padding: 36px 34px 30px; border-radius: 24px; background: linear-gradient(165deg, rgba(255,255,255,.055), rgba(8,14,32,.55)); border: 1px solid rgba(61,139,255,.24); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); box-shadow: 0 32px 80px rgba(0,0,0,.5), 0 20px 60px rgba(59,130,246,.12), 0 0 60px rgba(37,99,235,.12), inset 0 1px 0 rgba(255,255,255,.08);' + (s.authShake ? ' animation: syShake .45s ease;' : ''),
       toggleRemember: (e) => this.setState({ remember: e.target.checked }),
       authLoading: s.authLoading,
       authBtnLabel: s.authLoading ? (s.signup ? 'Creating account…' : 'Signing in…') : (s.signup ? 'Create account' : 'Sign in'),
@@ -1308,7 +1764,6 @@ class Component extends DCLogic {
       matchesCount: this.jobs.filter(j => this.prefScore(j, s) >= 95).length,
       isMobile: s.isMobile, isDesktop: !s.isMobile, navOpen: s.navOpen,
       heroFxRef: (el) => { this._heroFx = el; },
-      heroCanvasRef: this.heroCanvasRef,
       heroMatchNum: s.heroCounts.match + '%',
       heroResumeNum: s.heroCounts.resume + '%',
       heroAppsNum: s.heroCounts.apps,
@@ -1332,24 +1787,23 @@ class Component extends DCLogic {
         let seed = 1234567;
         const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; };
         const arr = [];
-        for (let i = 0; i < 90; i++) {
+        for (let i = 0; i < 26; i++) {
           const layer = i % 3;
-          const size = layer === 0 ? 2 + rnd() * 1.4 : layer === 1 ? 2.6 + rnd() * 1.8 : 3.6 + rnd() * 2.4;
+          const size = layer === 0 ? 2 + rnd() * 1.2 : layer === 1 ? 2.8 + rnd() * 1.6 : 3.8 + rnd() * 2.2;
           const left = rnd() * 100, top = rnd() * 100;
-          const base = layer === 0 ? 0.3 : layer === 1 ? 0.52 : 0.78;
-          const tw = 4 + rnd() * 6, dr = 9 + rnd() * 11, delay = rnd() * 8;
-          const color = rnd() > 0.5 ? '255,255,255' : '150,190,255';
-          const shadow = layer === 2
-            ? '0 0 8px rgba(255,255,255,.18), 0 0 24px rgba(120,170,255,.12), 0 0 48px rgba(80,120,255,.08)'
-            : layer === 1
-            ? '0 0 6px rgba(255,255,255,.16), 0 0 18px rgba(120,170,255,.1)'
-            : '0 0 5px rgba(255,255,255,.12)';
-          arr.push({ style: 'position:absolute; left:' + left.toFixed(2) + '%; top:' + top.toFixed(2) + '%; width:' + size.toFixed(1) + 'px; height:' + size.toFixed(1) + 'px; border-radius:50%; background:rgba(' + color + ',' + base + '); box-shadow:' + shadow + '; opacity:' + base + '; animation: sytwinkle ' + tw.toFixed(1) + 's ease-in-out ' + delay.toFixed(1) + 's infinite, sydrift ' + dr.toFixed(1) + 's ease-in-out ' + (delay / 2).toFixed(1) + 's infinite alternate;' });
+          // keep the headline/widget zone (left-center) mostly clean
+          if (left < 62 && top > 8 && top < 78 && rnd() > 0.3) continue;
+          const base = layer === 0 ? 0.10 : layer === 1 ? 0.16 : 0.24;
+          const tw = 6 + rnd() * 8, dr = 12 + rnd() * 12, delay = rnd() * 9;
+          const color = rnd() > 0.6 ? '220,234,255' : '150,190,255';
+          const blur = layer === 2 ? 0.5 : layer === 1 ? 1 : 1.6;
+          const shadow = '0 0 ' + (6 + layer * 6) + 'px rgba(120,170,255,.10)';
+          arr.push({ style: 'position:absolute; left:' + left.toFixed(2) + '%; top:' + top.toFixed(2) + '%; width:' + size.toFixed(1) + 'px; height:' + size.toFixed(1) + 'px; border-radius:50%; background:rgba(' + color + ',' + base + '); box-shadow:' + shadow + '; filter:blur(' + blur + 'px); opacity:' + base + '; animation: sytwinkle ' + tw.toFixed(1) + 's ease-in-out ' + delay.toFixed(1) + 's infinite, sydrift ' + dr.toFixed(1) + 's ease-in-out ' + (delay / 2).toFixed(1) + 's infinite alternate;' });
         }
         this._parts = arr;
         return arr;
       })(),
-      logout: () => { this.setState({ authed: false, authMode: 'main', authLoading: false, errs: {}, signup: false }); },
+      logout: () => { try { localStorage.removeItem('syhire.session'); } catch (_) {} this.setState({ authed: false, authMode: 'main', authLoading: false, errs: {}, signup: false, password: '' }); },
       comingSoon: () => this.toast('This feature is coming soon'),
       soonBadge: 'margin-left: auto; font-size: 10px; font-weight: 600; background: #f1f4f9; color: #94a3b8; padding: 2px 7px; border-radius: 999px; letter-spacing: .02em;',
       jobCount: this.jobs.length,
@@ -1379,12 +1833,14 @@ class Component extends DCLogic {
       bannerNew: s.jobsToday,
       bannerUpdated: s.lastScan,
       bannerBtnLabel: s.scanning ? 'Scanning…' : 'Refresh',
+      liveScanLine: (this._scanSources || ['Scanning sources…'])[s.scanTick || 0],
+      liveScanStyle: 'animation: syActIn .5s ease both; animation-delay: 0s;',
       scanProgressStyle: 'width:' + (online ? Math.max(3, Math.min(100, Math.round((1 - s.nextScanSecs / 300) * 100))) : 0) + '%; height:100%; border-radius:999px; background:linear-gradient(90deg,#7fd6a3,#cfe0ff);',
       trendingChips: ['React', 'Python', 'AI Engineer', 'Product Design', 'DevOps', 'Remote'].map(term => ({ label: term, go: () => this.setState({ search: term, view: 'jobs', page: 1, showSaved: false }) })),
 
       recentJobs: this.jobs.slice(0, 4).map(decorate),
       recommendedJobs: [...this.jobs].sort((a, b) => this.prefScore(b, s) - this.prefScore(a, s) || b.match - a.match).slice(0, 4).map(decorate),
-      activity: s.activity || this.activityFeed,
+      activity: (s.activity || this.activityFeed).map((a, i) => ({ ...a, rowStyle: 'display: flex; gap: 11px; padding: 8px 0; align-items: flex-start;' + (a.fresh ? ' animation: syActIn .55s cubic-bezier(.22,1,.36,1) both;' : '') })),
       prefChips: (() => {
         const chips = [{ label: (s.profileTitle ?? 'Senior Frontend Engineer') || 'Any role', bg: '#eef2ff', fg: '#1e3a8a' }];
         if (s.prefWork) chips.push({ label: s.prefWork, bg: '#f4f6fa', fg: '#475569' });
@@ -1482,6 +1938,9 @@ class Component extends DCLogic {
       sort: s.sort, setSort: (e) => this.setState({ sort: e.target.value }),
       showAllJobs: () => this.setState({ showSaved: false }), showSavedJobs: () => this.setState({ showSaved: true }),
       toggleSavedView: () => this.setState(st => ({ showSaved: !st.showSaved, visibleCount: 6 })),
+      hasNewJobs: (s.newJobsCount || 0) > 0,
+      newJobsCount: s.newJobsCount || 0,
+      clearNewJobs: () => this.setState({ newJobsCount: 0, newJobIds: [] }),
       savedToggleFill: s.showSaved ? '#1e3a8a' : 'none',
       savedToggleStyle: 'height:40px; padding:0 15px; border:1px solid ' + (s.showSaved ? '#1e3a8a' : '#e6eaf1') + '; border-radius:11px; font-size:13px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:7px; background:' + (s.showSaved ? '#eef2ff' : '#fff') + '; color:' + (s.showSaved ? '#1e3a8a' : '#475569') + ';',
       segAllStyle: seg(!s.showSaved), segSavedStyle: seg(s.showSaved),
@@ -1514,7 +1973,7 @@ class Component extends DCLogic {
       selSaveStroke: sel && s.saved.includes(sel.id) ? '#1e3a8a' : '#64748b',
       selSaveLabel: sel && s.saved.includes(sel.id) ? 'Saved' : 'Save',
       toggleSelSave: () => { if (sel) this.doToggleSave(sel.id); },
-      applySel: () => { if (sel) { this.toast('Opening ' + sel.company + ' on ' + sel.source); this.logActivity('Applied to ' + sel.title + ' · ' + sel.company, '#16a34a'); } },
+      applySel: () => { if (sel) { this.toast('Opening ' + sel.company + ' on ' + sel.source); this.logActivity('Applied to ' + sel.title + ' \u00b7 ' + sel.company, '#16a34a'); this._robotReact('Good luck! \uD83D\uDE80', 'hop'); } },
       closeJob: () => this.setState({ selected: null }),
       stop: (e) => e.stopPropagation(),
 
@@ -1595,6 +2054,11 @@ class Component extends DCLogic {
       this.setState(st => ({ scanning: false, lastScan: 'just now', nextScanSecs: 300, jobsToday: st.jobsToday + n }));
       this.toast('Scan complete — new matches found');
       this.logActivity('Scan completed · AI found ' + n + ' new jobs', '#2563eb');
+      this._robotReact('Found ' + n + ' new opportunities.', 'nod');
+      const top = [...this.jobs].sort((a, b) => b.match - a.match).slice(0, Math.min(3, n)).map(x => x.id);
+      this.setState(st => ({ newJobIds: top, newJobsCount: (st.newJobsCount || 0) + n }));
+      clearTimeout(this._newJobT);
+      this._newJobT = setTimeout(() => this.setState({ newJobIds: [] }), 7000);
     }, 1800);
   }
 }
