@@ -1,0 +1,39 @@
+# ── SyHire · files kept OUT of the public GitHub repo ──────────────
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# Node / build (only relevant if you add tooling later)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+.env
+.env.*
+!.env.example
+
+# Vercel local state
+.vercel/
+
+# ── Internal working material — do NOT publish ────────────────────
+# Design-handoff, engineering blueprint, raw screenshots, uploads,
+# and the internal security audit are private working docs, not part
+# of the deployed product. Remove these lines only if you WANT them
+# public.
+design_handoff_syhire_v1/
+screenshots/
+uploads/
+SECURITY_AUDIT.md
+
+# Platform authoring source (optional).
+# The DEPLOYED site is SyHire.standalone.html (fully self-contained).
+# The .dc.html source files below are your editable working copies.
+# Uncomment to keep them private and ship only the standalone build:
+# SyHire.dc.html
+# SyHire Brand Guide.dc.html
+# SyHire Workflow.dc.html
+# support.js
