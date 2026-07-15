@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My alerts — SyHire</title>
+<style>
+  :root{
+    --ink:#0a1628; --card:#131f36; --line:#22314f;
+    --gold:#d4af37; --gold-deep:#c9a227;
+    --cream:#f5f0e6; --muted:#8a96a8; --body:#c4cdd9;
+    --ok:#4caf7d; --err:#e06c6c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Arial,sans-serif;
+    background:var(--ink); color:var(--body);
+    min-height:100vh; display:flex; flex-direction:column; align-items:center;
+    padding:48px 20px;
+  }
+  .wordmark{color:var(--gold); font-size:22px; font-weight:700; letter-spacing:4px; text-decoration:none}
+  .tagline{color:var(--muted); font-size:12px; letter-spacing:1px; margin-top:4px; text-align:center}
+  .panel{
+    width:100%; max-width:460px; margin-top:36px;
+    background:var(--card); border:1px solid var(--line); border-radius:8px;
+    padding:28px 24px; display:none;
+  }
+  h1{color:var(--cream); font-size:18px; font-weight:600}
+  .who{color:var(--muted); font-size:13px; margin-top:4px; word-break:break-all}
+  label{display:block; color:var(--cream); font-size:13px; font-weight:600; margin:20px 0 6px}
+  input{
+    width:100%; background:var(--ink); border:1px solid var(--line); border-radius:6px;
+    color:var(--cream); font:inherit; font-size:15px; padding:11px 12px;
+  }
+  input::placeholder{color:#5b6778}
+  input:focus-visible, button:focus-visible, a:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+  .hint{font-size:12px; color:var(--muted); margin-top:6px; line-height:1.6}
+  .btn{
+    width:100%; margin-top:24px; background:var(--gold); color:var(--ink);
+    border:none; border-radius:6px; font:inherit; font-size:14px; font-weight:700;
+    padding:13px 0; cursor:pointer;
+  }
+  .btn:hover{background:var(--gold-deep)}
+  .btn:disabled{opacity:.6; cursor:wait}
+  .msg{margin-top:16px; font-size:13.5px; line-height:1.5; display:none; padding:10px 12px; border-radius:6px}
+  .msg.err{display:block; color:var(--err); background:rgba(224,108,108,.08); border:1px solid rgba(224,108,108,.35)}
+  .msg.ok{display:block; color:var(--ok); background:rgba(76,175,125,.08); border:1px solid rgba(76,175,125,.35)}
+  .rowlinks{margin-top:26px; display:flex; justify-content:space-between; align-items:center; font-size:13px}
+  .goldlink{color:var(--gold); text-decoration:none; border-bottom:1px solid var(--gold); padding-bottom:2px; font-weight:600}
+  .quietbtn{background:none; border:none; color:var(--muted); font:inherit; font-size:13px; cursor:pointer; text-decoration:underline}
+  .loading{margin-top:48px; color:var(--muted); font-size:14px}
+</style>
+</head>
+<body>
+  <a class="wordmark" href="jobs.html">SYHIRE</a>
+  <p class="tagline">JOB ALERTS &amp; REFERRALS</p>
+
+  <p class="loading" id="loading">Loading your account…</p>
+
+  <div class="panel" id="panel">
+    <h1>My job alerts</h1>
+    <p class="who" id="who"></p>
+
+    <label for="name">Your name</label>
+    <input id="name" type="text" autocomplete="name" placeholder="e.g. Juan Dela Cruz">
+
+    <label for="keywords">Job keywords</label>
+    <input id="keywords" type="text" placeholder="e.g. developer, designer, virtual assistant">
+    <p class="hint">Separate keywords with commas. Every 6 hours, SyHire checks new jobs from 5 job boards — when a job title matches any of your keywords, you get an email.</p>
+
+    <button class="btn" id="saveBtn">Save alerts</button>
+    <div class="msg" id="msg"></div>
+
+    <div class="rowlinks">
+      <a class="goldlink" href="jobs.html">Browse jobs →</a>
+      <button class="quietbtn" id="logoutBtn">Log out</button>
+    </div>
+  </div>
+
+<script src="config.js"></script>
+<script type="module">
+  const cfg = window.SYHIRE_CONFIG || {};
+  const msg = document.getElementById('msg');
+  const loading = document.getElementById('loading');
+
+  function show(kind, text){ msg.className = 'msg ' + kind; msg.textContent = text; }
+
+  if (!cfg.SUPABASE_URL || cfg.SUPABASE_URL.includes('PALITAN')) {
+    loading.textContent = 'Setup needed: open config.js and paste your Supabase URL and anon key.';
+    throw new Error('config.js not set');
+  }
+
+  const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+  const sb = createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
+
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) { location.href = 'login.html'; throw new Error('no session'); }
+
+  const email = session.user.email;
+  document.getElementById('who').textContent = 'Signed in as ' + email;
+
+  // Load existing preferences, if any
+  const { data: row, error: loadErr } = await sb.from('users')
+    .select('name, job_keywords').eq('email', email).maybeSingle();
+  if (loadErr) show('err', 'Could not load your saved alerts: ' + loadErr.message);
+  if (row) {
+    document.getElementById('name').value = row.name || '';
+    document.getElementById('keywords').value = row.job_keywords || '';
+  }
+
+  loading.style.display = 'none';
+  document.getElementById('panel').style.display = 'block';
+
+  document.getElementById('saveBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('saveBtn'); btn.disabled = true;
+    msg.className = 'msg';
+    const keywords = document.getElementById('keywords').value.trim();
+    const { error } = await sb.from('users').upsert({
+      email,
+      name: document.getElementById('name').value.trim(),
+      job_keywords: keywords
+    }, { onConflict: 'email' });
+    btn.disabled = false;
+    if (error) return show('err', 'Save failed: ' + error.message);
+    show('ok', keywords
+      ? 'Saved. Alerts are active — you\'ll be emailed when new jobs match your keywords.'
+      : 'Saved. Add at least one keyword to start receiving alerts.');
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await sb.auth.signOut();
+    location.href = 'login.html';
+  });
+</script>
+</body>
+</html>
